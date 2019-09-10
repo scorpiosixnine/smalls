@@ -19,3 +19,36 @@ The other approach is much simpler - I call it "Just In Time Underwear". We leav
 There are some problems with this approach too. The main one is that the immersion is imperfect, since you usually get a brief flash of them naked before the underwear appears. On the other hand, it is minimally intrusive and can be enabled/disabled at any point.
 
 As you have probably guessed, Smalls takes the second approach.
+
+## Configuration
+
+By default, Smalls uses underwear from CBBE and SOS, for female and male characters respectively.
+
+However, you can edit the underwear list to add your own items, via an MCM configuration panel.
+
+There are three categories: male, female (bottom) and female (top). If you have more than one item in a category, a random choice is made. If the female (bottom) item appears to cover the whole body, it is used on its own. If not, a female (top) item is added too.
+
+This is not very sophisticated, and doesn't account for things like matching tops & bottoms, or picking appropriate underwear for profession, economic status, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
+
+## Dependencies
+
+- SkyUI (for the configuration menu)
+- CBBE Standalone Underwear (for the default female underwear)
+- SOS (for the default male underwear)
+
+In the future I may bundle some default underwear into the mod, which would remove the last two dependencies. I'm no artist however, so I'd need to get permission from someone else first.
+
+## Improvements
+
+If anyone is interested, I'd like to expand this mod. Things I'm considering:
+
+- a way to tag underwear sets so that they are applied together
+- a way to tag underwear to be used for a particular race, class, or wealth level
+- a way to apply specific underwear to known NPCs, so that their underwear matches their outerwear
+- (possibly) a way to use this mod when interacting with followers (whilst they are still alive!), in order to automatically outfit them with underwear
+
+## Credits
+
+I came up with approach after getting into a mess with [Equipable Underwear For Everyone](https://www.nexusmods.com/skyrimspecialedition/mods/17183). 
+
+I later discovered [Underpants](https://www.loverslab.com/files/file/1878-underpants/), which works the same way. I wasn't sure whether it was ported to SE yet, and in any case I wanted to learn how to mod, so I decided to make my own. Whilst I didn't copy any of the Underpants code, taking a look at how it worked was invaluable. So props to [periselene](https://www.loverslab.com/profile/786664-periselene/) for making the source available.
