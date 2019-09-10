@@ -27,8 +27,8 @@ bool[] _inventoryEnabled
 int[] _inventoryIndexes
 
 String _generalPage = "General"
-String _existingPage = "Existing"
-String _addPage = "Add"
+String _existingPage = "Current Items"
+String _addPage = "Add Items"
 
 String[] _kinds
 
@@ -161,16 +161,13 @@ endFunction
 function SetupExistingPage()
   SetCursorFillMode(TOP_TO_BOTTOM)
   AddHeaderOption("Female")
-  AddTextOption("Count", rQuest.pFemale.GetSize())
   SetupSettingsFor("Bottom", _femaleCount, _femaleNames, _femaleEnabled)
 
   AddHeaderOption("Female Tops")
-  AddTextOption("Count", rQuest.pTops.GetSize())
   SetupSettingsFor("Top", _topsCount, _topNames, _topEnabled)
 
   SetCursorPosition(1)
   AddHeaderOption("Male")
-  AddTextOption("Count", rQuest.pMale.GetSize())
   SetupSettingsFor("Male", _maleCount, _maleNames, _maleEnabled)
 endFunction
 

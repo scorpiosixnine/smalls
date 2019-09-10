@@ -121,11 +121,12 @@ function AddSmall(Armor item)
 endFunction
 
 int function GetRandomSmallsIndex(FormList list)
-  return list.GetSize() - 1
+  return Utility.RandomInt(0, list.GetSize() - 1)
 endFunction
 
 Armor function GetRandomSmall(FormList list)
-  return list.GetAt(list.GetSize() - 1) as Armor
+  int index = Utility.RandomInt(0, list.GetSize() - 1)
+  return list.GetAt(index) as Armor
 endFunction
 
 bool function IsSmalls(Armor akArmour)
@@ -153,11 +154,12 @@ bool function HasMesh(Armor akArmour, bool checkFemale)
   int n = 0
   while (n < count)
     ArmorAddon addon = akArmour.GetNthArmorAddon(n)
-    self.Debug("male: " + addon.GetModelPath(false, false))
-    self.Debug("female: " + addon.GetModelPath(false, true))
-    if addon.GetModelPath(false, checkFemale) != ""
+    String path = addon.GetModelPath(false, checkFemale)
+    if path != ""
+      self.Debug(akArmour.GetName() + " " + checkFemale + " " + path)
       return true
     endif
+    n += 1
   endwhile
   return false
 endFunction
