@@ -1,3 +1,5 @@
+#!/bin/bash
+
 VERSION="1.0.0a2"
 FOLDER="Releases/Smalls-$VERSION"
 
@@ -29,4 +31,5 @@ cp "$SOURCE/"*.psc "Source/Scripts/"
 popd
 
 cp "$DATA/$OUTPUT"/*.pex Scripts/
+cp "$DATA/Smalls.esp" .
 rm -r "$DATA/$BUILD"

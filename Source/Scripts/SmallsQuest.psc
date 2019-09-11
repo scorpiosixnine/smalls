@@ -16,16 +16,16 @@ int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis
 int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
 int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
 
-int property pMajorVersion auto
-int property pMinorVersion auto
-int property pPatchVersion auto
-int property pBuildNumber auto
+int property pMajorVersion = 1 AutoReadOnly
+int property pMinorVersion = 0 AutoReadOnly
+int property pPatchVersion = 0 AutoReadOnly
+int property pBuildNumber = 26 AutoReadOnly
 
 
 event OnInit()
   SetupPerks()
   SetupDefaultSmalls()
-	self.Debug("Smalls Initialised")
+	Debug.Notification("Smalls Initialised.")
 endEvent
 
 function Log(String msg)
@@ -54,7 +54,7 @@ endFunction
 
 
 String function GetVersionString()
-  return "" + pMajorVersion + "." + pMinorVersion + "." + pPatchVersion
+  return pMajorVersion + "." + pMinorVersion + "." + pPatchVersion
 endFunction
 
 Actor function GetTarget()
@@ -74,11 +74,11 @@ endFunction
 
 function SetupPerks()
   if pEnabled
-    Log("Smalls " + GetVersionString() + " enabled.")
     Game.GetPlayer().AddPerk(rPerk)
+    Debug.Notification("Smalls " + GetVersionString() + " enabled.")
   else
-    Log("Smalls " + GetVersionString() + " disabled.")
     Game.GetPlayer().RemovePerk(rPerk)
+    Debug.Notification("Smalls " + GetVersionString() + " disabled.")
   endif
 endfunction
 

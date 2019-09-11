@@ -80,7 +80,7 @@ int function GetVersion()
 endFunction
 
 event OnVersionUpdate(int newVersion)
-  rQuest.Log(self + ":updated to version " + rQuest.GetVersionString() + " (" + newVersion + ")")
+  rQuest.Log("Smalls updated to version " + rQuest.GetVersionString() + " (" + newVersion + ")")
 endEvent
 
 event OnPageReset(string page)
@@ -145,7 +145,7 @@ endFunction
 function SetupGeneralPage()
   SetCursorFillMode(TOP_TO_BOTTOM)
 
-  AddHeaderOption("Smalls " + rQuest.GetVersionString())
+  AddHeaderOption("Smalls " + rQuest.GetVersionString() + " (" + rQuest.pBuildNumber + ")")
   AddTextOption("By scorpiosixnine.", "")
   AddTextOption("Proudly preserving the decency of the", "")
   AddTextOption("citizens of Skyrim since 4E 201.", "")
