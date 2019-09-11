@@ -19,7 +19,7 @@ int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE stand
 int property pMajorVersion = 1 AutoReadOnly
 int property pMinorVersion = 0 AutoReadOnly
 int property pPatchVersion = 0 AutoReadOnly
-int property pBuildNumber = 29 AutoReadOnly
+int property pBuildNumber = 31 AutoReadOnly
 
 
 event OnInit()

@@ -18,6 +18,8 @@ mkdir -p "$DATA/$SOURCE"
 mkdir -p "$DATA/$OUTPUT"
 
 echo "Copying source"
+chmod -R u+rw Source
+
 cp Source/Scripts/* "$DATA/$SOURCE/"
 cp Smalls.flg "$DATA/$SOURCE"
 
@@ -31,6 +33,8 @@ echo "Copying Output"
 cp "$OUTPUT/"*.pex "Scripts/"
 cp "$SOURCE/"*.psc "Source/Scripts/"
 popd
+
+touch "$DATA/Smalls.esp"
 
 cp "$DATA/$OUTPUT"/*.pex Scripts/
 cp "$DATA/Smalls.esp" .
