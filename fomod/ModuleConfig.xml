@@ -3,5 +3,4 @@
 	<requiredInstallFiles>
 		<folder destination="" source="Smalls" />
 	</requiredInstallFiles>
-	</installSteps>
 </config>
