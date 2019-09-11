@@ -19,13 +19,13 @@ int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE stand
 int property pMajorVersion = 1 AutoReadOnly
 int property pMinorVersion = 0 AutoReadOnly
 int property pPatchVersion = 0 AutoReadOnly
-int property pBuildNumber = 26 AutoReadOnly
+int property pBuildNumber = 29 AutoReadOnly
 
 
 event OnInit()
-  SetupPerks()
+  Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
   SetupDefaultSmalls()
-	Debug.Notification("Smalls Initialised.")
+  SetupPerks()
 endEvent
 
 function Log(String msg)
@@ -57,6 +57,10 @@ String function GetVersionString()
   return pMajorVersion + "." + pMinorVersion + "." + pPatchVersion
 endFunction
 
+String function GetFullVersionString()
+  return pMajorVersion + "." + pMinorVersion + "." + pPatchVersion + " (" + pBuildNumber + ")"
+endFunction
+
 Actor function GetTarget()
   return rTarget.GetActorReference()
 endFunction
@@ -73,12 +77,12 @@ function ClearTarget()
 endFunction
 
 function SetupPerks()
-  if pEnabled
+  if (pEnabled)
+    Debug.Notification("Smalls " + GetFullVersionString() + " enabled.")
     Game.GetPlayer().AddPerk(rPerk)
-    Debug.Notification("Smalls " + GetVersionString() + " enabled.")
   else
+    Debug.Notification("Smalls " + GetFullVersionString() + " disabled.")
     Game.GetPlayer().RemovePerk(rPerk)
-    Debug.Notification("Smalls " + GetVersionString() + " disabled.")
   endif
 endfunction
 
@@ -139,14 +143,6 @@ bool function IsInSlot(Armor akArmour, int slot)
     return true
   endif
 
-  ; int count = akArmour.GetNumArmorAddons()
-  ; int n = 0
-  ; while (n < count)
-  ;   ArmorAddon addon = akArmour.GetNthArmorAddon(n)
-  ;   if Math.LogicalAnd(addon.getSlotMask(), slot)
-  ;     return true
-  ;   endif
-  ; endwhile
   return false
 endFunction
 

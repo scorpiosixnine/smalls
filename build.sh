@@ -26,6 +26,8 @@ pushd "$DATA"
 ls "$SOURCE"
 
 "$COMPILER" "$SOURCE" -all -o="$OUTPUT" -i="Scripts/Source" -i="Source/Scripts" -f="$SOURCE/Smalls.flg"
+
+echo "Copying Output"
 cp "$OUTPUT/"*.pex "Scripts/"
 cp "$SOURCE/"*.psc "Source/Scripts/"
 popd
