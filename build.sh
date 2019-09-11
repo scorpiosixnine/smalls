@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.0a2"
+VERSION="1.0.0a3"
 FOLDER="Releases/Smalls-$VERSION"
 
 mkdir -p "$FOLDER"
