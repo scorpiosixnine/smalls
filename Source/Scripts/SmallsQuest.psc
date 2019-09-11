@@ -23,7 +23,6 @@ int property pBuildNumber auto
 
 
 event OnInit()
-  Debug.Notification("starting")
   SetupPerks()
   SetupDefaultSmalls()
 	self.Debug("Smalls Initialised")
@@ -75,8 +74,10 @@ endFunction
 
 function SetupPerks()
   if pEnabled
+    Log("Smalls " + GetVersionString() + " enabled.")
     Game.GetPlayer().AddPerk(rPerk)
   else
+    Log("Smalls " + GetVersionString() + " disabled.")
     Game.GetPlayer().RemovePerk(rPerk)
   endif
 endfunction

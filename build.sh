@@ -1,6 +1,6 @@
 VERSION="1.0.0a2"
 FOLDER="Releases/Smalls-$VERSION"
-./pull.sh
+
 mkdir -p "$FOLDER"
 cp Smalls.esp "$FOLDER/"
 cp Source/Scripts "$FOLDER/"
@@ -25,6 +25,7 @@ ls "$SOURCE"
 
 "$COMPILER" "$SOURCE" -all -o="$OUTPUT" -i="Scripts/Source" -i="Source/Scripts" -f="$SOURCE/Smalls.flg"
 cp "$OUTPUT/"*.pex "Scripts/"
+cp "$SOURCE/"*.psc "Source/Scripts/"
 popd
 
 cp "$DATA/$OUTPUT"/*.pex Scripts/

@@ -16,19 +16,21 @@ event OnMenuClose(String MenuName)
 EndEvent
 
 event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
-	Armor armour = akBaseObject as Armor
-	Actor player = rQuest.GetTarget()
-	if (armour)
-		int mask = armour.getSlotMask()
-		if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
-			rQuest.Debug("Unequipped armour")
-			int gender = player.GetLeveledActorBase().GetSex()
-			rQuest.Debug("gender is " + gender)
-			if !rQuest.IsSmalls(armour)
-				EquipSmalls(player, gender)
+	if !Utilty.IsMenuEnabled()
+		Armor armour = akBaseObject as Armor
+		Actor player = rQuest.GetTarget()
+		if (armour)
+			int mask = armour.getSlotMask()
+			if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
+				rQuest.Debug("Unequipped armour")
+				int gender = player.GetLeveledActorBase().GetSex()
+				rQuest.Debug("gender is " + gender)
+				if !rQuest.IsSmalls(armour)
+					EquipSmalls(player, gender)
+				endif
+			else
+				rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
 			endif
-		else
-			rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
 		endif
 	endif
 endEvent
