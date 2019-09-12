@@ -1,7 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-VERSION="1.0.1"
-NAME="Smalls-$VERSION"
+source ./version.sh
+
+VERSION="$MAJOR.$MINOR.$PATCH"
+NAME="Smalls-$VERSION-$BUILD_NO"
 FOLDER="Releases/Smalls"
 ARCHIVE="$NAME.zip"
 

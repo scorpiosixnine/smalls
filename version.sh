@@ -1,0 +1,7 @@
+
+MAJOR=1
+MINOR=0
+PATCH=1
+BUILD_NO=34
+
+echo "Version is $MAJOR.$MINOR.$PATCH ($BUILD_NO)"
