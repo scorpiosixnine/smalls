@@ -2,6 +2,7 @@
 MAJOR=1
 MINOR=0
 PATCH=1
-BUILD_NO=34
+GIT_NO=`git log --oneline | wc -l`
+BUILD_NO=$(($GIT_NO + 20))
 
 echo "Version is $MAJOR.$MINOR.$PATCH ($BUILD_NO)"

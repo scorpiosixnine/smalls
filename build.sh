@@ -17,10 +17,10 @@ chmod -R u+rw Source
 cp Source/Scripts/* "$DATA/$SOURCE/"
 cp Smalls.flg "$DATA/$SOURCE"
 
-echo "int property pMajorVersion = $MAJOR AutoReadOnly\r" >> "$DATA/$SOURCE/SmallsQuest.psc"
-echo "int property pMinorVersion = $MINOR AutoReadOnly\r" >> "$DATA/$SOURCE/SmallsQuest.psc"
-echo "int property pPatchVersion = $PATCH AutoReadOnly\r" >> "$DATA/$SOURCE/SmallsQuest.psc"
-echo "int property pBuildNumber = $BUILD_NO AutoReadOnly\r" >> "$DATA/$SOURCE/SmallsQuest.psc"
+printf "int property pMajorVersion = $MAJOR AutoReadOnly\n" >> "$DATA/$SOURCE/SmallsQuest.psc"
+printf "int property pMinorVersion = $MINOR AutoReadOnly\n" >> "$DATA/$SOURCE/SmallsQuest.psc"
+printf "int property pPatchVersion = $PATCH AutoReadOnly\n" >> "$DATA/$SOURCE/SmallsQuest.psc"
+printf "int property pBuildNumber = $BUILD_NO AutoReadOnly\n" >> "$DATA/$SOURCE/SmallsQuest.psc"
 
 echo "Compiling"
 pushd "$DATA"
