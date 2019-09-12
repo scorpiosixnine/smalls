@@ -17,11 +17,11 @@ int property kBodySlot = 0x00000004 AutoReadOnly ; BODY
 int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis
 int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
 int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
-
-int property pMajorVersion = 1 AutoReadOnly
-int property pMinorVersion = 0 AutoReadOnly
-int property pPatchVersion = 1 AutoReadOnly
-int property pBuildNumber = 32 AutoReadOnly
+;
+; int property pMajorVersion = {MAJOR} AutoReadOnly
+; int property pMinorVersion = {MINOR} AutoReadOnly
+; int property pPatchVersion = {PATCH} AutoReadOnly
+; int property pBuildNumber = {BUILD} AutoReadOnly
 
 
 event OnInit()

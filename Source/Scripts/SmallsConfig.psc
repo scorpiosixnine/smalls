@@ -130,7 +130,7 @@ function UpdateToggle(String identifier, bool value, int tag)
     rQuest.debugMode = value
   elseif identifier == "ReplaceMales"
     rQuest.pReplaceMales = value
-  elseif identifier == "pReplaceFemales"
+  elseif identifier == "ReplaceFemales"
     rQuest.pReplaceFemales = value
   elseif identifier == "Top"
     _topEnabled[tag] = value
@@ -155,13 +155,13 @@ function SetupGeneralPage()
   AddEmptyOption()
   AddTextOption("By scorpiosixnine.", "")
 
-
+  AddHeaderOption("Settings " + rQuest.GetFullVersionString())
   SetupToggle("Enabled", "Enabled", rQuest.pEnabled)
   SetupToggle("ReplaceMales", "Use for males.", rQuest.pReplaceMales)
   SetupToggle("ReplaceFemales", "Use for females.", rQuest.pReplaceFemales)
 
   AddEmptyOption()
-  AddHeaderOption("Debugging")
+  AddHeaderOption("Debug Options")
   SetupToggle("Debugging", "Enable Logging", rQuest.debugMode)
 endFunction
 

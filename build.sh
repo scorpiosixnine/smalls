@@ -5,6 +5,12 @@ BUILD="Temp-Build"
 SOURCE="$BUILD/Source"
 OUTPUT="$BUILD/Output"
 
+MAJOR=1
+MINOR=0
+PATCH=1
+BUILD_NO=34
+
+
 mkdir -p "$DATA/$BUILD"
 mkdir -p "$DATA/$SOURCE"
 mkdir -p "$DATA/$OUTPUT"
@@ -14,6 +20,11 @@ chmod -R u+rw Source
 
 cp Source/Scripts/* "$DATA/$SOURCE/"
 cp Smalls.flg "$DATA/$SOURCE"
+
+echo "int property pMajorVersion = $MAJOR AutoReadOnly" >> "$DATA/$SOURCE/SmallsQuest.psc"
+echo "int property pMinorVersion = $MINOR AutoReadOnly" >> "$DATA/$SOURCE/SmallsQuest.psc"
+echo "int property pPatchVersion = $PATCH AutoReadOnly" >> "$DATA/$SOURCE/SmallsQuest.psc"
+echo "int property pBuildNumber = $BUILD_NO AutoReadOnly" >> "$DATA/$SOURCE/SmallsQuest.psc"
 
 echo "Compiling"
 pushd "$DATA"
