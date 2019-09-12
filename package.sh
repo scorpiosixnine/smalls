@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="1.0.0a2"
+VERSION="1.0.0a3"
 NAME="Smalls-$VERSION"
 FOLDER="Releases/Smalls"
 ARCHIVE="$NAME.zip"

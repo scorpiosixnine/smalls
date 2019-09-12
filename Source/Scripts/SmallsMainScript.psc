@@ -47,22 +47,26 @@ function EquipSmalls(Actor akActor, int gender)
 EndFunction
 
 function EquipMaleSmalls(Actor akActor)
-	Armor item = rQuest.GetRandomSmall(rQuest.pMale)
-	if (item)
-		rQuest.Debug("Adding smalls " + item.GetName())
-		akActor.EquipItem(item, true, false)
+	if rQuest.pReplaceMales
+		Armor item = rQuest.GetRandomSmall(rQuest.pMale)
+		if (item)
+			rQuest.Debug("Adding smalls " + item.GetName())
+			akActor.EquipItem(item, true, false)
+		endif
 	endif
 EndFunction
 
 function EquipFemaleSmalls(Actor akActor)
-	Armor bottom = rQuest.GetRandomSmall(rQuest.pFemale)
-	if (bottom)
-		rQuest.Debug("Adding smalls " + bottom.GetName())
-		akActor.EquipItem(bottom, true, false)
-		if rQuest.IsInSlot(bottom , rQuest.kPelvisUnderwearSlot) && !rQuest.IsInSlot(bottom , rQuest.kTorsoUnderwearSlot)
-			Form top = rQuest.GetRandomSmall(rQuest.pTops)
-			rQuest.Debug("Adding top " + top.GetName())
-			akActor.EquipItem(top, true, false)
+	if rQuest.pReplaceFemales
+		Armor bottom = rQuest.GetRandomSmall(rQuest.pFemale)
+		if (bottom)
+			rQuest.Debug("Adding smalls " + bottom.GetName())
+			akActor.EquipItem(bottom, true, false)
+			if rQuest.IsInSlot(bottom , rQuest.kPelvisUnderwearSlot) && !rQuest.IsInSlot(bottom , rQuest.kTorsoUnderwearSlot)
+				Form top = rQuest.GetRandomSmall(rQuest.pTops)
+				rQuest.Debug("Adding top " + top.GetName())
+				akActor.EquipItem(top, true, false)
+			endif
 		endif
 	endif
 EndFunction

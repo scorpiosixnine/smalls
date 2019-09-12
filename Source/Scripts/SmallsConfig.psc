@@ -128,6 +128,10 @@ endEvent
 function UpdateToggle(String identifier, bool value, int tag)
   if identifier == "Debugging"
     rQuest.debugMode = value
+  elseif identifier == "ReplaceMales"
+    rQuest.pReplaceMales = value
+  elseif identifier == "pReplaceFemales"
+    rQuest.pReplaceFemales = value
   elseif identifier == "Top"
     _topEnabled[tag] = value
   elseif identifier == "Bottom"
@@ -146,14 +150,17 @@ function SetupGeneralPage()
   SetCursorFillMode(TOP_TO_BOTTOM)
 
   AddHeaderOption("Smalls " + rQuest.GetFullVersionString())
-  AddTextOption("By scorpiosixnine.", "")
   AddTextOption("Proudly preserving the decency of the", "")
   AddTextOption("citizens of Skyrim since 4E 201.", "")
-
   AddEmptyOption()
+  AddTextOption("By scorpiosixnine.", "")
+
 
   SetupToggle("Enabled", "Enabled", rQuest.pEnabled)
+  SetupToggle("ReplaceMales", "Use for males.", rQuest.pReplaceMales)
+  SetupToggle("ReplaceFemales", "Use for females.", rQuest.pReplaceFemales)
 
+  AddEmptyOption()
   AddHeaderOption("Debugging")
   SetupToggle("Debugging", "Enable Logging", rQuest.debugMode)
 endFunction

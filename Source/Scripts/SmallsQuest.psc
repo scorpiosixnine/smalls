@@ -10,6 +10,8 @@ FormList property pMale auto
 
 bool property debugMode auto
 bool property pEnabled auto
+bool property pReplaceMales auto
+bool property pReplaceFemales auto
 
 int property kBodySlot = 0x00000004 AutoReadOnly ; BODY
 int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis
@@ -18,8 +20,8 @@ int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE stand
 
 int property pMajorVersion = 1 AutoReadOnly
 int property pMinorVersion = 0 AutoReadOnly
-int property pPatchVersion = 0 AutoReadOnly
-int property pBuildNumber = 31 AutoReadOnly
+int property pPatchVersion = 1 AutoReadOnly
+int property pBuildNumber = 32 AutoReadOnly
 
 
 event OnInit()
