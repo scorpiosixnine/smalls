@@ -1,12 +1,4 @@
 #!/bin/bash
-
-VERSION="1.0.0a3"
-FOLDER="Releases/Smalls-$VERSION"
-
-mkdir -p "$FOLDER"
-cp Smalls.esp "$FOLDER/"
-cp Source/Scripts "$FOLDER/"
-
 DATA="/mnt/d/Steam/steamapps/common/Skyrim Special Edition/Data"
 COMPILER="$DATA/../Papyrus Compiler/PapyrusCompiler.exe"
 BUILD="Temp-Build"
