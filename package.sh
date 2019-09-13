@@ -17,7 +17,6 @@ cp -r Source/Scripts "$FOLDER/Smalls/Source/Scripts"
 cp -r Scripts "$FOLDER/Smalls/Scripts"
 cp -r fomod "$FOLDER/"
 sed -i "s/{VERSION}/$VERSION/g" "$FOLDER/fomod/info.xml"
-exit 0
 
 rm "Releases/$ARCHIVE"
 cd "Releases/Smalls"
