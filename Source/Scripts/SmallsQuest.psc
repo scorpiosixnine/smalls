@@ -17,11 +17,6 @@ int property kBodySlot = 0x00000004 AutoReadOnly ; BODY
 int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis
 int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
 int property kMiscSlot = 0x00040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
-;
-; int property pMajorVersion = {MAJOR} AutoReadOnly
-; int property pMinorVersion = {MINOR} AutoReadOnly
-; int property pPatchVersion = {PATCH} AutoReadOnly
-; int property pBuildNumber = {BUILD} AutoReadOnly
 
 
 event OnInit()
@@ -115,6 +110,7 @@ function AddSmall(Armor item)
     bool isTop = IsInTopSlot(item)
     bool isBottom = IsInBottomSlot(item)
     if (isTop && !isBottom)
+      ; definitely a top
       pTops.AddForm(item)
     else
       if HasMesh(item, false)
@@ -122,6 +118,9 @@ function AddSmall(Armor item)
       endif
       if HasMesh(item, true)
         pFemale.AddForm(item)
+        if !isBottom ; isn't marked as a top or a bottom, so might be an all-in-one, or a top, or a bottom - add it to both lists just in case
+          pTops.AddForm(item)
+        endif
       endif
     endif
   endif
