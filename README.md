@@ -30,6 +30,23 @@ There are three categories: male, female (bottom) and female (top). If you have 
 
 This is not very sophisticated, and doesn't account for things like matching tops & bottoms, or picking appropriate underwear for profession, economic status, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
 
+### How To Add Armour
+
+Make sure that the armour you want to add is in your inventory.
+
+Open up the Smalls / Add Item panel in MCM.
+
+Tick the items you want to add, then dismiss MCM (or switch away from the Smalls panel).
+
+Smalls has to guess which lists to add the item to, based on the slot positions it's marked for, and whether it has meshes set for male, female or both. This information isn't always reliable, so sometimes underwear will be added to the wrong lists. You can fix this yourself by removing the armour from some lists.
+
+### How To Remove Armour
+
+Open up the Smalls / Existing Items panel in MCM.
+
+Un-tick the items you want to remove, then dismiss MCM (or switch away from the Smalls panel).
+
+
 ## Dependencies
 
 - SkyUI (for the configuration menu)
@@ -37,6 +54,12 @@ This is not very sophisticated, and doesn't account for things like matching top
 - SOS (for the default male underwear)
 
 In the future I may bundle some default underwear into the mod, which would remove the last two dependencies. I'm no artist however, so I'd need to get permission from someone else first.
+
+## Known Issues
+
+If the dependencies are missing, the mod should still function, but the default underwear sets will not display correctly. You can fix this by just adding your own and removing the defaults.
+
+The default male underwear set comes from SOS, but for some reason it seems to be showing up with the wrong texture. I haven't figured out what's going on there yet...
 
 ## Improvements
 
@@ -49,7 +72,7 @@ If anyone is interested, I'd like to expand this mod. Things I'm considering:
 
 ## Credits
 
-I came up with approach after getting into a mess with [Equipable Underwear For Everyone](https://www.nexusmods.com/skyrimspecialedition/mods/17183). 
+I came up with approach after getting into a mess with [Equipable Underwear For Everyone](https://www.nexusmods.com/skyrimspecialedition/mods/17183).
 
 I later discovered [Underpants](https://www.loverslab.com/files/file/1878-underpants/), which works the same way. I wasn't sure whether it was ported to SE yet, and in any case I wanted to learn how to mod, so I decided to make my own. Whilst I didn't copy any of the Underpants code, taking a look at how it worked was invaluable. So props to [periselene](https://www.loverslab.com/profile/786664-periselene/) for making the source available.
 
