@@ -15,6 +15,8 @@ echo "Copying source"
 chmod -R u+rw Source
 
 cp Source/Scripts/* "$DATA/$SOURCE/"
+cp Source/Scripts/* "$DATA/Scripts/Source" # copy to old location too
+
 cp Smalls.flg "$DATA/$SOURCE"
 
 printf "int property pMajorVersion = $MAJOR AutoReadOnly\n" >> "$DATA/$SOURCE/SmallsQuest.psc"
