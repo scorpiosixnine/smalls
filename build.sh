@@ -37,6 +37,5 @@ popd
 
 touch "$DATA/Smalls.esp"
 
-cp "$DATA/$OUTPUT"/*.pex Scripts/
 cp "$DATA/Smalls.esp" .
 rm -r "$DATA/$BUILD"
