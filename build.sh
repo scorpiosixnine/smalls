@@ -36,6 +36,9 @@ cp "$SOURCE/"*.psc "Source/Scripts/"
 popd
 
 touch "$DATA/Smalls.esp"
+touch "$DATA/SmallsSupport.esp"
 
 cp "$DATA/Smalls.esp" .
+cp "$DATA/SmallsSupport.esp" .
+
 rm -r "$DATA/$BUILD"
