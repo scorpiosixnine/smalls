@@ -41,4 +41,7 @@ touch "$DATA/Smalls+"*.esp
 cp "$DATA/Smalls.esp" .
 cp "$DATA/Smalls+"*.esp .
 
+mkdir -p meshes/armor
+cp -r "$DATA/meshes/armor/Smalls+"*/*.nif meshes/armor
+
 rm -r "$DATA/$BUILD"
