@@ -87,7 +87,7 @@ event OnPageReset(string page)
   {Called when a new page is selected, including the initial empty page}
 
   rQuest.Debug("PageReset " + page)
-  ResetToggles()
+  ResetOptions()
 
   if (page == _generalPage) || (page == "")
     SetupGeneralPage()
@@ -114,9 +114,18 @@ endEvent
 event OnOptionMenuOpen(int option)
 	{Called when the user selects a menu option}
 
-	SetMenuDialogStartIndex(0)
-	SetMenuDialogDefaultIndex(0)
-	SetMenuDialogOptions(_kinds)
+  int n = 0
+  while(n < _menuCount)
+    if option == _menus[n]
+      SetMenuDialogStartIndex(_menuValues[n])
+    	SetMenuDialogDefaultIndex(0)
+    	SetMenuDialogOptions(_kinds)
+    endif
+    n += 1
+  endWhile
+endEvent
+
+event OnOptionMenuAccept(int option, int index)
 endEvent
 
 function UpdateToggle(String identifier, bool value, int tag)
@@ -179,16 +188,8 @@ function SetupExistingPage()
   int itemCount = defaults.GetSize()
   while (itemNo < itemCount)
     Armor item = defaults.GetAt(itemNo) as Armor
-    SetupMenu(itemNo, item.GetName(), false)
+    SetupMenu(itemNo, item.GetName(), _kinds, 0)
     itemNo += 1
-  endWhile
-
-
-  int n = 0
-  while(n < count)
-    SetupToggle(identifier, names[n], values[n], n)
-    ; AddMenuOption("Kind", identifier)
-    n += 1
   endWhile
 
 endFunction
