@@ -8,7 +8,6 @@ FormList property pTops auto
 FormList property pFemale auto
 FormList property pMale auto
 
-bool property debugMode auto
 bool property pEnabled auto
 bool property pReplaceMales auto
 bool property pReplaceFemales auto
@@ -24,39 +23,6 @@ event OnInit()
   SetupDefaultSmalls()
   SetupPerks()
 endEvent
-
-function Log(String msg)
-	Debug.Notification(msg)
-endFunction
-
-function Trace(String msg)
-  Debug.Trace(msg)
-endfunction
-
-function Debug(String msg)
-  if debugMode
-	   Debug.Notification("debug: " + msg)
-   else
-     Debug.Trace(msg)
-  endif
-endFunction
-
-function Warning(String msg)
-  if debugMode
-      Debug.Notification("warning: " + msg)
-   else
-     Debug.Trace("warning: " + msg)
-  endif
-endFunction
-
-
-String function GetVersionString()
-  return pMajorVersion + "." + pMinorVersion + "." + pPatchVersion
-endFunction
-
-String function GetFullVersionString()
-  return pMajorVersion + "." + pMinorVersion + "." + pPatchVersion + " (" + pBuildNumber + ")"
-endFunction
 
 Actor function GetTarget()
   return rTarget.GetActorReference()

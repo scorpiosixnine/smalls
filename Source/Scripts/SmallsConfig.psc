@@ -2,13 +2,6 @@ Scriptname SmallsConfig extends SKI_ConfigBase
 
 SmallsQuest property rQuest auto
 
-int[] _toggles
-bool[] _toggleValues
-int[] _toggleTags
-String[] _toggleIDs
-int _toggleCount = 0
-int _toggleMax = 0
-
 int _topsCount = 0
 String[] _topNames
 bool[] _topEnabled
@@ -33,11 +26,15 @@ String _addPage = "Add Items"
 String[] _kinds
 
 event OnConfigInit()
+  ResetProperties()
+endEvent
+
+function ResetProperties()
   Pages = new string[3]
   Pages[0] = _generalPage
   Pages[1] = _existingPage
   Pages[2] = _addPage
-endEvent
+endFunction
 
 event OnConfigOpen()
   rQuest.Trace("ConfigOpen")
@@ -59,11 +56,13 @@ event OnConfigOpen()
   _inventoryIndexes = new int[100]
   _inventoryCount = ReadInventory()
 
-  _kinds = new String[3]
-  _kinds[0] = "Bottom"
-  _kinds[1] = "Top"
-  _kinds[2] = "Both"
-  _kinds[3] = "Remove"
+  _kinds = new String[6]
+  _kinds[0] = "Unisex"
+  _kinds[1] = "Male"
+  _kinds[2] = "Female"
+  _kinds[3] = "Female Top"
+  _kinds[4] = "Disable"
+  _kinds[5] = "Remove"
 endEvent
 
 event OnConfigClose()
@@ -81,19 +80,14 @@ endFunction
 
 event OnVersionUpdate(int newVersion)
   rQuest.Log("Smalls updated to version " + rQuest.GetFullVersionString())
+  ResetProperties()
 endEvent
 
 event OnPageReset(string page)
   {Called when a new page is selected, including the initial empty page}
 
   rQuest.Debug("PageReset " + page)
-
-  _toggleMax = 100
-  _toggles = new int[100]
-  _toggleValues = new bool[100]
-  _toggleTags = new int[100]
-  _toggleIDs = new String[100]
-  _toggleCount = 0
+  ResetToggles()
 
   if (page == _generalPage) || (page == "")
     SetupGeneralPage()
@@ -126,23 +120,23 @@ event OnOptionMenuOpen(int option)
 endEvent
 
 function UpdateToggle(String identifier, bool value, int tag)
-  if identifier == "Debugging"
-    rQuest.debugMode = value
-  elseif identifier == "ReplaceMales"
-    rQuest.pReplaceMales = value
-  elseif identifier == "ReplaceFemales"
-    rQuest.pReplaceFemales = value
-  elseif identifier == "Top"
-    _topEnabled[tag] = value
-  elseif identifier == "Bottom"
-    _femaleEnabled[tag] = value
-  elseif identifier == "Male"
-    _maleEnabled[tag] = value
-  elseif identifier == "Enabled"
-    rQuest.pEnabled = value
-    rQuest.SetupPerks()
-  elseif identifier == "Inventory"
-    _inventoryEnabled[tag] = value
+  if !UpdateStandardToggle(identifier, value, tag)
+    if identifier == "ReplaceMales"
+      rQuest.pReplaceMales = value
+    elseif identifier == "ReplaceFemales"
+      rQuest.pReplaceFemales = value
+    elseif identifier == "Top"
+      _topEnabled[tag] = value
+    elseif identifier == "Bottom"
+      _femaleEnabled[tag] = value
+    elseif identifier == "Male"
+      _maleEnabled[tag] = value
+    elseif identifier == "Enabled"
+      rQuest.pEnabled = value
+      rQuest.SetupPerks()
+    elseif identifier == "Inventory"
+      _inventoryEnabled[tag] = value
+    endif
   endif
 endFunction
 
@@ -163,7 +157,7 @@ function SetupGeneralPage()
 
   AddEmptyOption()
   AddHeaderOption("Debug Options")
-  SetupToggle("Debugging", "Enable Logging", rQuest.debugMode)
+  SetupToggle("Debugging", "Enable Logging", rQuest.pDebugMode)
 endFunction
 
 function SetupExistingPage()
@@ -174,9 +168,29 @@ function SetupExistingPage()
   AddHeaderOption("Female Tops")
   SetupSettingsFor("Top", _topsCount, _topNames, _topEnabled)
 
-  SetCursorPosition(1)
   AddHeaderOption("Male")
   SetupSettingsFor("Male", _maleCount, _maleNames, _maleEnabled)
+
+  SetCursorPosition(1)
+  AddHeaderOption("All")
+
+  FormList defaults = rQuest.rDefaults
+  int itemNo = 0
+  int itemCount = defaults.GetSize()
+  while (itemNo < itemCount)
+    Armor item = defaults.GetAt(itemNo) as Armor
+    SetupMenu(itemNo, item.GetName(), false)
+    itemNo += 1
+  endWhile
+
+
+  int n = 0
+  while(n < count)
+    SetupToggle(identifier, names[n], values[n], n)
+    ; AddMenuOption("Kind", identifier)
+    n += 1
+  endWhile
+
 endFunction
 
 function SetupAddPage()
@@ -184,16 +198,6 @@ function SetupAddPage()
   SetCursorFillMode(TOP_TO_BOTTOM)
   AddHeaderOption("Inventory")
   SetupSettingsFor("Inventory", _inventoryCount, _inventoryNames, _inventoryEnabled)
-endFunction
-
-function SetupToggle(String identifier, String name, bool initialState, int tag = 0)
-  if _toggleCount < _toggleMax
-    _toggles[_toggleCount] = AddToggleOption(name, initialState)
-    _toggleValues[_toggleCount] = initialState
-    _toggleIDs[_toggleCount] = identifier
-    _toggleTags[_toggleCount] = tag
-    _toggleCount += 1
-  endif
 endFunction
 
 function SetupSettingsFor(String identifier, int count, String[] names, bool[] values)
