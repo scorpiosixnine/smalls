@@ -146,16 +146,16 @@ endFunction
 int function ModeForItem(Armor item)
   bool inMale = pQuest.pMale.HasForm(item)
   bool inTops = pQuest.pTops.HasForm(item)
-  bool inBottoms = pQuest.pFemale.HasForm(item)
+  bool inFemale = pQuest.pFemale.HasForm(item)
 
-  if inMale && inTops && inBottoms
+  if inMale && inFemale
     return kModeUnisex
   elseif inMale
     return kModeMale
+  elseif inFemale
+    return kModeFemale
   elseif inTops
     return kModeFemaleTop
-  elseif inBottoms
-    return kModeFemale
   else
     return kModeDisabled
   endif
@@ -191,7 +191,7 @@ function MenuChanged(int index, int tag, int value)
     if (value == kModeUnisex) || (value == kModeFemale)
       pQuest.pFemale.AddForm(item)
     endif
-    if (value == kModeUnisex) || (value == kModeFemaleTop)
+    if (value == kModeFemaleTop)
       pQuest.pTops.AddForm(item)
     endif
   endif

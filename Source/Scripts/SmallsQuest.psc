@@ -20,7 +20,7 @@ int property kMiscSlot = 0x040000 AutoReadOnly ; Misc slot (used by CBBE standal
 
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
-  SetupDefaultSmalls()
+  ResetDefaultSmalls()
   SetupPerks()
 endEvent
 
@@ -39,6 +39,12 @@ function ClearTarget()
   Debug("target cleared")
 endFunction
 
+function UpdatedEnabled()
+  if pEnabled
+    SetupPerks()
+  endif
+endFunction
+
 function SetupPerks()
   if (pEnabled)
     Debug.Notification("Smalls " + GetFullVersionString() + " enabled.")
@@ -50,6 +56,15 @@ function SetupPerks()
 endfunction
 
 function ResetDefaultSmalls()
+  if !pFemale || !pMale || !pTops || !rDefaults
+    Warning("failed to load lists")
+  endif
+
+  rDefaults.Revert()
+  pFemale.Revert()
+  pMale.Revert()
+  pTops.Revert()
+
   AddDefaultSmall(0x1875, "Shino_Traveling Magician.esp")
   AddDefaultSmall(0x1876, "Shino_Traveling Magician.esp")
   AddDefaultSmall(0x1877, "Shino_Traveling Magician.esp")
@@ -111,54 +126,15 @@ function AddDefaultSmall(int formID, String filename)
   Armor item = Game.GetFormFromFile(formID, filename) as Armor
   if item
     Trace(filename + " " + formID + " found as " + item.GetName())
-    if !rDefaults.HasForm(item)
-      rDefaults.AddForm(item)
-    endif
+    AddSmall(item)
   else
     Trace(filename + " " + formID + " missing")
   endif
 endFunction
 
-function SetupDefaultSmalls()
-  if !pFemale || !pMale || !pTops || !rDefaults
-    Warning("failed to load lists")
-  endif
-
-  pFemale.Revert()
-  pTops.Revert()
-  pMale.Revert()
-
-  int itemNo = 0
-  int itemCount = rDefaults.GetSize()
-  while (itemNo < itemCount)
-    Armor item = rDefaults.GetAt(itemNo) as Armor
-    AddSmall(item)
-    itemNo += 1
-  endWhile
-
-  Trace("Female: " + pFemale.GetSize())
-  Trace("Tops: " + pTops.GetSize())
-  Trace("Male: " + pMale.GetSize())
-endFunction
-
 function AddSmall(Armor item)
-  if (item)
-    bool isTop = IsInTopSlot(item)
-    bool isBottom = IsInBottomSlot(item)
-    if (isTop && !isBottom)
-      ; definitely a top
-      pTops.AddForm(item)
-    else
-      if HasMesh(item, false)
-        pMale.AddForm(item)
-      endif
-      if HasMesh(item, true)
-        pFemale.AddForm(item)
-        if !isBottom ; isn't marked as a top or a bottom, so might be an all-in-one, or a top, or a bottom - add it to both lists just in case
-          pTops.AddForm(item)
-        endif
-      endif
-    endif
+  if !rDefaults.HasForm(item)
+    rDefaults.AddForm(item)
   endif
 endFunction
 
