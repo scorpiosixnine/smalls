@@ -86,9 +86,11 @@ event OnPageReset(string page)
   endif
 endEvent
 
-function ButtonClicked(int index, int tag)
+function ButtonClicked(int index, int tag, int option)
   if tag == kButtonReset
+    SetTextOptionValue(option, "Resetting...")
     pQuest.ResetDefaultSmalls()
+    SetTextOptionValue(option, "Reset")
   endif
 endFunction
 
@@ -121,7 +123,7 @@ function SetupGeneralPage()
   SetupToggle("ReplaceMales", "Use for males.", pQuest.pReplaceMales)
   SetupToggle("ReplaceFemales", "Use for females.", pQuest.pReplaceFemales)
   AddEmptyOption()
-  SetupButton("Reset", "Revert to default item list. Any custom items will be removed.")
+  SetupButton("Reset", "Revert to default item list. Any custom items will be removed.", kButtonReset)
 
   AddHeaderOption("Debug Options")
   SetupToggle("Debugging", "Enable Logging", pQuest.pDebugMode)
