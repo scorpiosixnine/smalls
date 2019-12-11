@@ -36,26 +36,27 @@ function ResetProperties()
   Pages[2] = _addPage
 endFunction
 
-event OnConfigOpen()
-  rQuest.Trace("ConfigOpen")
+function SetupSmallsNames()
+  if _topsCount == 0
+    _topNames = new String[100]
+    _topEnabled = new bool[100]
+    _topsCount = ReadSmallsForList(rQuest.pTops, _topNames, _topEnabled)
+  endif
 
-  _topNames = new String[100]
-  _topEnabled = new bool[100]
-  _topsCount = ReadSmallsForList(rQuest.pTops, _topNames, _topEnabled)
+  if _femaleCount == 0
+    _femaleNames = new String[100]
+    _femaleEnabled = new bool[100]
+    _femaleCount = ReadSmallsForList(rQuest.pFemale, _femaleNames, _femaleEnabled)
+  endIf
 
-  _femaleNames = new String[100]
-  _femaleEnabled = new bool[100]
-  _femaleCount = ReadSmallsForList(rQuest.pFemale, _femaleNames, _femaleEnabled)
+  if _maleCount == 0
+    _maleNames = new String[100]
+    _maleEnabled = new bool[100]
+    _maleCount = ReadSmallsForList(rQuest.pMale, _maleNames, _maleEnabled)
+  endIf
+endFunction
 
-  _maleNames = new String[100]
-  _maleEnabled = new bool[100]
-  _maleCount = ReadSmallsForList(rQuest.pMale, _maleNames, _maleEnabled)
-
-  _inventoryNames = new String[100]
-  _inventoryEnabled = new bool[100]
-  _inventoryIndexes = new int[100]
-  _inventoryCount = ReadInventory()
-
+function SetupSmallsKinds()
   _kinds = new String[6]
   _kinds[0] = "Unisex"
   _kinds[1] = "Male"
@@ -63,6 +64,19 @@ event OnConfigOpen()
   _kinds[3] = "Female Top"
   _kinds[4] = "Disable"
   _kinds[5] = "Remove"
+endFunction
+
+function SetupInventoryNames()
+  if _inventoryCount == 0
+    _inventoryNames = new String[100]
+    _inventoryEnabled = new bool[100]
+    _inventoryIndexes = new int[100]
+    _inventoryCount = ReadInventory()
+  endif
+endFunction
+
+event OnConfigOpen()
+  rQuest.Trace("ConfigOpen")
 endEvent
 
 event OnConfigClose()
@@ -170,6 +184,9 @@ function SetupGeneralPage()
 endFunction
 
 function SetupExistingPage()
+  SetupSmallsNames()
+  SetupSmallsKinds()
+
   SetCursorFillMode(TOP_TO_BOTTOM)
   AddHeaderOption("Female")
   SetupSettingsFor("Bottom", _femaleCount, _femaleNames, _femaleEnabled)
@@ -183,6 +200,8 @@ function SetupExistingPage()
   SetCursorPosition(1)
   AddHeaderOption("All")
 
+  rQuest.ResetDefaultSmalls()
+
   FormList defaults = rQuest.rDefaults
   int itemNo = 0
   int itemCount = defaults.GetSize()
@@ -191,10 +210,11 @@ function SetupExistingPage()
     SetupMenu(itemNo, item.GetName(), _kinds, 0)
     itemNo += 1
   endWhile
-
 endFunction
 
 function SetupAddPage()
+  SetupInventoryNames()
+
   SetTitleText("Add Items")
   SetCursorFillMode(TOP_TO_BOTTOM)
   AddHeaderOption("Inventory")
