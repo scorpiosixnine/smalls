@@ -40,7 +40,7 @@ endEvent
 event OnVersionUpdate(int newVersion)
   pQuest.Log("Smalls updated to version " + pQuest.GetFullVersionString())
   ResetPageNames()
-  if (newVersion >= 74) && (CurrentVersion < 74)
+  if (newVersion >= 75) && (CurrentVersion < 75)
     pQuest.ResetDefaultSmalls()
   endif
 endEvent

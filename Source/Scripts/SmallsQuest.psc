@@ -62,6 +62,8 @@ function SetupPerks()
 endfunction
 
 function ResetDefaultSmalls()
+  Trace("Resetting default smalls list.")
+
   if !pFemale || !pMale || !pTops || !rDefaults
     Warning("failed to load lists")
   endif
@@ -128,12 +130,49 @@ function ResetDefaultSmalls()
 
   AddDefaultSmall(0x012DA, "Schlongs of Skyrim.esp", kModeMale)
 
+  AddDefaultSmall(0x02FFF7, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x02FFF9, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x02FFFB, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x02FFFD, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x02FFFF, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x030001, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x03056A, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x03103B, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x03103E, "Apachii_DivineEleganceStore.esm", kModeFemale)
+
+  AddDefaultSmall(0x0B031B19, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B1B, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B1B, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B1D, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B1F, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B21, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B23, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B25, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B27, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B29, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B2B, "Apachii_DivineEleganceStore.esm", kModeMale)
+  AddDefaultSmall(0x0B031B2D, "Apachii_DivineEleganceStore.esm", kModeMale)
+
+  AddDefaultSmall(0x0B0320A5, "Apachii_DivineEleganceStore.esm", kModeFemale)
+  AddDefaultSmall(0x0B0320A7, "Apachii_DivineEleganceStore.esm", kModeFemale)
+
+
+
+
+
+
+
+
+
+
+
+
+
 EndFunction
 
 function AddDefaultSmall(int formID, String filename, int mode = -1)
   Armor item = Game.GetFormFromFile(formID, filename) as Armor
   if item
-    Trace(filename + " " + formID + " found as " + item.GetName())
     AddSmall(item)
     if mode == -1
       mode = DefaultModeForSmall(item)
