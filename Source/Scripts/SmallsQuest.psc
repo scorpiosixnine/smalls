@@ -266,6 +266,7 @@ String function SlotsDescription(Armor item)
       result += mask + ", "
     endif
     mask *= 2
+    n += 1
   endWhile
   return result
 endFunction
