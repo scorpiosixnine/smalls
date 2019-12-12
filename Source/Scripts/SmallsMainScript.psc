@@ -44,7 +44,8 @@ bool function AlreadyWearingSmalls(Actor target)
 	int items = 0
 	while(n < count)
 		Form item = target.GetNthForm(n)
-		if target.IsEquipped(item) && rQuest.IsSmalls(item as Armor)
+		Armor itemAsArmor = item as Armor
+		if target.IsEquipped(item) && itemAsArmor && (rQuest.IsInTopSlot(itemAsArmor) || rQuest.IsInBottomSlot(itemAsArmor))
 			return true
 		endif
 		n += 1
