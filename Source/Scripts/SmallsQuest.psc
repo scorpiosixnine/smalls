@@ -262,11 +262,11 @@ String function SlotsDescription(Armor item)
   int mask = 1
   string result = ""
   while n < 64
+    n += 1
     if Math.LogicalAnd(itemMask , mask)
-      result += mask + ", "
+      result += n + ", "
     endif
     mask *= 2
-    n += 1
   endWhile
   return result
 endFunction
