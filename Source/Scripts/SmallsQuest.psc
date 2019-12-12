@@ -17,6 +17,12 @@ int property kPelvisUnderwearSlot = 0x400000 AutoReadOnly ; Underwear pelvis
 int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
 int property kMiscSlot = 0x040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
 
+int kModeUnisex = 0
+int kModeMale = 1
+int kModeFemale = 2
+int kModeFemaleTop = 3
+int kModeDisabled = 4
+int kModeRemove = 5
 
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
@@ -127,6 +133,7 @@ function AddDefaultSmall(int formID, String filename)
   if item
     Trace(filename + " " + formID + " found as " + item.GetName())
     AddSmall(item)
+    SetModeForSmall(item, DefaultModeForSmall(item))
   else
     Trace(filename + " " + formID + " missing")
   endif
@@ -136,6 +143,67 @@ function AddSmall(Armor item)
   if !rDefaults.HasForm(item)
     rDefaults.AddForm(item)
   endif
+endFunction
+
+int function DefaultModeForSmall(Armor item)
+  bool isTop = IsInTopSlot(item)
+  bool isBottom = IsInBottomSlot(item)
+  if (isTop && !isBottom)
+    ; definitely a top
+    return kModeFemaleTop
+  else
+    if HasMesh(item, false)
+      return kModeMale
+    endif
+    if HasMesh(item, true)
+      return kModeFemale
+    endif
+  endif
+  return kModeDisabled
+endFunction
+
+int function ModeForSmall(Armor item)
+  bool inMale = pMale.HasForm(item)
+  bool inTops = pTops.HasForm(item)
+  bool inFemale = pFemale.HasForm(item)
+
+  if inMale && inFemale
+    return kModeUnisex
+  elseif inMale
+    return kModeMale
+  elseif inFemale
+    return kModeFemale
+  elseif inTops
+    return kModeFemaleTop
+  else
+    return kModeDisabled
+  endif
+endFunction
+
+function SetModeForSmall(Armor item, int value)
+  pMale.RemoveAddedForm(item)
+  pFemale.RemoveAddedForm(item)
+  pTops.RemoveAddedForm(item)
+  if (value == kModeUnisex) || (value == kModeMale)
+    pMale.AddForm(item)
+  endif
+  if (value == kModeUnisex) || (value == kModeFemale)
+    pFemale.AddForm(item)
+  endif
+  if (value == kModeFemaleTop)
+    pTops.AddForm(item)
+  endif
+endFunction
+
+String[] function ModeNames()
+  String[] names = new String[6]
+  names[kModeUnisex] = "Unisex"
+  names[kModeMale] = "Male"
+  names[kModeFemale] = "Female"
+  names[kModeFemaleTop] = "Female Top"
+  names[kModeDisabled] = "Disable"
+  names[kModeRemove] = "Remove"
+  return names
 endFunction
 
 int function GetRandomSmallsIndex(FormList list)

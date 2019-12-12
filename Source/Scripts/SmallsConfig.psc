@@ -11,13 +11,6 @@ String _generalPage = "General"
 String _existingPage = "Current Items"
 String _addPage = "Add Items"
 
-int kModeUnisex = 0
-int kModeMale = 1
-int kModeFemale = 2
-int kModeFemaleTop = 3
-int kModeDisabled = 4
-int kModeRemove = 5
-
 int kButtonReset = 1
 
 String[] _kinds
@@ -31,16 +24,6 @@ function ResetProperties()
   Pages[0] = _generalPage
   Pages[1] = _existingPage
   Pages[2] = _addPage
-endFunction
-
-function SetupSmallsKinds()
-  _kinds = new String[6]
-  _kinds[kModeUnisex] = "Unisex"
-  _kinds[kModeMale] = "Male"
-  _kinds[kModeFemale] = "Female"
-  _kinds[kModeFemaleTop] = "Female Top"
-  _kinds[kModeDisabled] = "Disable"
-  _kinds[kModeRemove] = "Remove"
 endFunction
 
 function SetupInventoryNames()
@@ -130,7 +113,7 @@ function SetupGeneralPage()
 endFunction
 
 function SetupExistingPage()
-  SetupSmallsKinds()
+  _kinds = pQuest.ModeNames()
 
   SetCursorFillMode(TOP_TO_BOTTOM)
 
@@ -139,28 +122,10 @@ function SetupExistingPage()
   int itemCount = defaults.GetSize()
   while (itemNo < itemCount)
     Armor item = defaults.GetAt(itemNo) as Armor
-    int mode = ModeForItem(item)
+    int mode = pQuest.ModeForSmall(item)
     SetupMenu(item.GetName(), _kinds, mode)
     itemNo += 1
   endWhile
-endFunction
-
-int function ModeForItem(Armor item)
-  bool inMale = pQuest.pMale.HasForm(item)
-  bool inTops = pQuest.pTops.HasForm(item)
-  bool inFemale = pQuest.pFemale.HasForm(item)
-
-  if inMale && inFemale
-    return kModeUnisex
-  elseif inMale
-    return kModeMale
-  elseif inFemale
-    return kModeFemale
-  elseif inTops
-    return kModeFemaleTop
-  else
-    return kModeDisabled
-  endif
 endFunction
 
 function SetupAddPage()
@@ -184,18 +149,7 @@ endFunction
 function MenuChanged(int index, int tag, int value)
   Armor item = pQuest.rDefaults.GetAt(index) as Armor
   if item
-    pQuest.pMale.RemoveAddedForm(item)
-    pQuest.pFemale.RemoveAddedForm(item)
-    pQuest.pTops.RemoveAddedForm(item)
-    if (value == kModeUnisex) || (value == kModeMale)
-      pQuest.pMale.AddForm(item)
-    endif
-    if (value == kModeUnisex) || (value == kModeFemale)
-      pQuest.pFemale.AddForm(item)
-    endif
-    if (value == kModeFemaleTop)
-      pQuest.pTops.AddForm(item)
-    endif
+    pQuest.SetModeForSmall(item, value)
   endif
 endFunction
 
