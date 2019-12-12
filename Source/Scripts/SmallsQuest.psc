@@ -161,6 +161,7 @@ EndFunction
 function AddDefaultSmall(int formID, String filename, int mode = -1)
   Armor item = Game.GetFormFromFile(formID, filename) as Armor
   if item
+    Trace("added default: " + filename + " " + formID + " " + SlotsDescription(item))
     AddSmall(item)
     if mode == -1
       mode = DefaultModeForSmall(item)
@@ -248,7 +249,25 @@ Armor function GetRandomSmall(FormList list)
 endFunction
 
 bool function IsSmalls(Armor akArmour)
-  return pMale.HasForm(akArmour) || pFemale.HasForm(akArmour) || pTops.HasForm(akArmour)
+  if akArmour
+    return pMale.HasForm(akArmour) || pFemale.HasForm(akArmour) || pTops.HasForm(akArmour)
+  else
+    return false
+  endif
+endFunction
+
+String function SlotsDescription(Armor item)
+  int itemMask = item.getSlotMask()
+  int n = 0
+  int mask = 1
+  string result = ""
+  while n < 64
+    if Math.LogicalAnd(itemMask , mask)
+      result += mask + ", "
+    endif
+    mask *= 2
+  endWhile
+  return result
 endFunction
 
 bool function IsInSlot(Armor akArmour, int slot)

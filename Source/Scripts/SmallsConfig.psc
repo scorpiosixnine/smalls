@@ -79,7 +79,7 @@ function SetupGeneralPage()
   SetupToggle("ReplaceMales", "Use for males.", pQuest.pReplaceMales)
   SetupToggle("ReplaceFemales", "Use for females.", pQuest.pReplaceFemales)
   AddEmptyOption()
-  SetupButton("Reset", "Revert to default item list. Any custom items will be removed.", kButtonReset)
+  SetupButton("Reset items list to defaults", "Reset", "Revert to the default item list. Any custom items that you have added will be removed.", kButtonReset)
 
   AddHeaderOption("Debug Options")
   SetupToggle("Debugging", "Enable Logging", pQuest.pDebugMode)

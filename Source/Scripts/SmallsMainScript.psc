@@ -20,7 +20,7 @@ EndEvent
 event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
 	Armor armour = akBaseObject as Armor
 	Actor target = rQuest.GetTarget()
-	if (armour && target.IsDead())
+	if (armour && target.IsDead() && !AlreadyWearingSmalls(target))
 		int mask = armour.getSlotMask()
 		if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
 			rQuest.Debug("Unequipped armour")
@@ -34,6 +34,20 @@ event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
 		endif
 	endif
 endEvent
+
+bool function AlreadyWearingSmalls(Actor target)
+	int count = target.GetNumItems()
+	int n = 0
+	int items = 0
+	while(n < count)
+		Form item = target.GetNthForm(n)
+		if target.IsEquipped(item) && rQuest.IsSmalls(item as Armor)
+			return true
+		endif
+		n += 1
+	endWhile
+	return false
+endFunction
 
 function EquipSmalls(Actor akActor, int gender)
 	if gender == 0
