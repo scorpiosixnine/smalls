@@ -1,42 +1,34 @@
 Scriptname SmallsConfig extends SKI_ConfigBase
 
+; Properties
+
 SmallsQuest property pQuest auto
+
+
+; Constants
+
+String kGeneralPage = "General"
+String kExistingPage = "Current Items"
+String kAddPage = "Add Items"
+
+int kButtonReset = 1
+
+
+; Variables
 
 int _inventoryCount = 0
 String[] _inventoryNames
 bool[] _inventoryEnabled
 int[] _inventoryIndexes
 
-String _generalPage = "General"
-String _existingPage = "Current Items"
-String _addPage = "Add Items"
-
-int kButtonReset = 1
-
+bool _updateInventory = false
 String[] _kinds
 
+; Events
+
 event OnConfigInit()
-  ResetProperties()
-endEvent
-
-function ResetProperties()
-  Pages = new string[3]
-  Pages[0] = _generalPage
-  Pages[1] = _existingPage
-  Pages[2] = _addPage
-endFunction
-
-function SetupInventoryNames()
-  if _inventoryCount == 0
-    _inventoryNames = new String[100]
-    _inventoryEnabled = new bool[100]
-    _inventoryIndexes = new int[100]
-    _inventoryCount = ReadInventory()
-  endif
-endFunction
-
-event OnConfigOpen()
-  pQuest.Trace("ConfigOpen")
+  pQuest.Trace("ConfigInit")
+  ResetPageNames()
 endEvent
 
 event OnConfigClose()
@@ -45,51 +37,32 @@ event OnConfigClose()
   AddSmallsFromInventory()
 endEvent
 
-int function GetVersion()
-  return pQuest.pBuildNumber
-endFunction
-
 event OnVersionUpdate(int newVersion)
   pQuest.Log("Smalls updated to version " + pQuest.GetFullVersionString())
-  ResetProperties()
+  ResetPageNames()
+  if (newVersion >= 74) && (CurrentVersion < 74)
+    pQuest.ResetDefaultSmalls()
+  endif
 endEvent
 
 event OnPageReset(string page)
   {Called when a new page is selected, including the initial empty page}
 
   pQuest.Debug("PageReset " + page)
-  ResetOptions()
+  ConfigResetOptions()
 
-  if (page == _generalPage) || (page == "")
+  AddSmallsFromInventory()
+
+  if (page == kGeneralPage) || (page == "")
     SetupGeneralPage()
-  elseif page == _existingPage
+  elseif page == kExistingPage
     SetupExistingPage()
-  elseif page == _addPage
+  elseif page == kAddPage
     SetupAddPage()
   endif
 endEvent
 
-function ButtonClicked(int index, int tag, int option)
-  if tag == kButtonReset
-    SetTextOptionValue(option, "Resetting...")
-    pQuest.ResetDefaultSmalls()
-    SetTextOptionValue(option, "Reset")
-  endif
-endFunction
-
-
-function UpdateToggle(String identifier, bool value, int tag)
-  if identifier == "ReplaceMales"
-    pQuest.pReplaceMales = value
-  elseif identifier == "ReplaceFemales"
-    pQuest.pReplaceFemales = value
-  elseif identifier == "Enabled"
-    pQuest.pEnabled = value
-    pQuest.SetupPerks()
-  elseif identifier == "Inventory"
-    _inventoryEnabled[tag] = value
-  endif
-endFunction
+; Pages
 
 function SetupGeneralPage()
   SetCursorFillMode(TOP_TO_BOTTOM)
@@ -113,7 +86,9 @@ function SetupGeneralPage()
 endFunction
 
 function SetupExistingPage()
-  _kinds = pQuest.ModeNames()
+  if _kinds == None
+    _kinds = pQuest.ModeNames()
+  endif
 
   SetCursorFillMode(TOP_TO_BOTTOM)
 
@@ -146,10 +121,51 @@ function SetupSettingsFor(String identifier, int count, String[] names, bool[] v
   endWhile
 endFunction
 
-function MenuChanged(int index, int tag, int value)
+; Config Handlers
+
+function ConfigButtonClicked(int index, int tag, int option)
+  if tag == kButtonReset
+    SetTextOptionValue(option, "Resetting...")
+    pQuest.ResetDefaultSmalls()
+    SetTextOptionValue(option, "Reset")
+  endif
+endFunction
+
+function ConfigToggleChanged(String identifier, bool value, int tag)
+  if identifier == "ReplaceMales"
+    pQuest.pReplaceMales = value
+  elseif identifier == "ReplaceFemales"
+    pQuest.pReplaceFemales = value
+  elseif identifier == "Enabled"
+    pQuest.pEnabled = value
+    pQuest.SetupPerks()
+  elseif identifier == "Inventory"
+    _inventoryEnabled[tag] = value
+  endif
+endFunction
+
+function ConfigMenuChanged(int index, int tag, int value)
   Armor item = pQuest.rDefaults.GetAt(index) as Armor
   if item
     pQuest.SetModeForSmall(item, value)
+  endif
+endFunction
+
+; Utilities
+
+function ResetPageNames()
+  Pages = new string[3]
+  Pages[0] = kGeneralPage
+  Pages[1] = kExistingPage
+  Pages[2] = kAddPage
+endFunction
+
+function SetupInventoryNames()
+  if _inventoryCount == 0
+    _inventoryNames = new String[100]
+    _inventoryEnabled = new bool[100]
+    _inventoryIndexes = new int[100]
+    _inventoryCount = ReadInventory()
   endif
 endFunction
 
@@ -172,13 +188,17 @@ int function ReadInventory()
 endFunction
 
 function AddSmallsFromInventory()
-  ObjectReference player = Game.GetPlayer()
-  int n =  0
-  while(n < _inventoryCount)
-    if _inventoryEnabled[n]
-      Armor small = player.GetNthForm(_inventoryIndexes[n]) as Armor
-      pQuest.AddSmall(small)
-    endif
-    n += 1
-  endWhile
+  if _updateInventory
+    ObjectReference player = Game.GetPlayer()
+    int n =  0
+    while(n < _inventoryCount)
+      if _inventoryEnabled[n]
+        Armor small = player.GetNthForm(_inventoryIndexes[n]) as Armor
+        pQuest.AddSmall(small)
+        pQuest.SetModeForSmall(small, pQuest.DefaultModeForSmall(small))
+      endif
+      n += 1
+    endWhile
+    _updateInventory = false
+  endif
 endFunction
