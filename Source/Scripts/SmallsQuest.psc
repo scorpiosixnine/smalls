@@ -156,18 +156,6 @@ function ResetDefaultSmalls()
   AddDefaultSmall(0x0B0320A5, "Apachii_DivineEleganceStore.esm", kModeFemale)
   AddDefaultSmall(0x0B0320A7, "Apachii_DivineEleganceStore.esm", kModeFemale)
 
-
-
-
-
-
-
-
-
-
-
-
-
 EndFunction
 
 function AddDefaultSmall(int formID, String filename, int mode = -1)

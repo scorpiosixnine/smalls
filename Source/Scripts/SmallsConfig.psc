@@ -109,16 +109,7 @@ function SetupAddPage()
   SetTitleText("Add Items")
   SetCursorFillMode(TOP_TO_BOTTOM)
   AddHeaderOption("Inventory")
-  SetupSettingsFor("Inventory", _inventoryCount, _inventoryNames, _inventoryEnabled)
-endFunction
-
-function SetupSettingsFor(String identifier, int count, String[] names, bool[] values)
-  int n = 0
-  while(n < count)
-    SetupToggle(identifier, names[n], values[n], n)
-    ; AddMenuOption("Kind", identifier)
-    n += 1
-  endWhile
+  SetupToggles("Inventory", _inventoryCount, _inventoryNames, _inventoryEnabled)
 endFunction
 
 ; Config Handlers
