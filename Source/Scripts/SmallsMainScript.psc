@@ -20,17 +20,20 @@ EndEvent
 event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
 	Armor armour = akBaseObject as Armor
 	Actor target = rQuest.GetTarget()
-	if (armour && target.IsDead() && !AlreadyWearingSmalls(target))
-		int mask = armour.getSlotMask()
-		if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
-			rQuest.Debug("Unequipped armour")
-			int gender = target.GetLeveledActorBase().GetSex()
-			rQuest.Debug("gender is " + gender)
-			if !rQuest.IsSmalls(armour)
-				EquipSmalls(target, gender)
+	if (armour && target.IsDead())
+		rQuest.Trace("unequipped from slots " + rQuest.SlotsDescription(armour))
+		if !AlreadyWearingSmalls(target)
+			int mask = armour.getSlotMask()
+			if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
+				rQuest.Debug("Unequipped armour")
+				int gender = target.GetLeveledActorBase().GetSex()
+				rQuest.Debug("gender is " + gender)
+				if !rQuest.IsSmalls(armour)
+					EquipSmalls(target, gender)
+				endif
+			else
+				rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
 			endif
-		else
-			rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
 		endif
 	endif
 endEvent
