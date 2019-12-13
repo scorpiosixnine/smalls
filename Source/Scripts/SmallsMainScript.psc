@@ -21,37 +21,19 @@ event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
 	Armor armour = akBaseObject as Armor
 	Actor target = rQuest.GetTarget()
 	if (armour && target.IsDead())
-		rQuest.Trace("unequipped from slots " + rQuest.SlotsDescription(armour))
-		if !AlreadyWearingSmalls(target)
-			int mask = armour.getSlotMask()
-			if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
-				rQuest.Debug("Unequipped armour")
-				int gender = target.GetLeveledActorBase().GetSex()
-				rQuest.Debug("gender is " + gender)
-				if !rQuest.IsSmalls(armour)
-					EquipSmalls(target, gender)
-				endif
-			else
-				rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
+		int mask = armour.getSlotMask()
+		if (rQuest.IsInSlot(armour, rQuest.kBodySlot) && !rQuest.IsSmalls(armour))
+			rQuest.Debug("Unequipped armour")
+			int gender = target.GetLeveledActorBase().GetSex()
+			rQuest.Debug("gender is " + gender)
+			if !rQuest.IsSmalls(armour)
+				EquipSmalls(target, gender)
 			endif
+		else
+			rQuest.Debug("Uneqipped slotmask: " + armour.getSlotMask())
 		endif
 	endif
 endEvent
-
-bool function AlreadyWearingSmalls(Actor target)
-	int count = target.GetNumItems()
-	int n = 0
-	int items = 0
-	while(n < count)
-		Form item = target.GetNthForm(n)
-		Armor itemAsArmor = item as Armor
-		if target.IsEquipped(item) && itemAsArmor && (rQuest.IsInTopSlot(itemAsArmor) || rQuest.IsInBottomSlot(itemAsArmor))
-			return true
-		endif
-		n += 1
-	endWhile
-	return false
-endFunction
 
 function EquipSmalls(Actor akActor, int gender)
 	if gender == 0

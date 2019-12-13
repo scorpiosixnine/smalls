@@ -34,15 +34,46 @@ Actor function GetTarget()
   return rTarget.GetActorReference()
 endFunction
 
-function SetTarget(ObjectReference akTargetRef)
-  rTarget.ForceRefTo(akTargetRef)
-  (rTarget as SmallsMainScript).TargetUpdated()
-  Debug("target set to " + akTargetRef.GetName() + akTargetRef.GetFormID())
+function SetTarget(ObjectReference ref)
+  Actor target = ref as Actor
+  if target
+    if AlreadyWearingSmalls(target)
+      Trace("ignoring target as already wearing smalls " + target.GetName())
+    else
+      rTarget.ForceRefTo(target)
+      (rTarget as SmallsMainScript).TargetUpdated()
+      Trace("target set to " + target.GetName() + target.GetFormID())
+    endif
+  endif
 endFunction
 
 function ClearTarget()
   rTarget.Clear()
   Debug("target cleared")
+endFunction
+
+bool function AlreadyWearingSmalls(Actor target)
+	int count = target.GetNumItems()
+	int n = 0
+	int items = 0
+	while(n < count)
+		Form item = target.GetNthForm(n)
+		Armor itemAsArmor = item as Armor
+		if target.IsEquipped(item) && itemAsArmor
+      if rDefaults.HasForm(item)
+        Trace(item.GetName() + " is in the item list")
+        return true
+      elseif IsInTopSlot(itemAsArmor)
+        Trace(item.GetName() + " is in a slot used for tops " + SlotsDescription(itemAsArmor))
+        return true
+      elseif IsInBottomSlot(itemAsArmor)
+        Trace(item.GetName() + " is in a slot used for bottoms " + SlotsDescription(itemAsArmor))
+			  return true
+      endif
+		endif
+		n += 1
+	endWhile
+	return false
 endFunction
 
 function UpdatedEnabled()
