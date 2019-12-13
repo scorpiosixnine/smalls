@@ -89,7 +89,7 @@ function SetupGeneralPage()
 endFunction
 
 function SetupExistingPage()
-  if _kinds == None
+  if !_kinds
     _kinds = pQuest.ModeNames()
   endif
 
@@ -135,6 +135,7 @@ function ConfigToggleChanged(String identifier, bool value, int tag)
     pQuest.SetupPerks()
   elseif identifier == "Inventory"
     _inventoryEnabled[tag] = value
+    _updateInventory = true
   endif
 endFunction
 
