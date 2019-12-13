@@ -223,6 +223,7 @@ endFunction
 
 function AddSmall(Armor item)
   if !rDefaults.HasForm(item)
+    Trace("added " + item.GetName())
     rDefaults.AddForm(item)
   endif
 endFunction
@@ -267,12 +268,15 @@ function SetModeForSmall(Armor item, int value)
   pFemale.RemoveAddedForm(item)
   pTops.RemoveAddedForm(item)
   if (value == kModeUnisex) || (value == kModeMale)
+    Trace("added as male " + item.GetName())
     pMale.AddForm(item)
   endif
   if (value == kModeUnisex) || (value == kModeFemale)
+    Trace("added as female " + item.GetName())
     pFemale.AddForm(item)
   endif
   if (value == kModeFemaleTop)
+    Trace("added as top " + item.GetName())
     pTops.AddForm(item)
   endif
 endFunction

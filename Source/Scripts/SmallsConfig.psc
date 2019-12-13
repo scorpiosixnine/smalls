@@ -103,11 +103,15 @@ function SetupExistingPage()
   FormList defaults = pQuest.rDefaults
   int itemNo = 0
   int itemCount = defaults.GetSize()
+  pQuest.Trace("defaults list size " + itemCount)
   while (itemNo < itemCount)
     Armor item = defaults.GetAt(itemNo) as Armor
     int mode = pQuest.ModeForSmall(item)
     SetupMenu(item.GetName(), _kinds, mode)
     itemNo += 1
+    if itemNo == 64
+      SetCursorPosition(1)
+    endif
   endWhile
 endFunction
 
