@@ -19,7 +19,7 @@ int kButtonReset = 1
 int _inventoryCount = 0
 String[] _inventoryNames
 bool[] _inventoryEnabled
-int[] _inventoryIndexes
+Armor[] _inventoryItems
 
 bool _updateInventory = false
 bool _removeMarked = false
@@ -31,6 +31,11 @@ String[] _kinds
 event OnConfigInit()
   pQuest.Trace("ConfigInit")
   ResetPageNames()
+endEvent
+
+event onConfigOpen()
+  pQuest.Trace("ConfigOpen")
+  _inventoryCount = 0
 endEvent
 
 event OnConfigClose()
@@ -162,22 +167,25 @@ function SetupInventoryNames()
   if _inventoryCount == 0
     _inventoryNames = new String[100]
     _inventoryEnabled = new bool[100]
-    _inventoryIndexes = new int[100]
+    _inventoryItems = new Armor[100]
     _inventoryCount = ReadInventory()
   endif
 endFunction
 
 int function ReadInventory()
+  pQuest.Trace("Reading inventory")
   ObjectReference player = Game.GetPlayer()
   int count = player.GetNumItems()
   int n = 0
   int items = 0
   while(n < count)
-    Form item = player.GetNthForm(n) as Armor
+    Armor item = player.GetNthForm(n) as Armor
     if item
-      _inventoryNames[items] = item.GetName()
+      string name = item.GetName()
+      pQuest.Trace("found armor " + name)
+      _inventoryNames[items] = name
       _inventoryEnabled[items] = false
-      _inventoryIndexes[items] = n
+      _inventoryItems[items] = item
       items += 1
     endif
     n += 1
@@ -191,13 +199,12 @@ function AddSmallsFromInventory()
     int n =  0
     while(n < _inventoryCount)
       if _inventoryEnabled[n]
-        int index = _inventoryIndexes[n]
-        Armor small = player.GetNthForm(index) as Armor
-        if small
-          pQuest.AddSmall(small)
-          pQuest.SetModeForSmall(small, pQuest.DefaultModeForSmall(small))
+        Armor item = _inventoryItems[n]
+        if item
+          pQuest.AddSmall(item)
+          pQuest.SetModeForSmall(item, pQuest.DefaultModeForSmall(item))
         else
-          pQuest.Trace("error adding from inventory " + player.GetNthForm(index).GetName() + " " + n + " " + index)
+          pQuest.Trace("error adding from inventory " + item.GetName() + " " + n)
         endif
       endif
       n += 1
