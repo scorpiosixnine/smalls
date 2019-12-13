@@ -22,6 +22,8 @@ bool[] _inventoryEnabled
 int[] _inventoryIndexes
 
 bool _updateInventory = false
+bool _removeMarked = false
+
 String[] _kinds
 
 ; Events
@@ -35,6 +37,7 @@ event OnConfigClose()
   pQuest.Debug("ConfigClose")
 
   AddSmallsFromInventory()
+  RemoveMarkedItems()
 endEvent
 
 event OnVersionUpdate(int newVersion)
@@ -49,9 +52,9 @@ event OnPageReset(string page)
   {Called when a new page is selected, including the initial empty page}
 
   pQuest.Debug("PageReset " + page)
-  ConfigResetOptions()
-
+  RemoveMarkedItems()
   AddSmallsFromInventory()
+  ConfigResetOptions()
 
   if (page == kGeneralPage) || (page == "")
     SetupGeneralPage()
@@ -139,6 +142,9 @@ function ConfigMenuChanged(int index, int tag, int value)
   Armor item = pQuest.rDefaults.GetAt(index) as Armor
   if item
     pQuest.SetModeForSmall(item, value)
+    if value == pQuest.kModeRemove
+      _removeMarked = true
+    endif
   endif
 endFunction
 
@@ -191,5 +197,21 @@ function AddSmallsFromInventory()
       n += 1
     endWhile
     _updateInventory = false
+  endif
+endFunction
+
+function RemoveMarkedItems()
+  if _removeMarked
+    FormList defaults = pQuest.rDefaults
+    int itemNo =  defaults.GetSize()
+    while (itemNo > 0)
+      itemNo -= 1
+      if _menuValues[itemNo] == pQuest.kModeRemove
+        Armor item = defaults.GetAt(itemNo) as Armor
+        defaults.RemoveAddedForm(item)
+        pQuest.Trace("removed item " + item.GetName())
+      endif
+    endWhile
+    _removeMarked = false
   endif
 endFunction

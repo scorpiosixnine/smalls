@@ -17,12 +17,12 @@ int property kPelvisUnderwearSlot = 0x400000 AutoReadOnly ; Underwear pelvis
 int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
 int property kMiscSlot = 0x040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
 
-int kModeUnisex = 0
-int kModeMale = 1
-int kModeFemale = 2
-int kModeFemaleTop = 3
-int kModeDisabled = 4
-int kModeRemove = 5
+int property kModeUnisex = 0 AutoReadOnly
+int property kModeMale = 1 AutoReadOnly
+int property kModeFemale = 2 AutoReadOnly
+int property kModeFemaleTop = 3 AutoReadOnly
+int property kModeDisabled = 4 AutoReadOnly
+int property kModeRemove = 5 AutoReadOnly
 
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
@@ -187,12 +187,33 @@ function ResetDefaultSmalls()
   AddDefaultSmall(0x0B0320A5, "Apachii_DivineEleganceStore.esm", kModeFemale)
   AddDefaultSmall(0x0B0320A7, "Apachii_DivineEleganceStore.esm", kModeFemale)
 
+  AddDefaultSmall(0x75000D69, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D7E, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D7F, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D80, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D81, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D8C, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D8D, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D8E, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D8F, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75000D90, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75006F7B, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x75006F7C, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074E6, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074E7, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074E8, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074E9, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074EA, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074EB, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074EC, "CuteMinidressCollection.esp", kModeFemale)
+  AddDefaultSmall(0x750074ED, "CuteMinidressCollection.esp", kModeFemale)
+
 EndFunction
 
 function AddDefaultSmall(int formID, String filename, int mode = -1)
   Armor item = Game.GetFormFromFile(formID, filename) as Armor
   if item
-    Trace("added default: " + filename + " " + formID + " " + SlotsDescription(item))
+    Trace("added default: " + item.GetName() + " (" + filename + ") slots: " + SlotsDescription(item))
     AddSmall(item)
     if mode == -1
       mode = DefaultModeForSmall(item)
