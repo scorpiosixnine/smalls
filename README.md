@@ -70,6 +70,8 @@ Smalls knows about certain mods that add underwear, and it pre-populates its lis
 
 Smalls used to contain custom underwear items, but no longer does. If you were using a previous version of Smalls, some underwear items may disappear when you upgrade. This should be a one-time problem.
 
+Smalls makes new underwear when it needs it, so you could obviously use this mod in theory to farm underwear. If that floats your boat, then go for it. You weirdo ;). However, since the basic point of the mod is to add immersion / realism (of a sort), I'm just going to assume that anyone using it is unlikely to feel that particular urge, and I'm not going to treat it as a problem.
+
 ## Improvements
 
 If anyone is interested, I'd like to expand this mod. Things I'm considering:
@@ -82,6 +84,12 @@ If anyone is interested, I'd like to expand this mod. Things I'm considering:
 ## Installation
 
 Use a mod manager. You know it makes sense.
+
+
+## Source Code
+
+The source for this mod can be found on [github](https://github.com/scorpiosixnine/smalls).
+
 
 
 ## Credits
