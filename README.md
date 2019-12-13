@@ -22,13 +22,24 @@ As you have probably guessed, Smalls takes the second approach.
 
 ## Configuration
 
-By default, Smalls uses underwear from CBBE and SOS, for female and male characters respectively.
+By default, Smalls uses underwear from a few mods that it knows about, if they are installed.
 
 However, you can edit the underwear list to add your own items, via an MCM configuration panel.
 
-There are three categories: male, female (bottom) and female (top). If you have more than one item in a category, a random choice is made. If the female (bottom) item appears to cover the whole body, it is used on its own. If not, a female (top) item is added too.
+Each item that Smalls knows about can be set to one of the following modes:
 
-This is not very sophisticated, and doesn't account for things like matching tops & bottoms, or picking appropriate underwear for profession, economic status, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
+- unisex; used for males and females
+- male; used for males only
+- female; used for females only
+- female top; used for females only, where the first item added appears to be bottom-only
+- ignore; smalls knows that this is underwear, but doesn't use it
+- remove; when you close Smalls, this item will be removed from the list of known underwear
+
+If you have more than one item in a category, a random choice is made. If the female item appears to cover the whole body, it is used on its own. If not, a female top item is added too.
+
+This is not very sophisticated, and does not yet try to match tops & bottoms, or pick appropriate underwear for specific profession, races, tribes, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
+
+Smalls tries to detect the type of an item automatically, but the detection is based on the slot flags set by the armor author. These flags are often inconsistent, and underwear armor is often not designed to be worn along with other items, which means that sometimes the slot flags are just set as "body".
 
 ### How To Add Armour
 
@@ -36,30 +47,28 @@ Make sure that the armour you want to add is in your inventory.
 
 Open up the Smalls / Add Item panel in MCM.
 
-Tick the items you want to add, then dismiss MCM (or switch away from the Smalls panel).
+Tick the items you want to add, then switch back to the Current Items panel. The item you've added should now be in the list. By default it will
 
 Smalls has to guess which lists to add the item to, based on the slot positions it's marked for, and whether it has meshes set for male, female or both. This information isn't always reliable, so sometimes underwear will be added to the wrong lists. You can fix this yourself by removing the armour from some lists.
 
 ### How To Remove Armour
 
-Open up the Smalls / Existing Items panel in MCM.
+Open up the Smalls / Current Items panel in MCM.
 
-Un-tick the items you want to remove, then dismiss MCM (or switch away from the Smalls panel).
+Set the items you want to remove to "remove", then dismiss MCM (or switch away from the Smalls panel).
 
 
 ## Dependencies
 
-- SkyUI (for the configuration menu)
-- CBBE Standalone Underwear (for the default female underwear)
-- SOS (for the default male underwear)
+The only dependency is SkyUI, which is used for the configuration menu.
 
-In the future I may bundle some default underwear into the mod, which would remove the last two dependencies. I'm no artist however, so I'd need to get permission from someone else first.
+Smalls is compatible with UNP, CBBE, etc. Just use whatever underwear you want.
+
+Smalls knows about certain mods that add underwear, and it pre-populates its list if it detects that they are present. If you have a favourite mod you'd like Smalls to know about, please let me know and I will add it.
 
 ## Known Issues
 
-If the dependencies are missing, the mod should still function, but the default underwear sets will not display correctly. You can fix this by just adding your own and removing the defaults.
-
-The default male underwear set comes from SOS, but for some reason it seems to be showing up with the wrong texture. I haven't figured out what's going on there yet...
+Smalls used to contain custom underwear items, but no longer does. If you were using a previous version of Smalls, some underwear items may disappear when you upgrade. This should be a one-time problem.
 
 ## Improvements
 
@@ -69,6 +78,11 @@ If anyone is interested, I'd like to expand this mod. Things I'm considering:
 - a way to tag underwear to be used for a particular race, class, or wealth level
 - a way to apply specific underwear to known NPCs, so that their underwear matches their outerwear
 - (possibly) a way to use this mod when interacting with followers (whilst they are still alive!), in order to automatically outfit them with underwear
+
+## Installation
+
+Use a mod manager. You know it makes sense.
+
 
 ## Credits
 
