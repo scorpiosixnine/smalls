@@ -63,12 +63,9 @@ bool function AlreadyWearingSmalls(Actor target)
       if rDefaults.HasForm(item)
         Trace(item.GetName() + " is in the item list")
         return true
-      elseif IsInTopSlot(itemAsArmor)
-        Trace(item.GetName() + " is in a slot used for tops " + SlotsDescription(itemAsArmor))
+      elseif IsInSpecificSlot(itemAsArmor)
+        Trace(item.GetName() + " is in a non-body slot used for underwear " + SlotsDescription(itemAsArmor))
         return true
-      elseif IsInBottomSlot(itemAsArmor)
-        Trace(item.GetName() + " is in a slot used for bottoms " + SlotsDescription(itemAsArmor))
-			  return true
       endif
 		endif
 		n += 1
@@ -355,5 +352,5 @@ bool function IsInBottomSlot(Armor akArmour)
 endFunction
 
 bool function IsInSpecificSlot(Armor akArmour)
-  return IsInSlot(akArmour, kTorsoUnderwearSlot + kPelvisUnderwearSlot + kMiscSlot)
+  return IsInSlot(akArmour, kTorsoUnderwearSlot + kPelvisUnderwearSlot + kMiscSlot) && !IsInSlot(akArmour, kBodySlot)
 endFunction

@@ -82,7 +82,7 @@ function SetupGeneralPage()
   SetupToggle("ReplaceMales", "Use for males.", pQuest.pReplaceMales)
   SetupToggle("ReplaceFemales", "Use for females.", pQuest.pReplaceFemales)
   AddEmptyOption()
-  SetupButton("Reset items list to defaults", "Reset", "Revert to the default item list. Any custom items that you have added will be removed.", kButtonReset)
+  SetupButton("Reset items list to defaults.", "Reset", "Revert to the default item list. Any custom items that you have added will be removed.", kButtonReset)
 
   AddHeaderOption("Debug Options")
   SetupToggle("Debugging", "Enable Logging", pQuest.pDebugMode)
@@ -121,7 +121,7 @@ function ConfigButtonClicked(int index, int tag, int option)
   if tag == kButtonReset
     SetTextOptionValue(option, "Resetting...")
     pQuest.ResetDefaultSmalls()
-    SetTextOptionValue(option, "Reset")
+    SetTextOptionValue(option, "Done")
   endif
 endFunction
 
