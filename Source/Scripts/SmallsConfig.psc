@@ -191,9 +191,14 @@ function AddSmallsFromInventory()
     int n =  0
     while(n < _inventoryCount)
       if _inventoryEnabled[n]
-        Armor small = player.GetNthForm(_inventoryIndexes[n]) as Armor
-        pQuest.AddSmall(small)
-        pQuest.SetModeForSmall(small, pQuest.DefaultModeForSmall(small))
+        int index = _inventoryIndexes[n]
+        Armor small = player.GetNthForm(index) as Armor
+        if small
+          pQuest.AddSmall(small)
+          pQuest.SetModeForSmall(small, pQuest.DefaultModeForSmall(small))
+        else
+          pQuest.Trace("error adding from inventory " + player.GetNthForm(index).GetName() + " " + n + " " + index)
+        endif
       endif
       n += 1
     endWhile
