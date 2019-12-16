@@ -26,8 +26,8 @@ int property kModeRemove = 5 AutoReadOnly
 
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
-  ResetDefaultSmalls()
   SetupPerks()
+  ResetDefaultSmalls()
 endEvent
 
 Actor function GetTarget()

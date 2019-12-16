@@ -33,7 +33,7 @@ event OnConfigInit()
   ResetPageNames()
 endEvent
 
-event onConfigOpen()
+event OnConfigOpen()
   pQuest.Trace("ConfigOpen")
   _inventoryCount = 0
 endEvent
@@ -49,6 +49,7 @@ event OnVersionUpdate(int newVersion)
   pQuest.Log("Smalls updated to version " + pQuest.GetFullVersionString())
   ResetPageNames()
   if (newVersion >= 75) && (CurrentVersion < 75)
+    pQuest.Trace("Version update from " + CurrentVersion + " to " + newVersion)
     pQuest.ResetDefaultSmalls()
   endif
 endEvent
