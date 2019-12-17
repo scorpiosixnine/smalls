@@ -37,7 +37,9 @@ endFunction
 function SetTarget(ObjectReference ref)
   Actor target = ref as Actor
   if target
-    if AlreadyWearingSmalls(target)
+    if !target.IsDead()
+      Trace("ignoring target as it is alive " + target.GetName())
+    elseif AlreadyWearingSmalls(target)
       Trace("ignoring target as already wearing smalls " + target.GetName())
     else
       rTarget.ForceRefTo(target)
