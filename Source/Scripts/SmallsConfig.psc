@@ -162,6 +162,7 @@ endFunction
 ; Utilities
 
 function ResetPageNames()
+  ModName = pQuest.pName
   Pages = new string[3]
   Pages[0] = kGeneralPage
   Pages[1] = kExistingPage
