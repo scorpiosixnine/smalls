@@ -104,6 +104,9 @@ function SetupExistingPage()
   FormList defaults = pQuest.rDefaults
   int itemNo = 0
   int itemCount = defaults.GetSize()
+  if itemCount > 127
+    itemCount = 127
+  endif
   pQuest.Trace("defaults list size " + itemCount)
   while (itemNo < itemCount)
     Armor item = defaults.GetAt(itemNo) as Armor
