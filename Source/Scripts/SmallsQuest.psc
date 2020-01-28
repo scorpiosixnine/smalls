@@ -108,14 +108,14 @@ function ResetDefaultSmalls()
   ;   AddDefaultSmall(, , kModeFemale)
   ; endif
 
-  if Game.GetModByName("[Melodic] Angels Secrets.esp")
+  if Game.GetModByName("[Melodic] Angels Secrets.esp") != 255
     AddDefaultSmall(0x400012D0, "[Melodic] Angels Secrets.esp", kModeFemaleTop)
     AddDefaultSmall(0x400012D1, "[Melodic] Angels Secrets.esp", kModeFemale)
     AddDefaultSmall(0x400012D5, "[Melodic] Angels Secrets.esp", kModeFemaleBottom)
     AddDefaultSmall(0x400012D6, "[Melodic] Angels Secrets.esp", kModeFemaleBottom)
   endif
 
-  if Game.GetModByName("Apachii_DivineEleganceStore.esm")
+  if Game.GetModByName("Apachii_DivineEleganceStore.esm") != 255
     AddDefaultSmall(0x02FFF7, "Apachii_DivineEleganceStore.esm", kModeFemale)
     AddDefaultSmall(0x02FFF9, "Apachii_DivineEleganceStore.esm", kModeFemale)
     AddDefaultSmall(0x02FFFB, "Apachii_DivineEleganceStore.esm", kModeFemale)
@@ -143,16 +143,16 @@ function ResetDefaultSmalls()
     AddDefaultSmall(0x0B0320A7, "Apachii_DivineEleganceStore.esm", kModeFemale)
   endif
 
-  if Game.GetModByName("CBBE Standalone Underwear.esp")
+  if Game.GetModByName("CBBE Standalone Underwear.esp") != 255
     AddDefaultSmall(0xC804, "CBBE Standalone Underwear.esp", kModeFemale)
     AddDefaultSmall(0xC805, "CBBE Standalone Underwear.esp", kModeFemaleTop)
   endif
 
-  if Game.GetModByName("Celes Tarot Outfit Cloth UNP.esp")
+  if Game.GetModByName("Celes Tarot Outfit Cloth UNP.esp") != 255
     AddDefaultSmall(0x2B052192, "Celes Tarot Outfit Cloth UNP.esp", kModeFemale)
   endif
 
-  if Game.GetModByName("CuteMinidressCollection.esp")
+  if Game.GetModByName("CuteMinidressCollection.esp") != 255
     AddDefaultSmall(0x75000D69, "CuteMinidressCollection.esp", kModeFemale)
     AddDefaultSmall(0x75000D7E, "CuteMinidressCollection.esp", kModeFemale)
     AddDefaultSmall(0x75000D7F, "CuteMinidressCollection.esp", kModeFemale)
@@ -175,13 +175,13 @@ function ResetDefaultSmalls()
     AddDefaultSmall(0x750074ED, "CuteMinidressCollection.esp", kModeFemale)
   endif
 
-  if Game.GetModByName("Gwelda Red Riding Hood.esp")
+  if Game.GetModByName("Gwelda Red Riding Hood.esp") != 255
     AddDefaultSmall(0x47037180, "Gwelda Red Riding Hood.esp", kModeFemaleBottom)
     AddDefaultSmall(0x470505EC, "Gwelda Red Riding Hood.esp", kModeFemaleBottom)
     AddDefaultSmall(0x470505EE, "Gwelda Red Riding Hood.esp", kModeFemaleBottom)
   endif
 
-  if Game.GetModByName("Remodeled Armor - Underwear.esp")
+  if Game.GetModByName("Remodeled Armor - Underwear.esp") != 255
     AddDefaultSmall(0x00790C, "Remodeled Armor - Underwear.esp", kModeFemale)
     AddDefaultSmall(0x02BC56, "Remodeled Armor - Underwear.esp", kModeFemale)
     AddDefaultSmall(0x02BC5F, "Remodeled Armor - Underwear.esp", kModeFemale)
@@ -223,11 +223,11 @@ function ResetDefaultSmalls()
     AddDefaultSmall(0x02BCEE, "Remodeled Armor - Underwear.esp", kModeFemale)
   endif
 
-  if Game.GetModByName("Schlongs of Skyrim.esp")
+  if Game.GetModByName("Schlongs of Skyrim.esp") != 255
     AddDefaultSmall(0x012DA, "Schlongs of Skyrim.esp", kModeMale)
   endif
 
-  if Game.GetModByName("Shino_Traveling Magician.esp")
+  if Game.GetModByName("Shino_Traveling Magician.esp") != 255
     AddDefaultSmall(0x1875, "Shino_Traveling Magician.esp", kModeFemale)
     AddDefaultSmall(0x1876, "Shino_Traveling Magician.esp", kModeFemale)
     AddDefaultSmall(0x1877, "Shino_Traveling Magician.esp", kModeFemale)
@@ -236,14 +236,14 @@ function ResetDefaultSmalls()
     AddDefaultSmall(0x187A, "Shino_Traveling Magician.esp", kModeFemale)
   endif
 
-  if Game.GetModByName("[SunJeong] Nausicaa Lingerie.esp")
+  if Game.GetModByName("[SunJeong] Nausicaa Lingerie.esp") != 255
     AddDefaultSmall(0xA9EC, "[SunJeong] Nausicaa Lingerie.esp", kModeFemaleBottom)
     AddDefaultSmall(0xA9EF, "[SunJeong] Nausicaa Lingerie.esp", kModeFemaleTop)
     AddDefaultSmall(0xB4D9, "[SunJeong] Nausicaa Lingerie.esp", kModeFemaleTop)
     AddDefaultSmall(0xB4DF, "[SunJeong] Nausicaa Lingerie.esp", kModeFemaleBottom)
   endif
 
-  if Game.GetModByName("Sweet&Sexy Lingerie.esp")
+  if Game.GetModByName("Sweet&Sexy Lingerie.esp") != 255
     AddDefaultSmall(0x76001DE2, "Sweet&Sexy Lingerie.esp", kModeFemale)
     AddDefaultSmall(0x76001DE4, "Sweet&Sexy Lingerie.esp", kModeFemale)
     AddDefaultSmall(0x76001DEA, "Sweet&Sexy Lingerie.esp", kModeFemale)
@@ -254,7 +254,7 @@ function ResetDefaultSmalls()
   endif
 
 
-  if Game.GetModByName("UNP Undies.esp")
+  if Game.GetModByName("UNP Undies.esp") != 255
     AddDefaultSmall(0x02001D8E, "UNP Undies.esp", kModeFemale)
     AddDefaultSmall(0x02004E14, "UNP Undies.esp", kModeFemale)
     AddDefaultSmall(0x020063A4, "UNP Undies.esp", kModeFemale)
