@@ -238,6 +238,10 @@ function ResetDefaultSmalls()
     AddDefaultSmall(0x012DA, kModeMale)
   endif
 
+  if Game.GetModByName("Sleep-or-Swim.esp") != 255
+    AddDefaultSmall(0x081B, "Sleep-or-Swim.esp", kModeUnisex)
+  endif
+
   if GotDefaultMod("Shino_Traveling Magician.esp")
     AddDefaultSmall(0x1875, kModeFemale)
     AddDefaultSmall(0x1876, kModeFemale)
