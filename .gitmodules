@@ -1,3 +1,6 @@
 [submodule "scorpio-utilities"]
 	path = scorpio-utilities
 	url = git@github.com:scorpiosixnine/scorpio-utilities.git
+[submodule "skyui"]
+	path = sdks/skyui
+	url = git@github.com:schlangster/skyui
