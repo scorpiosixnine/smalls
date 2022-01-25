@@ -7,3 +7,6 @@
 [submodule "sdks/skyrim-sdk"]
 	path = sdks/skyrim-sdk
 	url = git@github.com:scorpiosixnine/skyrim-sdk
+[submodule "sdks/skse64"]
+	path = sdks/skse64
+	url = git@github.com:ianpatt/skse64
