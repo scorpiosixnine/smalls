@@ -119,6 +119,13 @@ function ResetDefaultSmalls()
   ;   AddDefaultSmall(ref, kModeFemale)
   ; endif
 
+  int defaultsFile = JValue.readFromFile("Data/SmallsDefaults.json")
+  string mod = JMap.nextKey(defaultsFile)
+  while mod 
+    Log(mod)
+    mod = JMap.nextKey(defaultsFile)
+  endwhile
+  
   if GotDefaultMod("[Melodic] Angels Secrets.esp")
     AddDefaultSmall(0x400012D0, kModeFemaleTop)
     AddDefaultSmall(0x400012D1, kModeFemale)
