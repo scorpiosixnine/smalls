@@ -103,31 +103,6 @@ Bool function GotDefaultMod(String name)
   return false
 endFunction
 
-function LoadModSettings(String mod, int file)
-  int values = JMap.getObj(file, mod)
-  Log("Reading defaults for " + mod)
-  LoadSettings(values, "female", kModeFemale, mod)
-  LoadSettings(values, "femaleTop", kModeFemaleTop, mod)
-  LoadSettings(values, "male", kModeMale, mod)
-  LoadSettings(values, "unisex", kModeUnisex, mod)
-endfunction
-
-function LoadSettings(int values, String k, int mode, String mod)
-  int list = JMap.getObj(values, k)
-  int i = JValue.count(list)
-  while i > 0
-    i -= 1
-    String idStr = JArray.getStr(list, i)
-    String data = "__formData|" + mod + "|" + idStr
-    Armor item = JString.decodeFormStringToForm(data) as Armor
-    if item
-      AddSmall(item)
-      SetModeForSmall(item, mode)
-      Log("added default: " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
-    endif
-  endwhile
-endfunction
-
 function ResetDefaultSmalls()
   Trace("Resetting default smalls list.")
 
@@ -140,37 +115,42 @@ function ResetDefaultSmalls()
   pMale.Revert()
   pTops.Revert()
 
-  ; if GotDefaultMod()
-  ;   AddDefaultSmall(ref, kModeFemale)
-  ; endif
+  LoadDefaults()
+EndFunction
 
+function LoadDefaults()
   int defaultsFile = JValue.readFromFile("Data/SmallsDefaults.json")
   String mod = JMap.nextKey(defaultsFile)
   while mod 
-    LoadModSettings(mod, defaultsFile)
+    LoadDefaultsForMod(mod, defaultsFile)
     mod = JMap.nextKey(defaultsFile, mod)
   endwhile
-  
-
-EndFunction
-
-function AddDefaultSmall(int formID, int mode = -1)
-  Armor item = Game.GetFormFromFile(formID, _defaultMod) as Armor
-  if item
-    AddDefaultSmallItem(item, mode)
-  else
-    Trace(_defaultMod + " " + formID + " missing")
-  endif
 endfunction
 
-function AddDefaultSmallItem(Armor item, int mode)
-  Trace("added default: " + item.GetName() + " (" + _defaultMod + ") slots: " + SlotsDescription(item))
-  AddSmall(item)
-  if mode == -1
-    mode = DefaultModeForSmall(item)
-  endif
-  SetModeForSmall(item, mode)
-endFunction
+function LoadDefaultsForMod(String mod, int file)
+  int values = JMap.getObj(file, mod)
+  Log("Reading defaults for " + mod)
+  LoadDefaultsWithKey(values, "female", kModeFemale, mod)
+  LoadDefaultsWithKey(values, "femaleTop", kModeFemaleTop, mod)
+  LoadDefaultsWithKey(values, "male", kModeMale, mod)
+  LoadDefaultsWithKey(values, "unisex", kModeUnisex, mod)
+endfunction
+
+function LoadDefaultsWithKey(int values, String k, int mode, String mod)
+  int list = JMap.getObj(values, k)
+  int i = JValue.count(list)
+  while i > 0
+    i -= 1
+    String idStr = JArray.getStr(list, i)
+    String data = "__formData|" + mod + "|" + idStr
+    Armor item = JString.decodeFormStringToForm(data) as Armor
+    if item
+      AddSmall(item)
+      SetModeForSmall(item, mode)
+      Trace("added " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
+    endif
+  endwhile
+endfunction
 
 function AddSmall(Armor item)
   if !rDefaults.HasForm(item)
