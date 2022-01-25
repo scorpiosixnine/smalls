@@ -103,6 +103,25 @@ Bool function GotDefaultMod(String name)
   return false
 endFunction
 
+function LoadModSettings(String mod, int file)
+  int values = JMap.getObj(file, mod)
+  Log("Reading defaults for " + mod)
+  LoadSettings(values, "female", kModeFemale)
+  LoadSettings(values, "femaleTop", kModeFemaleTop)
+  LoadSettings(values, "male", kModeMale)
+  LoadSettings(values, "unisex", kModeUnisex)
+endfunction
+
+function LoadSettings(int values, String k, int mode)
+  int list = JMap.getObj(values, k)
+  int i = JValue.count(list)
+  while i > 0
+    i -= 1
+    int id = JArray.getInt(list, i) 
+    Log(k + ":" + id)
+  endwhile
+endfunction
+
 function ResetDefaultSmalls()
   Trace("Resetting default smalls list.")
 
@@ -120,9 +139,9 @@ function ResetDefaultSmalls()
   ; endif
 
   int defaultsFile = JValue.readFromFile("Data/SmallsDefaults.json")
-  string mod = JMap.nextKey(defaultsFile)
+  String mod = JMap.nextKey(defaultsFile)
   while mod 
-    Log(mod)
+    LoadModSettings(mod, defaultsFile)
     mod = JMap.nextKey(defaultsFile)
   endwhile
   
