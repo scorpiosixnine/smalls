@@ -13,3 +13,6 @@
 [submodule "sdks/skse64-sdk"]
 	path = sdks/skse64-sdk
 	url = git@github.com:scorpiosixnine/skse64-sdk
+[submodule "sdks/jcontainers-sdk"]
+	path = sdks/jcontainers-sdk
+	url = git@github.com:scorpiosixnine/jcontainers-sdk
