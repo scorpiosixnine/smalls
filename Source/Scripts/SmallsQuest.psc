@@ -117,8 +117,8 @@ function LoadSettings(int values, String k, int mode)
   int i = JValue.count(list)
   while i > 0
     i -= 1
-    int id = JArray.getInt(list, i) 
-    Log(k + ":" + id)
+    int id = JArray.getString(list, i) 
+    Log(k + ":" + id + ", " + (id as int))
   endwhile
 endfunction
 
@@ -142,7 +142,7 @@ function ResetDefaultSmalls()
   String mod = JMap.nextKey(defaultsFile)
   while mod 
     LoadModSettings(mod, defaultsFile)
-    mod = JMap.nextKey(defaultsFile)
+    mod = JMap.nextKey(defaultsFile, mod)
   endwhile
   
   if GotDefaultMod("[Melodic] Angels Secrets.esp")
