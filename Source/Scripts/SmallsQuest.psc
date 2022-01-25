@@ -106,19 +106,25 @@ endFunction
 function LoadModSettings(String mod, int file)
   int values = JMap.getObj(file, mod)
   Log("Reading defaults for " + mod)
-  LoadSettings(values, "female", kModeFemale)
-  LoadSettings(values, "femaleTop", kModeFemaleTop)
-  LoadSettings(values, "male", kModeMale)
-  LoadSettings(values, "unisex", kModeUnisex)
+  LoadSettings(values, "female", kModeFemale, mod)
+  LoadSettings(values, "femaleTop", kModeFemaleTop, mod)
+  LoadSettings(values, "male", kModeMale, mod)
+  LoadSettings(values, "unisex", kModeUnisex, mod)
 endfunction
 
-function LoadSettings(int values, String k, int mode)
+function LoadSettings(int values, String k, int mode, String mod)
   int list = JMap.getObj(values, k)
   int i = JValue.count(list)
   while i > 0
     i -= 1
-    int id = JArray.getString(list, i) 
-    Log(k + ":" + id + ", " + (id as int))
+    String idStr = JArray.getStr(list, i)
+    String data = "__formData|" + mod + "|" + idStr
+    Armor item = JString.decodeFormStringToForm(data) as Armor
+    if item
+      AddSmall(item)
+      SetModeForSmall(item, mode)
+      Log("added default: " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
+    endif
   endwhile
 endfunction
 
@@ -145,173 +151,25 @@ function ResetDefaultSmalls()
     mod = JMap.nextKey(defaultsFile, mod)
   endwhile
   
-  if GotDefaultMod("[Melodic] Angels Secrets.esp")
-    AddDefaultSmall(0x400012D0, kModeFemaleTop)
-    AddDefaultSmall(0x400012D1, kModeFemale)
-    AddDefaultSmall(0x400012D5, kModeFemaleBottom)
-    AddDefaultSmall(0x400012D6, kModeFemaleBottom)
-  endif
-
-  if GotDefaultMod("Apachii_DivineEleganceStore.esm")
-    AddDefaultSmall(0x02FFF7, kModeFemale)
-    AddDefaultSmall(0x02FFF9, kModeFemale)
-    AddDefaultSmall(0x02FFFB, kModeFemale)
-    AddDefaultSmall(0x02FFFD, kModeFemale)
-    AddDefaultSmall(0x02FFFF, kModeFemale)
-    AddDefaultSmall(0x030001, kModeFemale)
-    AddDefaultSmall(0x03056A, kModeFemale)
-    AddDefaultSmall(0x03103B, kModeFemale)
-    AddDefaultSmall(0x03103E, kModeFemale)
-
-    AddDefaultSmall(0x0B031B19, kModeMale)
-    AddDefaultSmall(0x0B031B1B, kModeMale)
-    AddDefaultSmall(0x0B031B1B, kModeMale)
-    AddDefaultSmall(0x0B031B1D, kModeMale)
-    AddDefaultSmall(0x0B031B1F, kModeMale)
-    AddDefaultSmall(0x0B031B21, kModeMale)
-    AddDefaultSmall(0x0B031B23, kModeMale)
-    AddDefaultSmall(0x0B031B25, kModeMale)
-    AddDefaultSmall(0x0B031B27, kModeMale)
-    AddDefaultSmall(0x0B031B29, kModeMale)
-    AddDefaultSmall(0x0B031B2B, kModeMale)
-    AddDefaultSmall(0x0B031B2D, kModeMale)
-
-    AddDefaultSmall(0x0B0320A5, kModeFemale)
-    AddDefaultSmall(0x0B0320A7, kModeFemale)
-  endif
-
-  if GotDefaultMod("CBBE Standalone Underwear.esp")
-    AddDefaultSmall(0xC804, kModeFemale)
-    AddDefaultSmall(0xC805, kModeFemaleTop)
-  endif
-
-  if GotDefaultMod("Celes Tarot Outfit Cloth UNP.esp")
-    AddDefaultSmall(0x2B052192, kModeFemale)
-  endif
-
-  if GotDefaultMod("CuteMinidressCollection.esp")
-    AddDefaultSmall(0x75000D69, kModeFemale)
-    AddDefaultSmall(0x75000D7E, kModeFemale)
-    AddDefaultSmall(0x75000D7F, kModeFemale)
-    AddDefaultSmall(0x75000D80, kModeFemale)
-    AddDefaultSmall(0x75000D81, kModeFemale)
-    AddDefaultSmall(0x75000D8C, kModeFemale)
-    AddDefaultSmall(0x75000D8D, kModeFemale)
-    AddDefaultSmall(0x75000D8E, kModeFemale)
-    AddDefaultSmall(0x75000D8F, kModeFemale)
-    AddDefaultSmall(0x75000D90, kModeFemale)
-    AddDefaultSmall(0x75006F7B, kModeFemale)
-    AddDefaultSmall(0x75006F7C, kModeFemale)
-    AddDefaultSmall(0x750074E6, kModeFemale)
-    AddDefaultSmall(0x750074E7, kModeFemale)
-    AddDefaultSmall(0x750074E8, kModeFemale)
-    AddDefaultSmall(0x750074E9, kModeFemale)
-    AddDefaultSmall(0x750074EA, kModeFemale)
-    AddDefaultSmall(0x750074EB, kModeFemale)
-    AddDefaultSmall(0x750074EC, kModeFemale)
-    AddDefaultSmall(0x750074ED, kModeFemale)
-  endif
-
-  if GotDefaultMod("Gwelda Red Riding Hood.esp")
-    AddDefaultSmall(0x47037180, kModeFemaleBottom)
-    AddDefaultSmall(0x470505EC, kModeFemaleBottom)
-    AddDefaultSmall(0x470505EE, kModeFemaleBottom)
-  endif
-
-  if GotDefaultMod("Remodeled Armor - Underwear.esp")
-    AddDefaultSmall(0x00790C, kModeFemale)
-    AddDefaultSmall(0x02BC56, kModeFemale)
-    AddDefaultSmall(0x02BC5F, kModeFemale)
-    AddDefaultSmall(0x02BC60, kModeFemale)
-    AddDefaultSmall(0x02BC61, kModeFemale)
-    AddDefaultSmall(0x02BC62, kModeFemale)
-    AddDefaultSmall(0x02BC63, kModeFemale)
-    AddDefaultSmall(0x02BC64, kModeFemale)
-    AddDefaultSmall(0x02BC65, kModeFemale)
-    AddDefaultSmall(0x02BC6F, kModeFemale)
-    AddDefaultSmall(0x02BC94, kModeFemale)
-    AddDefaultSmall(0x02BC95, kModeFemale)
-    AddDefaultSmall(0x02BC98, kModeFemale)
-    AddDefaultSmall(0x02BC99, kModeFemale)
-    AddDefaultSmall(0x02BC9A, kModeFemale)
-    AddDefaultSmall(0x02BC9B, kModeFemale)
-    AddDefaultSmall(0x02BC9C, kModeFemale)
-    AddDefaultSmall(0x02BC9D, kModeFemale)
-    AddDefaultSmall(0x02BC9E, kModeFemale)
-    AddDefaultSmall(0x02BC9F, kModeFemale)
-    AddDefaultSmall(0x02BCA0, kModeFemale)
-    AddDefaultSmall(0x02BCA1, kModeFemale)
-    AddDefaultSmall(0x02BCA2, kModeFemale)
-    AddDefaultSmall(0x02BCB6, kModeFemale)
-    AddDefaultSmall(0x02BCB7, kModeFemale)
-    AddDefaultSmall(0x02BCB8, kModeFemale)
-    AddDefaultSmall(0x02BCB9, kModeFemale)
-    AddDefaultSmall(0x02BCC2, kModeFemale)
-    AddDefaultSmall(0x02BCC3, kModeFemale)
-    AddDefaultSmall(0x02BCD2, kModeFemale)
-    AddDefaultSmall(0x02BCD4, kModeFemale)
-    AddDefaultSmall(0x02BCD6, kModeFemale)
-    AddDefaultSmall(0x02BCD8, kModeFemale)
-    AddDefaultSmall(0x02BCDA, kModeFemale)
-    AddDefaultSmall(0x02BCDC, kModeFemale)
-    AddDefaultSmall(0x02BCDE, kModeFemale)
-    AddDefaultSmall(0x02BCE0, kModeFemale)
-    AddDefaultSmall(0x02BCE2, kModeFemale)
-    AddDefaultSmall(0x02BCEE, kModeFemale)
-  endif
-
-  if GotDefaultMod("Schlongs of Skyrim.esp")
-    AddDefaultSmall(0x012DA, kModeMale)
-  endif
-
-  if GotDefaultMod("Shino_Traveling Magician.esp")
-    AddDefaultSmall(0x1875, kModeFemale)
-    AddDefaultSmall(0x1876, kModeFemale)
-    AddDefaultSmall(0x1877, kModeFemale)
-    AddDefaultSmall(0x1878, kModeFemale)
-    AddDefaultSmall(0x1879, kModeFemale)
-    AddDefaultSmall(0x187A, kModeFemale)
-  endif
-
-  if GotDefaultMod("[SunJeong] Nausicaa Lingerie.esp")
-    AddDefaultSmall(0xA9EC, kModeFemaleBottom)
-    AddDefaultSmall(0xA9EF, kModeFemaleTop)
-    AddDefaultSmall(0xB4D9, kModeFemaleTop)
-    AddDefaultSmall(0xB4DF, kModeFemaleBottom)
-  endif
-
-  if GotDefaultMod("Sweet&Sexy Lingerie.esp")
-    AddDefaultSmall(0x76001DE2, kModeFemale)
-    AddDefaultSmall(0x76001DE4, kModeFemale)
-    AddDefaultSmall(0x76001DEA, kModeFemale)
-    AddDefaultSmall(0x76006052, kModeFemale)
-    AddDefaultSmall(0x7600CCF5, kModeFemale)
-    AddDefaultSmall(0x7600CCF7, kModeFemale)
-    AddDefaultSmall(0x7600CCF9, kModeFemale)
-  endif
-
-
-  if GotDefaultMod("UNP Undies.esp")
-    AddDefaultSmall(0x02001D8E, kModeFemale)
-    AddDefaultSmall(0x02004E14, kModeFemale)
-    AddDefaultSmall(0x020063A4, kModeFemale)
-    AddDefaultSmall(0x020063A5, kModeFemale)
-  endif
 
 EndFunction
 
 function AddDefaultSmall(int formID, int mode = -1)
   Armor item = Game.GetFormFromFile(formID, _defaultMod) as Armor
   if item
-    Trace("added default: " + item.GetName() + " (" + _defaultMod + ") slots: " + SlotsDescription(item))
-    AddSmall(item)
-    if mode == -1
-      mode = DefaultModeForSmall(item)
-    endif
-    SetModeForSmall(item, mode)
+    AddDefaultSmallItem(item, mode)
   else
     Trace(_defaultMod + " " + formID + " missing")
   endif
+endfunction
+
+function AddDefaultSmallItem(Armor item, int mode)
+  Trace("added default: " + item.GetName() + " (" + _defaultMod + ") slots: " + SlotsDescription(item))
+  AddSmall(item)
+  if mode == -1
+    mode = DefaultModeForSmall(item)
+  endif
+  SetModeForSmall(item, mode)
 endFunction
 
 function AddSmall(Armor item)

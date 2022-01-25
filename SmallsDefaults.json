@@ -1,7 +1,174 @@
 {
-    "[Melodic] Angels Secrets": {
+    "Apachii_DivineEleganceStore.esm": {
         "female": [
-            "0x0012D1"
+            "0x02FFF7",
+            "0x02FFF9",
+            "0x02FFFB",
+            "0x02FFFD",
+            "0x02FFFF",
+            "0x030001",
+            "0x03056A",
+            "0x03103B",
+            "0x03103E",
+            "0x0B0320A5",
+            "0x0B0320A7"
+        ],
+        "male": [
+            "0x0B031B19",
+            "0x0B031B1B",
+            "0x0B031B1B",
+            "0x0B031B1D",
+            "0x0B031B1F",
+            "0x0B031B21",
+            "0x0B031B23",
+            "0x0B031B25",
+            "0x0B031B27",
+            "0x0B031B29",
+            "0x0B031B2B",
+            "0x0B031B2D"
         ]
-    } 
+    },
+    "[Melodic] Angels Secrets.esp": {
+        "femaleTop": [
+            "0x400012D0"
+        ],
+        "female": [
+            "0x400012D1"
+        ],
+        "femaleBottom": [
+            "0x400012D5",
+            "0x400012D6"
+        ]
+    },
+    "CBBE Standalone Underwear.esp": {
+        "female": [
+            "0xC804"
+        ],
+        "femaleTop": [
+            "0xC805"
+        ]
+    },
+    "Celes Tarot Outfit Cloth UNP.esp": {
+        "female": [
+            "0x2B052192"
+        ]
+    },
+    "CuteMinidressCollection.esp": {
+        "female": [
+            "0x75000D69",
+            "0x75000D7E",
+            "0x75000D7F",
+            "0x75000D80",
+            "0x75000D81",
+            "0x75000D8C",
+            "0x75000D8D",
+            "0x75000D8E",
+            "0x75000D8F",
+            "0x75000D90",
+            "0x75006F7B",
+            "0x75006F7C",
+            "0x750074E6",
+            "0x750074E7",
+            "0x750074E8",
+            "0x750074E9",
+            "0x750074EA",
+            "0x750074EB",
+            "0x750074EC",
+            "0x750074ED"
+        ]
+    },
+    "Gwelda Red Riding Hood.esp": {
+        "femaleBottom": [
+            "0x47037180",
+            "0x470505EC",
+            "0x470505EE"
+        ]
+    },
+    "Remodeled Armor - Underwear.esp": {
+        "female": [
+            "0x00790C",
+            "0x02BC56",
+            "0x02BC5F",
+            "0x02BC60",
+            "0x02BC61",
+            "0x02BC62",
+            "0x02BC63",
+            "0x02BC64",
+            "0x02BC65",
+            "0x02BC6F",
+            "0x02BC94",
+            "0x02BC95",
+            "0x02BC98",
+            "0x02BC99",
+            "0x02BC9A",
+            "0x02BC9B",
+            "0x02BC9C",
+            "0x02BC9D",
+            "0x02BC9E",
+            "0x02BC9F",
+            "0x02BCA0",
+            "0x02BCA1",
+            "0x02BCA2",
+            "0x02BCB6",
+            "0x02BCB7",
+            "0x02BCB8",
+            "0x02BCB9",
+            "0x02BCC2",
+            "0x02BCC3",
+            "0x02BCD2",
+            "0x02BCD4",
+            "0x02BCD6",
+            "0x02BCD8",
+            "0x02BCDA",
+            "0x02BCDC",
+            "0x02BCDE",
+            "0x02BCE0",
+            "0x02BCE2",
+            "0x02BCEE"
+        ]
+    },
+    "Schlongs of Skyrim.esp": {
+        "male": [
+            "0x012DA"
+        ]
+    },
+    "Shino_Traveling Magician.esp": {
+        "female": [
+            "0x1875",
+            "0x1876",
+            "0x1877",
+            "0x1878",
+            "0x1879",
+            "0x187A"
+        ]
+    },
+    "[SunJeong] Nausicaa Lingerie.esp": {
+        "femaleBottom": [
+            "0xA9EC",
+            "0xB4DF"
+        ],
+        "femaleTop": [
+            "0xA9EF",
+            "0xB4D9"
+        ]
+    },
+    "Sweet&Sexy Lingerie.esp": {
+        "female": [
+            "0x76001DE2",
+            "0x76001DE4",
+            "0x76001DEA",
+            "0x76006052",
+            "0x7600CCF5",
+            "0x7600CCF7",
+            "0x7600CCF9"
+        ]
+    },
+    "UNP Undies.esp": {
+        "female": [
+            "0x02001D8E",
+            "0x02004E14",
+            "0x020063A4",
+            "0x020063A5"
+        ]
+    }
 }
