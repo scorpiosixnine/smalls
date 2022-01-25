@@ -4,3 +4,6 @@
 [submodule "skyui"]
 	path = sdks/skyui
 	url = git@github.com:schlangster/skyui
+[submodule "sdks/skyrim-sdk"]
+	path = sdks/skyrim-sdk
+	url = git@github.com:scorpiosixnine/skyrim-sdk
