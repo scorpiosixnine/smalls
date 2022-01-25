@@ -132,6 +132,7 @@ function LoadDefaultsForMod(String mod, int file)
   Log("Reading defaults for " + mod)
   LoadDefaultsWithKey(values, "female", kModeFemale, mod)
   LoadDefaultsWithKey(values, "femaleTop", kModeFemaleTop, mod)
+  LoadDefaultsWithKey(values, "femaleBottom", kModeFemaleBottom, mod)
   LoadDefaultsWithKey(values, "male", kModeMale, mod)
   LoadDefaultsWithKey(values, "unisex", kModeUnisex, mod)
 endfunction
@@ -198,14 +199,17 @@ function SetModeForSmall(Armor item, int value)
   pMale.RemoveAddedForm(item)
   pFemale.RemoveAddedForm(item)
   pTops.RemoveAddedForm(item)
+
   if (value == kModeUnisex) || (value == kModeMale)
     Trace("added as male " + item.GetName())
     pMale.AddForm(item)
   endif
-  if (value == kModeUnisex) || (value == kModeFemale)
+
+  if (value == kModeUnisex) || (value == kModeFemale) || (value == kModeFemaleBottom)
     Trace("added as female " + item.GetName())
     pFemale.AddForm(item)
   endif
+
   if (value == kModeFemaleTop)
     Trace("added as top " + item.GetName())
     pTops.AddForm(item)
