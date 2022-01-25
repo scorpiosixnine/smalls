@@ -10,3 +10,6 @@
 [submodule "sdks/skse64"]
 	path = sdks/skse64
 	url = git@github.com:ianpatt/skse64
+[submodule "sdks/skse64-sdk"]
+	path = sdks/skse64-sdk
+	url = git@github.com:scorpiosixnine/skse64-sdk
