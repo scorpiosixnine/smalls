@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+    {
+        "name": "Run Skyrim",
+        "program": "${SKYRIM_HOME}/skse64_loader.exe",
+        "cwd": "${SKYRIM_HOME}",
+        "preLaunchTask": "build",
+        "request": "launch",
+        "type": ""
+    },
+    {
+        "type": "papyrus",
+        "name": "Skyrim Special Edition",
+        "request": "attach",
+        "game": "skyrimSpecialEdition"
+    }
+    ]
+}
