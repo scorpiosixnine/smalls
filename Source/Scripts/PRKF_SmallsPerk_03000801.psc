@@ -5,8 +5,8 @@ Scriptname PRKF_SmallsPerk_03000801 Extends Perk Hidden
 ;BEGIN FRAGMENT Fragment_4
 Function Fragment_4(ObjectReference akTargetRef, Actor akActor)
 ;BEGIN CODE
-	Actor akActorTar = akTargetRef.GetBaseObject() as Actor
-	rQuest.SetTarget(akTargetRef)
+	; Actor akActorTar = akTargetRef.GetBaseObject() as Actor
+	; rQuest.SetTarget(akTargetRef)
 ;END CODE
 EndFunction
 ;END FRAGMENT

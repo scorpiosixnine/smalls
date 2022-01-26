@@ -25,17 +25,58 @@ int property kModeFemaleTop = 3 AutoReadOnly
 int property kModeDisabled = 4 AutoReadOnly
 int property kModeRemove = 5 AutoReadOnly
 
-String _defaultMod = ""
-
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
   SetupPerks()
   ResetDefaultSmalls()
 endEvent
 
+Bool function EffectStarted(Actor akTarget, Actor akCaster)
+  Debug("EffectStarted")
+  if akTarget
+    Debug("Target is " + akTarget.GetName())
+  else
+    Debug("Target is None")
+  endif
+  if akCaster
+    Debug("Caster is " + akCaster.GetName())
+  else
+    Debug("Caster is None")
+  endif
+
+  return false
+endfunction
+
+function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
+  Debug("EffectObjectUnequipped")
+
+  if IsEligibleTarget(target)
+    Debug("Removed " + akBaseObject.GetName() + " from " + target.GetName())
+
+    Armor armour = akBaseObject as Armor
+    if armour
+      int mask = armour.getSlotMask()
+      if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
+        Debug("Unequipped armour")
+        int gender = target.GetLeveledActorBase().GetSex()
+        Debug("gender is " + gender)
+        if !IsSmalls(armour)
+          EquipSmalls(target, gender)
+        endif
+      else
+        Debug("Uneqipped slotmask: " + armour.getSlotMask())
+      endif
+	  endif
+  endif
+endfunction
+
 Actor function GetTarget()
   return rTarget.GetActorReference()
 endFunction
+
+Bool function IsEligibleTarget(Actor akTarget)
+  return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
+endfunction
 
 function SetTarget(ObjectReference ref)
   Actor target = ref as Actor
@@ -56,6 +97,42 @@ function ClearTarget()
   rTarget.Clear()
   Debug("target cleared")
 endFunction
+
+function EquipSmalls(Actor akActor, int gender)
+	if gender == 0
+		EquipMaleSmalls(akActor)
+	else
+		EquipFemaleSmalls(akActor)
+	endif
+	if !akActor.IsOnMount()
+		akActor.QueueNiNodeUpdate()
+	endif
+EndFunction
+
+function EquipMaleSmalls(Actor akActor)
+	if pReplaceMales
+		Armor item = GetRandomSmall(pMale)
+		if (item)
+			Debug("Adding smalls " + item.GetName())
+			akActor.EquipItem(item, true, false)
+		endif
+	endif
+EndFunction
+
+function EquipFemaleSmalls(Actor akActor)
+	if pReplaceFemales
+		Armor bottom = GetRandomSmall(pFemale)
+		if (bottom)
+			Debug("Adding smalls " + bottom.GetName())
+			akActor.EquipItem(bottom, true, false)
+			if IsInSlot(bottom , kPelvisUnderwearSlot) && !IsInSlot(bottom , kTorsoUnderwearSlot)
+				Form top = GetRandomSmall(pTops)
+				Debug("Adding top " + top.GetName())
+				akActor.EquipItem(top, true, false)
+			endif
+		endif
+	endif
+EndFunction
 
 bool function AlreadyWearingSmalls(Actor target)
   int count = target.GetNumItems()
@@ -93,15 +170,6 @@ function SetupPerks()
     Game.GetPlayer().RemovePerk(rPerk)
   endif
 endfunction
-
-Bool function GotDefaultMod(String name)
-  if Game.GetModByName(name) != 255
-    _defaultMod = name
-    return true
-  endif
-
-  return false
-endFunction
 
 function ResetDefaultSmalls()
   Trace("Resetting default smalls list.")
