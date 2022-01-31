@@ -1,0 +1,26 @@
+{
+"CuteMinidressCollection.esp": {
+"femaleBottom": [
+{ "id": "00000D69", "name": "AAYenClothesPanties" },
+{ "id": "00000D7E", "name": "AAYenClothesPantiesBR" },
+{ "id": "00000D7F", "name": "AAYenClothesPantiesGR" },
+{ "id": "00000D80", "name": "AAYenClothesPantiesP" },
+{ "id": "00000D81", "name": "AAYenClothesPantiesR" },
+{ "id": "00000D8C", "name": "AAYenArmorPanties" },
+{ "id": "00000D8D", "name": "AAYenArmorPantiesBR" },
+{ "id": "00000D8E", "name": "AAYenArmorPantiesGR" },
+{ "id": "00000D8F", "name": "AAYenArmorPantiesP" },
+{ "id": "00000D90", "name": "AAYenArmorPantiesR" },
+{ "id": "00006F7B", "name": "AAYenClothesPanties01" },
+{ "id": "00006F7C", "name": "AAYenArmorPanties01" },
+{ "id": "000074E6", "name": "AAYenArmorPanties01Br" },
+{ "id": "000074E7", "name": "AAYenArmorPanties01Gr" },
+{ "id": "000074E8", "name": "AAYenArmorPanties01P" },
+{ "id": "000074E9", "name": "AAYenArmorPanties01R" },
+{ "id": "000074EA", "name": "AAYenClothesPanties01Br" },
+{ "id": "000074EB", "name": "AAYenClothesPanties01Gr" },
+{ "id": "000074EC", "name": "AAYenClothesPanties01P" },
+{ "id": "000074ED", "name": "AAYenClothesPanties01R" }
+]
+}
+}

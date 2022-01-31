@@ -1,0 +1,26 @@
+{
+    "SOS - Chainmail Underwear.esp": {
+        "male": [
+            {
+                "id": "00000D63",
+                "name": "SOS_UnderwearChainmail"
+            },
+            {
+                "id": "00002852",
+                "name": "SOS_UnderwearChainmailCopper"
+            },
+            {
+                "id": "00002853",
+                "name": "SOS_UnderwearChainmailGolden"
+            },
+            {
+                "id": "00002854",
+                "name": "SOS_UnderwearChainmailSilver"
+            },
+            {
+                "id": "00002855",
+                "name": "SOS_UnderwearWhite"
+            }
+        ]
+    }
+}

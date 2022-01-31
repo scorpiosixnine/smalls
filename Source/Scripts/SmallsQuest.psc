@@ -210,13 +210,22 @@ function LoadDefaultsWithKey(int values, String k, int mode, String mod)
   int i = JValue.count(list)
   while i > 0
     i -= 1
-    String idStr = JArray.getStr(list, i)
-    String data = "__formData|" + mod + "|" + idStr
-    Armor item = JString.decodeFormStringToForm(data) as Armor
-    if item
-      AddSmall(item)
-      SetModeForSmall(item, mode)
-      Trace("added " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
+    String idStr
+    int itemRecord = JArray.getObj(list, i)
+    if itemRecord
+      idStr = JMap.getStr(itemRecord, "id")
+    else
+      idStr = JArray.getStr(list, i)
+    endif
+
+    if idStr
+      String data = "__formData|" + mod + "|" + idStr
+      Armor item = JString.decodeFormStringToForm(data) as Armor
+      if item
+        AddSmall(item)
+        SetModeForSmall(item, mode)
+        Trace("added " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
+      endif
     endif
   endwhile
 endfunction
