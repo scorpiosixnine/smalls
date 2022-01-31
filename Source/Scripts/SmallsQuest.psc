@@ -12,10 +12,10 @@ bool property pEnabled auto
 bool property pReplaceMales auto
 bool property pReplaceFemales auto
 
-int property kBodySlot = 0x000004 AutoReadOnly ; BODY
-int property kPelvisUnderwearSlot = 0x400000 AutoReadOnly ; Underwear pelvis
-int property kTorsoUnderwearSlot = 0x04000000 AutoReadOnly ; Underwear chest
-int property kMiscSlot = 0x040000 AutoReadOnly ; Misc slot (used by CBBE standalone top, and maybe others?)
+int property kBodySlot = 0x000004 AutoReadOnly ; BODY 32 
+int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis 52
+int property kTorsoUnderwearSlot  = 0x04000000 AutoReadOnly ; Underwear chest  56
+int property kMiscSlot = 0x040000 AutoReadOnly ; Misc slot 48 (used by CBBE standalone top, and maybe others?)
 
 int property kModeUnisex = 0 AutoReadOnly
 int property kModeMale = 1 AutoReadOnly
