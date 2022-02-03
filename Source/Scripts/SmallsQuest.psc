@@ -170,15 +170,19 @@ endfunction
 
 function LoadDefaultsForMod(String mod, int file)
   int values = JMap.getObj(file, mod)
-  Log("Reading defaults for " + mod)
-  LoadDefaultsWithKey(values, "female", kModeFemale, mod)
-  LoadDefaultsWithKey(values, "femaleTop", kModeFemaleTop, mod)
-  LoadDefaultsWithKey(values, "femaleBottom", kModeFemaleBottom, mod)
-  LoadDefaultsWithKey(values, "male", kModeMale, mod)
-  LoadDefaultsWithKey(values, "unisex", kModeUnisex, mod)
+  int added = 0
+  added += LoadDefaultsWithKey(values, "female", kModeFemale, mod)
+  added += LoadDefaultsWithKey(values, "femaleTop", kModeFemaleTop, mod)
+  added += LoadDefaultsWithKey(values, "femaleBottom", kModeFemaleBottom, mod)
+  added += LoadDefaultsWithKey(values, "male", kModeMale, mod)
+  added += LoadDefaultsWithKey(values, "unisex", kModeUnisex, mod)
+  if added > 0
+    Log("Added " + added + " defaults from " + mod + ".")
+  endif
 endfunction
 
-function LoadDefaultsWithKey(int values, String k, int mode, String mod)
+int function LoadDefaultsWithKey(int values, String k, int mode, String mod)
+  int added = 0
   int list = JMap.getObj(values, k)
   int i = JValue.count(list)
   while i > 0
@@ -198,9 +202,11 @@ function LoadDefaultsWithKey(int values, String k, int mode, String mod)
         AddSmall(item)
         SetModeForSmall(item, mode)
         Trace("added " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
+        added += 1
       endif
     endif
   endwhile
+  return added
 endfunction
 
 function AddSmall(Armor item)
