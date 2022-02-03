@@ -31,24 +31,26 @@ event OnInit()
   ResetDefaultSmalls()
 endEvent
 
+String function AppendName(String sLabel, Form akTarget)
+  if akTarget
+    return sLabel + akTarget.GetName()
+  else
+    return sLabel + "<none>"
+  endif
+endFunction
+
 Bool function EffectStarted(Actor akTarget, Actor akCaster)
   Debug("EffectStarted")
-  if akTarget
-    Debug("Target is " + akTarget.GetName())
-  else
-    Debug("Target is None")
-  endif
-  if akCaster
-    Debug("Caster is " + akCaster.GetName())
-  else
-    Debug("Caster is None")
-  endif
+  Debug(AppendName("Target is " ,akTarget))
+  Debug(AppendName("Caster is ", akCaster))
 
-  return false
+  bool shouldDispel = !IsPotentialTarget(akTarget)
 endfunction
 
 function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
   Debug("EffectObjectUnequipped")
+  Debug(AppendName("Target is ", target))
+  Debug(AppendName("Base is ", akBaseObject))
 
   if IsEligibleTarget(target)
     Debug("Removed " + akBaseObject.GetName() + " from " + target.GetName())
@@ -73,6 +75,10 @@ endfunction
 Actor function GetTarget()
   return rTarget.GetActorReference()
 endFunction
+
+Bool function IsPotentialTarget(Actor akTarget)
+  return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
+endfunction
 
 Bool function IsEligibleTarget(Actor akTarget)
   return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()

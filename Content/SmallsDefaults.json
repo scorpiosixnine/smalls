@@ -224,6 +224,7 @@
             "0x020063A5"
         ]
     },
+    
     "SOS - Chainmail Underwear.esp": {
         "male": [
             {
@@ -247,6 +248,12 @@
                 "name": "SOS_UnderwearWhite"
             }
         ]
-    }
+    },
+
+    "[Zynx][Anano] Osare Gothic Lolita.esp": {
+        "femaleBottom": [
+            { "id": "00001DAC", "name": "00GothicLolitaPantyWT" }
+        ]
+        }
 
 }

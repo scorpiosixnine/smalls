@@ -6,6 +6,7 @@ SmallsQuest Property rQuest  Auto
 Event OnEffectStart(Actor akTarget, Actor akCaster)
 	GoToState("busy")
     if rQuest.EffectStarted(akTarget, akCaster)
+		Debug.Notification("effect dispelled")
 		Dispel()
 		Return
 	EndIf
@@ -13,8 +14,10 @@ Event OnEffectStart(Actor akTarget, Actor akCaster)
 EndEvent
 
 Event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
+	Debug.Notification("objectunequipped")
+	Actor target = GetTargetActor()
 	GoToState("busy")
-    rQuest.EffectObjectUnequipped(akBaseObject, akReference, GetTargetActor())
+    rQuest.EffectObjectUnequipped(akBaseObject, akReference, target)
 	GoToState("")
 EndEvent
 
