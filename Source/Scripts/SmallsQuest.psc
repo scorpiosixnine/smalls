@@ -1,7 +1,6 @@
 Scriptname SmallsQuest extends Quest
 {Main smalls quest script}
 
-ReferenceAlias property rTarget auto
 Perk property rPerk auto
 FormList property rDefaults auto
 FormList property pTops auto
@@ -60,10 +59,8 @@ function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, 
       int mask = armour.getSlotMask()
       if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
         Debug("Unequipped armour")
-        int gender = target.GetLeveledActorBase().GetSex()
-        Debug("gender is " + gender)
         if !IsSmalls(armour)
-          EquipSmalls(target, gender)
+          EquipSmalls(target)
         endif
       else
         Debug("Uneqipped slotmask: " + armour.getSlotMask())
@@ -72,40 +69,19 @@ function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, 
   endif
 endfunction
 
-Actor function GetTarget()
-  return rTarget.GetActorReference()
-endFunction
-
 Bool function IsPotentialTarget(Actor akTarget)
   return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
 endfunction
 
 Bool function IsEligibleTarget(Actor akTarget)
-  return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
+  return akTarget && akTarget.IsDead() && !AlreadyWearingSmalls(akTarget) && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
 endfunction
 
-function SetTarget(ObjectReference ref)
-  Actor target = ref as Actor
-  if target
-    if !target.IsDead()
-      Trace("ignoring target as it is alive " + target.GetName())
-    elseif AlreadyWearingSmalls(target)
-      Trace("ignoring target as already wearing smalls " + target.GetName())
-    else
-      rTarget.ForceRefTo(target)
-      (rTarget as SmallsMainScript).TargetUpdated()
-      Trace("target set to " + target.GetName() + target.GetFormID())
-    endif
-  endif
-endFunction
+function EquipSmalls(Actor akActor)
+  int gender = akActor.GetLeveledActorBase().GetSex()
+  Debug("gender is " + gender)
 
-function ClearTarget()
-  rTarget.Clear()
-  Debug("target cleared")
-endFunction
-
-function EquipSmalls(Actor akActor, int gender)
-	if gender == 0
+  if gender == 0
 		EquipMaleSmalls(akActor)
 	else
 		EquipFemaleSmalls(akActor)

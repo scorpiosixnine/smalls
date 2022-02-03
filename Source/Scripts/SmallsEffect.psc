@@ -14,7 +14,6 @@ Event OnEffectStart(Actor akTarget, Actor akCaster)
 EndEvent
 
 Event OnObjectUnequipped(Form akBaseObject, ObjectReference akReference)
-	Debug.Notification("objectunequipped")
 	Actor target = GetTargetActor()
 	GoToState("busy")
     rQuest.EffectObjectUnequipped(akBaseObject, akReference, target)
