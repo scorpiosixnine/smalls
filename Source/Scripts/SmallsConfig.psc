@@ -145,7 +145,7 @@ function ConfigToggleChanged(String identifier, bool value, int tag)
     pQuest.pReplaceFemales = value
   elseif identifier == "Enabled"
     pQuest.pEnabled = value
-    pQuest.SetupPerks()
+    pQuest.UpdatedEnabled()
   elseif identifier == "Inventory"
     _inventoryEnabled[tag] = value
     _updateInventory = true

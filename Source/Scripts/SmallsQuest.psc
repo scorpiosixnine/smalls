@@ -1,7 +1,6 @@
 Scriptname SmallsQuest extends Quest
 {Main smalls quest script}
 
-Perk property rPerk auto
 FormList property rDefaults auto
 FormList property pTops auto
 FormList property pFemale auto
@@ -26,7 +25,7 @@ int property kModeRemove = 5 AutoReadOnly
 
 event OnInit()
   Debug.Notification("Smalls " + GetFullVersionString() + " Initialising.")
-  SetupPerks()
+  UpdatedEnabled()
   ResetDefaultSmalls()
 endEvent
 
@@ -138,18 +137,10 @@ bool function AlreadyWearingSmalls(Actor target)
 endFunction
 
 function UpdatedEnabled()
-  if pEnabled
-    SetupPerks()
-  endif
-endFunction
-
-function SetupPerks()
   if (pEnabled)
     Debug.Notification("Smalls " + GetFullVersionString() + " enabled.")
-    Game.GetPlayer().AddPerk(rPerk)
   else
     Debug.Notification("Smalls " + GetFullVersionString() + " disabled.")
-    Game.GetPlayer().RemovePerk(rPerk)
   endif
 endfunction
 
