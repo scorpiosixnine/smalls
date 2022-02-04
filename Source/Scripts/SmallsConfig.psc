@@ -134,7 +134,7 @@ function ConfigButtonClicked(int index, int tag, int option)
   if tag == kButtonReset
     SetTextOptionValue(option, "Resetting...")
     pQuest.ResetDefaultSmalls()
-    SetTextOptionValue(option, "Done")
+    SetTextOptionValue(option, "Done") ; TODO: this can fail if the MCM has been closed in the meantime... should really keep track of this
   endif
 endFunction
 

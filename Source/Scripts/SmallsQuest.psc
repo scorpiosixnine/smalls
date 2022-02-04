@@ -190,7 +190,6 @@ int function LoadDefaultsWithKey(int values, String k, int mode, String mod)
     String idStr
     int itemRecord = JArray.getObj(list, i)
     if itemRecord
-      Debug.Notification("got record for " + k + " " + i)
       idStr = JMap.getStr(itemRecord, "id")
     else
       idStr = JArray.getStr(list, i)
