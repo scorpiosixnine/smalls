@@ -1,55 +1,55 @@
 {
     "kuzak-bodyandstockings.esp": {
         "femaleBottom": [
-            "00001000",
-            "00001566",
-            "0000156E",
-            "0000156F",
-            "00003063",
-            "00003064",
-            "000050CF",
-            "000050D4",
-            "000050D7",
-            "00005BAC",
-            "00005BAF",
-            "00009746",
-            "00009747",
-            "0000ACE1",
-            "0000ACEA",
-            "0000ACEB",
-            "0000ACEC",
-            "0000E30E",
-            "0000E313",
-            "0000F341",
-            "0000F342"
+            "0x1000",
+            "0x1566",
+            "0x156E",
+            "0x156F",
+            "0x3063",
+            "0x3064",
+            "0x50CF",
+            "0x50D4",
+            "0x50D7",
+            "0x5BAC",
+            "0x5BAF",
+            "0x9746",
+            "0x9747",
+            "0xACE1",
+            "0xACEA",
+            "0xACEB",
+            "0xACEC",
+            "0xE30E",
+            "0xE313",
+            "0xF341",
+            "0xF342"
         ],
         "female": [
-            "0000563E",
-            "00005BA4",
-            "00005BA8",
-            "0000611A",
-            "0000611B",
-            "00006690",
-            "00006691",
-            "0000B255",
-            "0000B25C",
-            "0000B25D",
-            "0000B25E",
-            "0000F341",
-            "0000F342"
+            "0x563E",
+            "0x5BA4",
+            "0x5BA8",
+            "0x611A",
+            "0x611B",
+            "0x6690",
+            "0x6691",
+            "0xB255",
+            "0xB25C",
+            "0xB25D",
+            "0xB25E",
+            "0xF341",
+            "0xF342"
             ]
     },
     "[COCO]Lingerie.esp": {
         "female": [
-            "00000803",
-            "00000809",
-            "0000080F",
-            "00000814",
-            "0000081C",
-            "0000083D",
-            "00000843",
-            "00000849",
-            "00000856"
+            "0x0803",
+            "0x0809",
+            "0x080F",
+            "0x0814",
+            "0x081C",
+            "0x083D",
+            "0x0843",
+            "0x0849",
+            "0x0856"
         ]
     },
     "Apachii_DivineEleganceStore.esm": {
@@ -63,34 +63,34 @@
             "0x03056A",
             "0x03103B",
             "0x03103E",
-            "0x0B0320A5",
-            "0x0B0320A7"
+            "0x0320A5",
+            "0x0320A7"
         ],
         "male": [
-            "0x0B031B19",
-            "0x0B031B1B",
-            "0x0B031B1B",
-            "0x0B031B1D",
-            "0x0B031B1F",
-            "0x0B031B21",
-            "0x0B031B23",
-            "0x0B031B25",
-            "0x0B031B27",
-            "0x0B031B29",
-            "0x0B031B2B",
-            "0x0B031B2D"
+            "0x031B19",
+            "0x031B1B",
+            "0x031B1B",
+            "0x031B1D",
+            "0x031B1F",
+            "0x031B21",
+            "0x031B23",
+            "0x031B25",
+            "0x031B27",
+            "0x031B29",
+            "0x031B2B",
+            "0x031B2D"
         ]
     },
     "[Melodic] Angels Secrets.esp": {
         "femaleTop": [
-            "0x400012D0"
+            "0x0012D0"
         ],
         "female": [
-            "0x400012D1"
+            "0x0012D1"
         ],
         "femaleBottom": [
-            "0x400012D5",
-            "0x400012D6"
+            "0x0012D5",
+            "0x0012D6"
         ]
     },
     "CBBE Standalone Underwear.esp": {
@@ -108,33 +108,33 @@
     },
     "CuteMinidressCollection.esp": {
         "female": [
-            "0x75000D69",
-            "0x75000D7E",
-            "0x75000D7F",
-            "0x75000D80",
-            "0x75000D81",
-            "0x75000D8C",
-            "0x75000D8D",
-            "0x75000D8E",
-            "0x75000D8F",
-            "0x75000D90",
-            "0x75006F7B",
-            "0x75006F7C",
-            "0x750074E6",
-            "0x750074E7",
-            "0x750074E8",
-            "0x750074E9",
-            "0x750074EA",
-            "0x750074EB",
-            "0x750074EC",
-            "0x750074ED"
+            "0x0D69",
+            "0x0D7E",
+            "0x0D7F",
+            "0x0D80",
+            "0x0D81",
+            "0x0D8C",
+            "0x0D8D",
+            "0x0D8E",
+            "0x0D8F",
+            "0x0D90",
+            "0x6F7B",
+            "0x6F7C",
+            "0x74E6",
+            "0x74E7",
+            "0x74E8",
+            "0x74E9",
+            "0x74EA",
+            "0x74EB",
+            "0x74EC",
+            "0x74ED"
         ]
     },
     "Gwelda Red Riding Hood.esp": {
         "femaleBottom": [
-            "0x47037180",
-            "0x470505EC",
-            "0x470505EE"
+            "0x037180",
+            "0x0505EC",
+            "0x0505EE"
         ]
     },
     "Remodeled Armor - Underwear.esp": {
@@ -207,44 +207,44 @@
     },
     "Sweet&Sexy Lingerie.esp": {
         "female": [
-            "0x76001DE2",
-            "0x76001DE4",
-            "0x76001DEA",
-            "0x76006052",
-            "0x7600CCF5",
-            "0x7600CCF7",
-            "0x7600CCF9"
+            "0x1DE2",
+            "0x1DE4",
+            "0x1DEA",
+            "0x6052",
+            "0xCCF5",
+            "0xCCF7",
+            "0xCCF9"
         ]
     },
     "UNP Undies.esp": {
         "female": [
-            "0x02001D8E",
-            "0x02004E14",
-            "0x020063A4",
-            "0x020063A5"
+            "0x1D8E",
+            "0x4E14",
+            "0x63A4",
+            "0x63A5"
         ]
     },
     
     "SOS - Chainmail Underwear.esp": {
         "male": [
             {
-                "id": "00000D63",
+                "id": "0x0D63",
                 "name": "SOS_UnderwearChainmail"
             },
             {
-                "id": "00002852",
+                "id": "0x2852",
                 "name": "SOS_UnderwearChainmailCopper"
             },
             {
-                "id": "00002853",
+                "id": "0x2853",
                 "name": "SOS_UnderwearChainmailGolden"
             },
             {
-                "id": "00002854",
+                "id": "0x2854",
                 "name": "SOS_UnderwearChainmailSilver"
             },
             {
-                "id": "00002855",
+                "id": "0x2855",
                 "name": "SOS_UnderwearWhite"
             }
         ]
@@ -252,7 +252,7 @@
 
     "[Zynx][Anano] Osare Gothic Lolita.esp": {
         "femaleBottom": [
-            { "id": "00001DAC", "name": "00GothicLolitaPantyWT" }
+            { "id": "0x1DAC", "name": "00GothicLolitaPantyWT" }
         ]
         }
 
