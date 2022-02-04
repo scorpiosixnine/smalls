@@ -1,5 +1,5 @@
 {
-  Export spells, perks, items, shouts and leveled items-spells for Spell Perk Item Distributor
+  Export underwear items as JSON for use as Smalls Defaults
 }
 unit ExportSPI;
 
