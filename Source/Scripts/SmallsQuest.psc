@@ -68,29 +68,46 @@ Bool function EffectObjectUnequipped(Form akBaseObject, ObjectReference akRefere
   endif
 
   Armor armour = akBaseObject as Armor
-  if armour && IsEligibleTarget(target)
-    Debug(AppendName("Target is ", target))
-    Debug(AppendName("Base is ", akBaseObject))
-    Debug("Removed " + akBaseObject.GetName() + " from " + target.GetName())
-
-    int mask = armour.getSlotMask()
-    if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
-      Debug("Unequipped armour")
-      EquipSmalls(target)
-      return false
-    else
-      Debug("Uneqipped slotmask: " + armour.getSlotMask())
-    endif
+  if !armour 
+    Debug(AppendName("Skipping non armour ", akBaseObject))
+    return true
   endif
-  return true
+
+  int mask = armour.getSlotMask()
+  Debug(AppendName("Removed ", armour) + AppendName(" (Slotmask " + mask + ") from ", target))
+
+  if !target.IsDead()
+    Debug("Skipping living target")
+    return true
+  endif
+
+  if target.IsPlayerTeammate()
+    Debug("Skipping team mate")
+    return true
+  endif
+
+  if !IsInSlot(armour, kBodySlot)
+    Debug("Skipping as item wasn't main armour")
+    return true
+  endif
+
+  if IsSmalls(armour)
+    Debug("Skipping as item was smalls")
+    return true
+  endif
+
+  if AlreadyWearingSmalls(target)
+    Debug("Skipping already equipped target")
+    return true
+  endif
+
+  Debug("Unequipped main armour" + armour.getSlotMask())
+  EquipSmalls(target)
+  return false
 endfunction
 
 Bool function IsPotentialTarget(Actor akTarget)
-  return akTarget && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
-endfunction
-
-Bool function IsEligibleTarget(Actor akTarget)
-  return akTarget.IsDead() && !AlreadyWearingSmalls(akTarget)
+  return akTarget && (akTarget != Game.GetPlayer())
 endfunction
 
 
