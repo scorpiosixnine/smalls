@@ -107,7 +107,11 @@ function GiveMaleSmalls(Actor akActor)
 		Armor item = GetRandomSmall(pMale)
 		if (item)
 			Debug("Adding smalls " + item.GetName())
-			akActor.AddItem(item, 1, false)
+      if !IsInSlot(item , kBodySlot)
+        akActor.EquipItem(item, true, false)
+      else
+        akActor.AddItem(item, 1, false)
+      endif
 		endif
 	endif
 EndFunction
@@ -117,11 +121,21 @@ function GiveFemaleSmalls(Actor akActor)
 		Armor bottom = GetRandomSmall(pFemale)
 		if (bottom)
 			Debug("Adding smalls " + bottom.GetName())
-			akActor.AddItem(bottom, 1, false)
-			if IsInSlot(bottom , kPelvisUnderwearSlot) && !IsInSlot(bottom , kTorsoUnderwearSlot)
-				Form top = GetRandomSmall(pTops)
-				Debug("Adding top " + top.GetName())
-				akActor.AddItem(top, 1, false)
+      if !IsInSlot(bottom, kBodySlot)
+        akActor.EquipItem(bottom, true, false)
+      else
+  			akActor.AddItem(bottom, 1, false)
+      endif
+			if !IsInSlot(bottom , kBodySlot)
+				Armor top = GetRandomSmall(pTops)
+        if top
+          Debug("Adding top " + top.GetName())
+          if !IsInSlot(top, kBodySlot)
+            akActor.EquipItem(top, true, false)
+          else
+            akActor.AddItem(top, 1, false)
+          endif
+        endif
 			endif
 		endif
 	endif
