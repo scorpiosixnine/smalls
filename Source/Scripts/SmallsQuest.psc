@@ -56,14 +56,15 @@ Bool function EffectStarted(Actor akTarget, Actor akCaster)
     Debug(AppendName("Ignoring " , akTarget))
   endif
 
-  return !shouldMonitor
+  return shouldMonitor
 endfunction
 
-function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
+Bool function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
   Debug("EffectObjectUnequipped")
 
   if !IsPotentialTarget(target)
-    Debug(AppendName("Effect Running on non-potential target ", target))
+    Debug(AppendName("Effect was running on non-potential target ", target))
+    return false
   endif
 
   Armor armour = akBaseObject as Armor
@@ -76,10 +77,12 @@ function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, 
     if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
       Debug("Unequipped armour")
       EquipSmalls(target)
+      return false
     else
       Debug("Uneqipped slotmask: " + armour.getSlotMask())
     endif
   endif
+  return true
 endfunction
 
 Bool function IsPotentialTarget(Actor akTarget)
@@ -87,7 +90,7 @@ Bool function IsPotentialTarget(Actor akTarget)
 endfunction
 
 Bool function IsEligibleTarget(Actor akTarget)
-  return akTarget && akTarget.IsDead() && !AlreadyWearingSmalls(akTarget) && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
+  return akTarget.IsDead() && !AlreadyWearingSmalls(akTarget)
 endfunction
 
 
@@ -99,6 +102,9 @@ function GiveSmalls(Actor akActor)
 		GiveMaleSmalls(akActor)
 	else
 		GiveFemaleSmalls(akActor)
+	endif
+	if !akActor.IsOnMount()
+		akActor.QueueNiNodeUpdate()
 	endif
 EndFunction
 
