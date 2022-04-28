@@ -6,9 +6,7 @@ SmallsQuest Property rQuest  Auto
 Event OnEffectStart(Actor akTarget, Actor akCaster)
 	GoToState("busy")
     if rQuest.EffectStarted(akTarget, akCaster)
-		Debug.Notification("effect dispelled")
 		Dispel()
-		Return
 	EndIf
 	GoToState("")
 EndEvent

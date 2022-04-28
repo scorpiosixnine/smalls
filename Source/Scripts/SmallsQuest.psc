@@ -30,41 +30,55 @@ event OnInit()
 endEvent
 
 String function AppendName(String sLabel, Form akTarget)
+  String name
   if akTarget
-    return sLabel + akTarget.GetName()
-  else
-    return sLabel + "<none>"
+    name = akTarget.GetName()
+    if !name
+      ObjectReference ref = akTarget as ObjectReference
+      name = ref.GetBaseObject().GetName()
+    endif
   endif
+  if !name
+    name = "<none>"
+  endif
+
+  return sLabel + name
 endFunction
 
 Bool function EffectStarted(Actor akTarget, Actor akCaster)
-  Debug("EffectStarted")
-  Debug(AppendName("Target is " ,akTarget))
-  Debug(AppendName("Caster is ", akCaster))
+  bool shouldMonitor = IsPotentialTarget(akTarget)
+  if shouldMonitor 
+    Debug(AppendName("Monitoring " , akTarget))
+    if !AlreadyHasSmalls(akTarget)
+      GiveSmalls(akTarget)
+    endif
+  else
+    Debug(AppendName("Ignoring " , akTarget))
+  endif
 
-  bool shouldDispel = !IsPotentialTarget(akTarget)
+  return !shouldMonitor
 endfunction
 
 function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
   Debug("EffectObjectUnequipped")
-  Debug(AppendName("Target is ", target))
-  Debug(AppendName("Base is ", akBaseObject))
 
-  if IsEligibleTarget(target)
+  if !IsPotentialTarget(target)
+    Debug(AppendName("Effect Running on non-potential target ", target))
+  endif
+
+  Armor armour = akBaseObject as Armor
+  if armour && IsEligibleTarget(target)
+    Debug(AppendName("Target is ", target))
+    Debug(AppendName("Base is ", akBaseObject))
     Debug("Removed " + akBaseObject.GetName() + " from " + target.GetName())
 
-    Armor armour = akBaseObject as Armor
-    if armour
-      int mask = armour.getSlotMask()
-      if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
-        Debug("Unequipped armour")
-        if !IsSmalls(armour)
-          EquipSmalls(target)
-        endif
-      else
-        Debug("Uneqipped slotmask: " + armour.getSlotMask())
-      endif
-	  endif
+    int mask = armour.getSlotMask()
+    if (IsInSlot(armour, kBodySlot) && !IsSmalls(armour))
+      Debug("Unequipped armour")
+      EquipSmalls(target)
+    else
+      Debug("Uneqipped slotmask: " + armour.getSlotMask())
+    endif
   endif
 endfunction
 
@@ -75,6 +89,43 @@ endfunction
 Bool function IsEligibleTarget(Actor akTarget)
   return akTarget && akTarget.IsDead() && !AlreadyWearingSmalls(akTarget) && (akTarget != Game.GetPlayer()) && !akTarget.IsPlayerTeammate()
 endfunction
+
+
+function GiveSmalls(Actor akActor)
+  int gender = akActor.GetLeveledActorBase().GetSex()
+  Debug("gender is " + gender)
+
+  if gender == 0
+		GiveMaleSmalls(akActor)
+	else
+		GiveFemaleSmalls(akActor)
+	endif
+EndFunction
+
+function GiveMaleSmalls(Actor akActor)
+	if pReplaceMales
+		Armor item = GetRandomSmall(pMale)
+		if (item)
+			Debug("Adding smalls " + item.GetName())
+			akActor.AddItem(item, 1, false)
+		endif
+	endif
+EndFunction
+
+function GiveFemaleSmalls(Actor akActor)
+	if pReplaceFemales
+		Armor bottom = GetRandomSmall(pFemale)
+		if (bottom)
+			Debug("Adding smalls " + bottom.GetName())
+			akActor.AddItem(bottom, 1, false)
+			if IsInSlot(bottom , kPelvisUnderwearSlot) && !IsInSlot(bottom , kTorsoUnderwearSlot)
+				Form top = GetRandomSmall(pTops)
+				Debug("Adding top " + top.GetName())
+				akActor.AddItem(top, 1, false)
+			endif
+		endif
+	endif
+EndFunction
 
 function EquipSmalls(Actor akActor)
   int gender = akActor.GetLeveledActorBase().GetSex()
@@ -90,30 +141,64 @@ function EquipSmalls(Actor akActor)
 	endif
 EndFunction
 
-function EquipMaleSmalls(Actor akActor)
+function EquipMaleSmalls(Actor target)
 	if pReplaceMales
-		Armor item = GetRandomSmall(pMale)
-		if (item)
-			Debug("Adding smalls " + item.GetName())
-			akActor.EquipItem(item, true, false)
-		endif
+    int count = target.GetNumItems()
+    int n = 0
+    int items = 0
+    while(n < count)
+      Form item = target.GetNthForm(n)
+      Armor itemAsArmor = item as Armor
+      if !target.IsEquipped(item) && itemAsArmor && pMale.HasForm(item)
+        Debug("Equipping " + item.GetName())
+        target.EquipItem(item)
+        return
+      endif
+      n += 1
+    endWhile
+  endif
+EndFunction
+
+function EquipFemaleSmalls(Actor target)
+	if pReplaceFemales
+    int count = target.GetNumItems()
+    int n = 0
+    int items = 0
+    int doneTop = 0
+    int doneBottom = 0
+
+    while(n < count)
+      Form item = target.GetNthForm(n)
+      Armor itemAsArmor = item as Armor
+      if !target.IsEquipped(item) && itemAsArmor && (pFemale.HasForm(item) || pTops.HasForm(item))
+        Debug("Equipping " + item.GetName())
+        target.EquipItem(item)
+      endif
+      n += 1
+    endWhile
 	endif
 EndFunction
 
-function EquipFemaleSmalls(Actor akActor)
-	if pReplaceFemales
-		Armor bottom = GetRandomSmall(pFemale)
-		if (bottom)
-			Debug("Adding smalls " + bottom.GetName())
-			akActor.EquipItem(bottom, true, false)
-			if IsInSlot(bottom , kPelvisUnderwearSlot) && !IsInSlot(bottom , kTorsoUnderwearSlot)
-				Form top = GetRandomSmall(pTops)
-				Debug("Adding top " + top.GetName())
-				akActor.EquipItem(top, true, false)
-			endif
-		endif
-	endif
-EndFunction
+bool function AlreadyHasSmalls(Actor target)
+  int count = target.GetNumItems()
+  int n = 0
+  int items = 0
+  while(n < count)
+    Form item = target.GetNthForm(n)
+    Armor itemAsArmor = item as Armor
+    if itemAsArmor
+      if rDefaults.HasForm(item)
+        Trace(item.GetName() + " is in the item list")
+        return true
+      elseif IsInSpecificSlot(itemAsArmor)
+        Trace(item.GetName() + " is in a non-body slot used for underwear " + SlotsDescription(itemAsArmor))
+        return true
+      endif
+    endif
+    n += 1
+  endWhile
+  return false
+endFunction
 
 bool function AlreadyWearingSmalls(Actor target)
   int count = target.GetNumItems()
