@@ -20,7 +20,7 @@ If you later kill the NPC and open its inventory to loot it, you should find tha
 
 If the underwear is equipped already, there's nothing more to do.
 
-If not, Smalls will monitor what you remove. If you remove the main clothing item (the one that occupies the body slot and hides the NPC's naughty bits), Smalls will equip the underwear to replace it.
+If not, Smalls will monitor what you remove. If you remove the main clothing item (the one that occupies the body slot and hides the NPC's naughty bits), Smalls will equip the underwear to replace it. Unfortunately, because the new item is only equipped after you've removed the old one, a brief flash can occur where the NPC appears to be naked. This isn't ideal, but it's tricky to avoid, for reasons that are covered below in the complicated version of the explanation!
 
 Exactly which items Smalls adds is determined randomly, using a list that you can configure. By default Smalls knows about a few popular underwear mods, but you can add in items from other mods, and remove any that you don't want to use. See the **Configuration** section below for more details.
 
