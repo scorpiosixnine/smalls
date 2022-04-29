@@ -2,27 +2,31 @@
 
 > “Smalls”: _noun, plural noun: 1. informal, british -- small items of clothing, especially underwear._
 
-Whilst adventuring in Skyrim SE, you tend to run across all sorts of bandits, ruffians and ne'er-do-wells. Typically it all goes south, you end up in a big fight, and then you loot the bodies for armour and treasure.
+Whilst adventuring in Skyrim SE, you tend to run across all sorts of bandits, ruffians and ne'er-do-wells. Often, things go south and you end up in a big fight, and if you emerge from that you loot the bodies for armour and treasure.
 
-If you're running with [a mod that replaces the default skin with a naked one](https://www.nexusmods.com/skyrimspecialedition/mods/198), it's a bit disconcerting to discover that everyone whose armour you loot seems to be going commando. What's up with that? Didn't their mothers warn them that they might meet a sticky end one day and thus clearly ought to pack some clean underwear for their trip just in case?
+If you're running with [a mod that replaces the default skin with a naked one](https://www.nexusmods.com/skyrimspecialedition/mods/198), it can be a bit disconcerting to discover that everyone whose armour you loot seems to be going commando! What's up with that? Didn't their mothers warn them that they might meet a sticky end one day and thus clearly ought to pack some clean underwear for their trip just in case?
 
-This mod attempts to fix this problem in the least intrusive way possible.
+This mod attempts to fix the problem in the least intrusive way possible.
 
-## How It Works
+## How It Works - The Simple Version
 
-Smalls keeps a list of male and female underwear items to use (which can be configured - see below).
+_This is the simple explanation. See below for a lot more detail about why it's all a little messy._
 
-When a new NPC is encountered, it is checked to see if its inventory includes known items of underwear, or if it is wearing an item which occupies a body slot typically used for underwear.
+When a new NPC is encountered, it is checked to see if its inventory includes some underwear.
 
-If not, an item of underwear is randomly assigned to it, and added to its inventory.
+If not, an item of underwear is randomly added to the NPC's inventory, from a list of underwear items that Smalls keeps. In some cases Smalls can also equip the item at this point, but more often it is just added to the inventory.
 
 If you later kill the NPC and open its inventory to loot it, you should find that the NPC has an item of underwear. 
 
 If the underwear is equipped already, there's nothing more to do.
 
-If not, Smalls will monitor what you remove. If you remove the main clothing item (the one that occupies the body slot), Smalls will equip the underwear to replace it.
+If not, Smalls will monitor what you remove. If you remove the main clothing item (the one that occupies the body slot and hides the NPC's naughty bits), Smalls will equip the underwear to replace it.
 
-## Armour, Clothing, Underwear and Slots
+Exactly which items Smalls adds is determined randomly, using a list that you can configure. By default Smalls knows about a few popular underwear mods, but you can add in items from other mods, and remove any that you don't want to use. See the **Configuration** section below for more details.
+
+## How It Works - The Complicated Version
+
+### Armour, Clothing, Underwear and Slots
 
 Any piece of armour/clothing in Skyrim is tagged as occupying one or more body slots. 
 
@@ -74,16 +78,31 @@ If on the other hand the randomly selected item is using the main body slot, the
 
 So what it does in this situation is just add the item to the NPC's inventory. Later when you are looting the NPC, Smalls watches for you removing the main piece of clothing, and quickly equips the underwear item when you do. This works, but can result in a brief flash where the NPC appears to be naked. This isn't ideal, but it's the best that can be managed in this situation.
 
-### 
+### What Would Make Things Better
 
+This problem is unlikely to ever be solved completely for Skyrim, because the architecture doesn't really support layering clothing in a generalised way.
 
+However, a few things would make things a bit better.
 
+### Fixing The Slots
 
+The first is if the people who make custom clothing/armour considered that people might want to equip individual parts of it. They could support this by splitting the armour up into logical bits, and assigning those bits slots _that aren't the default body slot_.
 
+Doing that won't necessarily mean that the armour will layer properly with other things, but it will at least make it possible to try!
 
+Note that it is possible to do this yourself, but it involves using Outfit Studio to change the body slots assigned to the models, **and** using CreationKit or SSEdit to change the slots assigned to the Armour records in the ESP. Which is fiddly and a pain in the arse.
 
+I am actually considering writing a tool to automate this process. I have a lot of the necessary code written, but finishing it off will be fiddly and there may not be enough hours in the day.
 
+### Fixing The Overlapping
 
+This is trickier. On a case-by-case basis you can use Outfit Studio to flatten inner-wear items to the body, and to pull outer-wear items away from it a bit. This will reduce the likelihood of clipping and items poking through, but can't completely eliminate it. Doing it is also time consuming.
+
+I think in theory this process could also be automated. If a tool rendered the body in one colour, and one or more clothing items in another, it should be able to analyse the colours to work out which clothing item is "on top", for any given rendered vertex and camera angle. It should then be able to push the vertices in/out until the right answer is achieved for that vertex and angle. If this process was iterated for each vertex, with the camera pointing through the vertex towards the centre of the model (or maybe the centre of the primary bone, or something), I think you could get a good approximation of a tool that automatically "form fitted" an item. This might work well for skin-tight items, but of course would completely destroy any places where the item deliberately stood away from the skin.
+
+A simpler and more practical solution might be to adopt some sort of Russian-doll approach where all designers standardise on one body shell for inner-wear, and another slightly expanded one for outer-wear. Again this is the sort of thing that really needs tool support if it stands any chance of being adopted widely.
+
+That is all beyond the scope of Smalls, but I'm up for discussing solutions!
 
 ## Configuration
 
