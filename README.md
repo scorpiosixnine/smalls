@@ -1,6 +1,6 @@
 # Smalls
 
-> __noun, plural noun: 1. INFORMAL•BRITISH -- small items of clothing, especially underwear.__
+> “Smalls”: _noun, plural noun: 1. informal, british -- small items of clothing, especially underwear._
 
 Whilst adventuring in Skyrim SE, you tend to run across all sorts of bandits, ruffians and ne'er-do-wells. Typically it all goes south, you end up in a big fight, and then you loot the bodies for armour and treasure.
 
