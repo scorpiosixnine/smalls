@@ -1,5 +1,7 @@
 # Smalls
 
+> __noun, plural noun: 1. INFORMAL•BRITISH -- small items of clothing, especially underwear.__
+
 Whilst adventuring in Skyrim SE, you tend to run across all sorts of bandits, ruffians and ne'er-do-wells. Typically it all goes south, you end up in a big fight, and then you loot the bodies for armour and treasure.
 
 If you're running with [a mod that replaces the default skin with a naked one](https://www.nexusmods.com/skyrimspecialedition/mods/198), it's a bit disconcerting to discover that everyone whose armour you loot seems to be going commando. What's up with that? Didn't their mothers warn them that they might meet a sticky end one day and thus clearly ought to pack some clean underwear for their trip just in case?
@@ -72,7 +74,7 @@ If on the other hand the randomly selected item is using the main body slot, the
 
 So what it does in this situation is just add the item to the NPC's inventory. Later when you are looting the NPC, Smalls watches for you removing the main piece of clothing, and quickly equips the underwear item when you do. This works, but can result in a brief flash where the NPC appears to be naked. This isn't ideal, but it's the best that can be managed in this situation.
 
-
+### 
 
 
 
