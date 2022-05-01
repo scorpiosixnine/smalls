@@ -1,0 +1,18 @@
+[submodule "scorpio-utilities"]
+	path = scorpio-utilities
+	url = git@githubasscorpio:scorpiosixnine/scorpio-utilities.git
+[submodule "skyui"]
+	path = sdks/skyui
+	url = git@github.com:schlangster/skyui
+[submodule "sdks/skyrim-sdk"]
+	path = sdks/skyrim-sdk
+	url = git@githubasscorpio:scorpiosixnine/skyrim-sdk
+[submodule "sdks/skse64"]
+	path = sdks/skse64
+	url = git@github.com:ianpatt/skse64
+[submodule "sdks/skse64-sdk"]
+	path = sdks/skse64-sdk
+	url = git@githubasscorpio:scorpiosixnine/skse64-sdk
+[submodule "sdks/jcontainers-sdk"]
+	path = sdks/jcontainers-sdk
+	url = git@githubasscorpio:scorpiosixnine/jcontainers-sdk
