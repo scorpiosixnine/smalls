@@ -2,6 +2,8 @@
 	<moduleName>Smalls</moduleName>
 	<moduleDependencies operator="And">
 		<fileDependency file="SkyUI" state="Active" />
+		<fileDependency file="JContainers SE" state="Active" />
+		<fileDependency file="Spell Perk Item Distributor - AE" state="Active" />
 	</moduleDependencies>
 	
 	<requiredInstallFiles>

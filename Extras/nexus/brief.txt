@@ -1,0 +1,1 @@
+Adds underwear to bodies when you loot them, so that NPCs don't all appear to be going commando if you're using a naked skin.
