@@ -46,6 +46,8 @@ String function AppendName(String sLabel, Form akTarget)
 endFunction
 
 Bool function EffectStarted(Actor akTarget, Actor akCaster)
+  ; return false from this function will dispel and permanently remove the effect from the target
+
   bool shouldMonitor = IsPotentialTarget(akTarget)
   if shouldMonitor 
     Debug(AppendName("Monitoring " , akTarget))
@@ -60,7 +62,7 @@ Bool function EffectStarted(Actor akTarget, Actor akCaster)
 endfunction
 
 Bool function EffectObjectUnequipped(Form akBaseObject, ObjectReference akReference, Actor target)
-  Debug("EffectObjectUnequipped")
+  ; return false from this function will dispel and remove the effect
 
   if !IsPotentialTarget(target)
     Debug(AppendName("Effect was running on non-potential target ", target))
@@ -80,6 +82,16 @@ Bool function EffectObjectUnequipped(Form akBaseObject, ObjectReference akRefere
     Debug("Skipping living target")
     return true
   endif
+
+  if !UI.IsMenuOpen("ContainerMenu")
+    Debug("Skipping as UI is not open")
+    return true
+  endif
+
+  if Game.GetCurrentCrosshairRef() != target
+    Debug("Skipping as target is not in crosshairs")
+		return true
+	endIf
 
   if target.IsPlayerTeammate()
     Debug("Skipping team mate")
