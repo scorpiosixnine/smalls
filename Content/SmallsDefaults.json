@@ -1,57 +1,4 @@
 {
-    "kuzak-bodyandstockings.esp": {
-        "femaleBottom": [
-            "0x1000",
-            "0x1566",
-            "0x156E",
-            "0x156F",
-            "0x3063",
-            "0x3064",
-            "0x50CF",
-            "0x50D4",
-            "0x50D7",
-            "0x5BAC",
-            "0x5BAF",
-            "0x9746",
-            "0x9747",
-            "0xACE1",
-            "0xACEA",
-            "0xACEB",
-            "0xACEC",
-            "0xE30E",
-            "0xE313",
-            "0xF341",
-            "0xF342"
-        ],
-        "female": [
-            "0x563E",
-            "0x5BA4",
-            "0x5BA8",
-            "0x611A",
-            "0x611B",
-            "0x6690",
-            "0x6691",
-            "0xB255",
-            "0xB25C",
-            "0xB25D",
-            "0xB25E",
-            "0xF341",
-            "0xF342"
-            ]
-    },
-    "[COCO]Lingerie.esp": {
-        "female": [
-            "0x0803",
-            "0x0809",
-            "0x080F",
-            "0x0814",
-            "0x081C",
-            "0x083D",
-            "0x0843",
-            "0x0849",
-            "0x0856"
-        ]
-    },
     "Apachii_DivineEleganceStore.esm": {
         "female": [
             "0x02FFF7",
@@ -79,18 +26,6 @@
             "0x031B29",
             "0x031B2B",
             "0x031B2D"
-        ]
-    },
-    "[Melodic] Angels Secrets.esp": {
-        "femaleTop": [
-            "0x0012D0"
-        ],
-        "female": [
-            "0x0012D1"
-        ],
-        "femaleBottom": [
-            "0x0012D5",
-            "0x0012D6"
         ]
     },
     "CBBE Standalone Underwear.esp": {
@@ -128,6 +63,126 @@
             "0x74EB",
             "0x74EC",
             "0x74ED"
+        ]
+    },
+    "Daily-Wear.esp": {
+        "femaleBottom": [
+            {
+                "id": "0x0000E355",
+                "name": "DWPantyClothB"
+            },
+            {
+                "id": "0x0000E356",
+                "name": "DWPantyClothD"
+            },
+            {
+                "id": "0x0000E357",
+                "name": "DWPantyClothGN"
+            },
+            {
+                "id": "0x0000E358",
+                "name": "DWPantyClothI"
+            },
+            {
+                "id": "0x0000E359",
+                "name": "DWPantyClothL1B"
+            },
+            {
+                "id": "0x0000E35A",
+                "name": "DWPantyClothL1R"
+            },
+            {
+                "id": "0x0000E35B",
+                "name": "DWPantyClothL2black"
+            },
+            {
+                "id": "0x0000E35C",
+                "name": "DWPantyClothL2pink"
+            },
+            {
+                "id": "0x0000E35D",
+                "name": "DWPantyClothL2red"
+            },
+            {
+                "id": "0x0000E35E",
+                "name": "DWPantyClothM"
+            },
+            {
+                "id": "0x0000E35F",
+                "name": "DWPantyClothR1"
+            },
+            {
+                "id": "0x0000E360",
+                "name": "DWPantyLight"
+            },
+            {
+                "id": "0x0000E361",
+                "name": "DWPantyLightB"
+            },
+            {
+                "id": "0x0000E363",
+                "name": "DWPantyLightD"
+            },
+            {
+                "id": "0x0000E364",
+                "name": "DWPantyLightGN"
+            },
+            {
+                "id": "0x0000E365",
+                "name": "DWPantyLightI"
+            },
+            {
+                "id": "0x0000E366",
+                "name": "DWPantyLightL1B"
+            },
+            {
+                "id": "0x0000E367",
+                "name": "DWPantyLightL1R"
+            },
+            {
+                "id": "0x0000E369",
+                "name": "DWPantyLightL2black"
+            },
+            {
+                "id": "0x0000E36A",
+                "name": "DWPantyLightL2pink"
+            },
+            {
+                "id": "0x0000E36B",
+                "name": "DWPantyLightL2red"
+            },
+            {
+                "id": "0x0000E36C",
+                "name": "DWPantyLightM"
+            },
+            {
+                "id": "0x0000E36D",
+                "name": "DWPantyLightR"
+            },
+            {
+                "id": "0x0000FEAD",
+                "name": "DWPantyClothTan"
+            },
+            {
+                "id": "0x0000FEAE",
+                "name": "DWPantyClothFur"
+            },
+            {
+                "id": "0x0000FEB0",
+                "name": "DWPantyLightFur"
+            },
+            {
+                "id": "0x00010426",
+                "name": "DWPantyLightTan"
+            },
+            {
+                "id": "0x00011469",
+                "name": "DWPantyClothL1G"
+            },
+            {
+                "id": "0x0001146A",
+                "name": "DWPantyLightL1G"
+            }
         ]
     },
     "Gwelda Red Riding Hood.esp": {
@@ -180,51 +235,58 @@
             "0x02BCEE"
         ]
     },
-    "Schlongs of Skyrim.esp": {
+    "RydinMaleUnderwear.esp": {
         "male": [
-            "0x012DA"
+            {
+                "id": "0x00000D62",
+                "name": "rump_male_clothwaistbandtiebriefs"
+            },
+            {
+                "id": "0x00000D68",
+                "name": "rump_male_bearfurbriefs"
+            },
+            {
+                "id": "0x0000182E",
+                "name": "rump_male_clothwaistbandbriefs"
+            },
+            {
+                "id": "0x00001830",
+                "name": "rump_male_leatherbriefs"
+            },
+            {
+                "id": "0x00001D94",
+                "name": "rump_male_wolffurbriefs"
+            },
+            {
+                "id": "0x00003323",
+                "name": "rump_male_blackleatherbriefs"
+            },
+            {
+                "id": "0x00003DEA",
+                "name": "rump_male_large_bearfurbriefs"
+            },
+            {
+                "id": "0x00003DEC",
+                "name": "rump_male_large_blackleatherbriefs"
+            },
+            {
+                "id": "0x00003DEE",
+                "name": "rump_male_large_clothwaistbandbriefs"
+            },
+            {
+                "id": "0x00003DF0",
+                "name": "rump_male_large_clothwaistbandtiebriefs"
+            },
+            {
+                "id": "0x00003DF3",
+                "name": "rump_male_large_leatherbriefs"
+            },
+            {
+                "id": "0x00003DF5",
+                "name": "rump_male_large_wolffurbriefs"
+            }
         ]
     },
-    "Shino_Traveling Magician.esp": {
-        "female": [
-            "0x1875",
-            "0x1876",
-            "0x1877",
-            "0x1878",
-            "0x1879",
-            "0x187A"
-        ]
-    },
-    "[SunJeong] Nausicaa Lingerie.esp": {
-        "femaleBottom": [
-            "0xA9EC",
-            "0xB4DF"
-        ],
-        "femaleTop": [
-            "0xA9EF",
-            "0xB4D9"
-        ]
-    },
-    "Sweet&Sexy Lingerie.esp": {
-        "female": [
-            "0x1DE2",
-            "0x1DE4",
-            "0x1DEA",
-            "0x6052",
-            "0xCCF5",
-            "0xCCF7",
-            "0xCCF9"
-        ]
-    },
-    "UNP Undies.esp": {
-        "female": [
-            "0x1D8E",
-            "0x4E14",
-            "0x63A4",
-            "0x63A5"
-        ]
-    },
-    
     "SOS - Chainmail Underwear.esp": {
         "male": [
             {
@@ -249,11 +311,124 @@
             }
         ]
     },
-
+    "Schlongs of Skyrim.esp": {
+        "male": [
+            {
+                "id": "0x000012DA",
+                "name": "SOS_DefaultUnderwear"
+            }
+        ]
+    },
+    "Shino_Traveling Magician.esp": {
+        "female": [
+            "0x1875",
+            "0x1876",
+            "0x1877",
+            "0x1878",
+            "0x1879",
+            "0x187A"
+        ]
+    },
+    "Sweet&Sexy Lingerie.esp": {
+        "female": [
+            "0x1DE2",
+            "0x1DE4",
+            "0x1DEA",
+            "0x6052",
+            "0xCCF5",
+            "0xCCF7",
+            "0xCCF9"
+        ]
+    },
+    "UNP Undies.esp": {
+        "female": [
+            "0x1D8E",
+            "0x4E14",
+            "0x63A4",
+            "0x63A5"
+        ]
+    },
+    "[COCO]Lingerie.esp": {
+        "female": [
+            "0x0803",
+            "0x0809",
+            "0x080F",
+            "0x0814",
+            "0x081C",
+            "0x083D",
+            "0x0843",
+            "0x0849",
+            "0x0856"
+        ]
+    },
+    "[Melodic] Angels Secrets.esp": {
+        "female": [
+            "0x0012D1"
+        ],
+        "femaleBottom": [
+            "0x0012D5",
+            "0x0012D6"
+        ],
+        "femaleTop": [
+            "0x0012D0"
+        ]
+    },
+    "[SunJeong] Nausicaa Lingerie.esp": {
+        "femaleBottom": [
+            "0xA9EC",
+            "0xB4DF"
+        ],
+        "femaleTop": [
+            "0xA9EF",
+            "0xB4D9"
+        ]
+    },
     "[Zynx][Anano] Osare Gothic Lolita.esp": {
         "femaleBottom": [
-            { "id": "0x1DAC", "name": "00GothicLolitaPantyWT" }
+            {
+                "id": "0x1DAC",
+                "name": "00GothicLolitaPantyWT"
+            }
         ]
-        }
-
+    },
+    "kuzak-bodyandstockings.esp": {
+        "female": [
+            "0x563E",
+            "0x5BA4",
+            "0x5BA8",
+            "0x611A",
+            "0x611B",
+            "0x6690",
+            "0x6691",
+            "0xB255",
+            "0xB25C",
+            "0xB25D",
+            "0xB25E",
+            "0xF341",
+            "0xF342"
+        ],
+        "femaleBottom": [
+            "0x1000",
+            "0x1566",
+            "0x156E",
+            "0x156F",
+            "0x3063",
+            "0x3064",
+            "0x50CF",
+            "0x50D4",
+            "0x50D7",
+            "0x5BAC",
+            "0x5BAF",
+            "0x9746",
+            "0x9747",
+            "0xACE1",
+            "0xACEA",
+            "0xACEB",
+            "0xACEC",
+            "0xE30E",
+            "0xE313",
+            "0xF341",
+            "0xF342"
+        ]
+    }
 }
