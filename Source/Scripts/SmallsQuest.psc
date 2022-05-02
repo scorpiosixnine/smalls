@@ -3,12 +3,15 @@ Scriptname SmallsQuest extends Quest
 
 FormList property rDefaults auto
 FormList property pTops auto
+FormList property pBottoms auto
 FormList property pFemale auto
 FormList property pMale auto
 
 bool property pEnabled auto
 bool property pReplaceMales auto
 bool property pReplaceFemales auto
+bool property pRunWithoutUI auto
+bool property pEquipEarly auto
 
 int property kBodySlot = 0x000004 AutoReadOnly ; BODY 32 
 int property kPelvisUnderwearSlot = 0x00400000 AutoReadOnly ; Underwear pelvis 52
@@ -83,7 +86,7 @@ Bool function EffectObjectUnequipped(Form akBaseObject, ObjectReference akRefere
     return true
   endif
 
-  if !UI.IsMenuOpen("ContainerMenu")
+  if !UI.IsMenuOpen("ContainerMenu") && !pRunWithoutUI
     Debug("Skipping as UI is not open")
     return true
   endif
@@ -137,17 +140,26 @@ function GiveSmalls(Actor akActor)
 	endif
 EndFunction
 
+Bool function ShouldEquipEarly(Armor item)
+  return pEquipEarly && !IsInSlot(item, kBodySlot)
+endFunction
+
+function AddOrEquipEarly(Actor akActor, Armor item)
+  if (item)
+    if ShouldEquipEarly(item)
+      Debug("Adding smalls " + item.GetName())
+      akActor.EquipItem(item, true, false)
+    else
+      Debug("Early equipping smalls " + item.GetName())
+      akActor.AddItem(item, 1, false)
+    endif
+  endif
+endFunction
+
 function GiveMaleSmalls(Actor akActor)
 	if pReplaceMales
 		Armor item = GetRandomSmall(pMale)
-		if (item)
-			Debug("Adding smalls " + item.GetName())
-      if !IsInSlot(item , kBodySlot)
-        akActor.EquipItem(item, true, false)
-      else
-        akActor.AddItem(item, 1, false)
-      endif
-		endif
+    AddOrEquipEarly(akActor, item)
 	endif
 EndFunction
 
@@ -155,22 +167,12 @@ function GiveFemaleSmalls(Actor akActor)
 	if pReplaceFemales
 		Armor bottom = GetRandomSmall(pFemale)
 		if (bottom)
-			Debug("Adding smalls " + bottom.GetName())
-      if !IsInSlot(bottom, kBodySlot)
-        akActor.EquipItem(bottom, true, false)
-      else
-  			akActor.AddItem(bottom, 1, false)
-      endif
-			if !IsInSlot(bottom , kBodySlot)
+      AddOrEquipEarly(akActor, bottom)
+
+      ; if it's in the bottoms list, then we also need a top
+      if pBottoms.HasForm(bottom)
 				Armor top = GetRandomSmall(pTops)
-        if top
-          Debug("Adding top " + top.GetName())
-          if !IsInSlot(top, kBodySlot)
-            akActor.EquipItem(top, true, false)
-          else
-            akActor.AddItem(top, 1, false)
-          endif
-        endif
+        AddOrEquipEarly(akActor, bottom)
 			endif
 		endif
 	endif
@@ -281,7 +283,7 @@ endfunction
 function ResetDefaultSmalls()
   Trace("Resetting default smalls list.")
 
-  if !pFemale || !pMale || !pTops || !rDefaults
+  if !pFemale || !pMale || !pTops || !pBottoms || !rDefaults
     Warning("failed to load lists")
   endif
 
@@ -289,6 +291,7 @@ function ResetDefaultSmalls()
   pFemale.Revert()
   pMale.Revert()
   pTops.Revert()
+  pBottoms.Revert()
 
   LoadDefaults()
 EndFunction
@@ -391,6 +394,7 @@ endFunction
 int function ModeForSmall(Armor item)
   bool inMale = pMale.HasForm(item)
   bool inTops = pTops.HasForm(item)
+  bool inBottoms = pBottoms.HasForm(item)
   bool inFemale = pFemale.HasForm(item)
 
   if inMale && inFemale
@@ -401,6 +405,8 @@ int function ModeForSmall(Armor item)
     return kModeFemale
   elseif inTops
     return kModeFemaleTop
+  elseif inBottoms
+    return kModeFemaleBottom
   else
     return kModeDisabled
   endif
@@ -410,6 +416,7 @@ function SetModeForSmall(Armor item, int value)
   pMale.RemoveAddedForm(item)
   pFemale.RemoveAddedForm(item)
   pTops.RemoveAddedForm(item)
+  pBottoms.RemoveAddedForm(item)
 
   if (value == kModeUnisex) || (value == kModeMale)
     Trace("added as male " + item.GetName())
@@ -419,6 +426,11 @@ function SetModeForSmall(Armor item, int value)
   if (value == kModeUnisex) || (value == kModeFemale) || (value == kModeFemaleBottom)
     Trace("added as female " + item.GetName())
     pFemale.AddForm(item)
+  endif
+
+  if (value == kModeFemaleBottom)
+    Trace("added as bottom " + item.GetName())
+    pBottoms.AddForm(item)
   endif
 
   if (value == kModeFemaleTop)
@@ -433,6 +445,7 @@ names[kModeUnisex] = "Unisex"
 names[kModeMale] = "Male"
 names[kModeFemale] = "Female"
 names[kModeFemaleTop] = "Female Top"
+names[kModeFemaleBottom] = "Female Bottom"
 names[kModeDisabled] = "Disable"
 names[kModeRemove] = "Remove"
 return names
@@ -449,7 +462,7 @@ endFunction
 
 bool function IsSmalls(Armor akArmour)
   if akArmour
-    return pMale.HasForm(akArmour) || pFemale.HasForm(akArmour) || pTops.HasForm(akArmour)
+    return pMale.HasForm(akArmour) || pFemale.HasForm(akArmour) || pTops.HasForm(akArmour) || pBottoms.HasForm(akArmour)
   else
     return false
   endif
