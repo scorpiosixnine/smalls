@@ -23,6 +23,7 @@ Armor[] _inventoryItems
 
 bool _updateInventory = false
 bool _removeMarked = false
+bool _resetWhenClosed = false
 
 String[] _kinds
 
@@ -36,13 +37,19 @@ endEvent
 event OnConfigOpen()
   pQuest.Trace("ConfigOpen")
   _inventoryCount = 0
+  _resetWhenClosed = false
 endEvent
 
 event OnConfigClose()
   pQuest.Debug("ConfigClose")
 
-  AddSmallsFromInventory()
-  RemoveMarkedItems()
+  if _resetWhenClosed
+    pQuest.ResetDefaultSmalls()
+    _resetWhenClosed = false
+  else
+    AddSmallsFromInventory()
+    RemoveMarkedItems()
+  endif
 endEvent
 
 event OnVersionUpdate(int newVersion)
@@ -133,8 +140,7 @@ endFunction
 function ConfigButtonClicked(int index, int tag, int option)
   if tag == kButtonReset
     SetTextOptionValue(option, "Resetting...")
-    pQuest.ResetDefaultSmalls()
-    SetTextOptionValue(option, "Done") ; TODO: this can fail if the MCM has been closed in the meantime... should really keep track of this
+    _resetWhenClosed = true
   endif
 endFunction
 
