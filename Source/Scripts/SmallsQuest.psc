@@ -300,10 +300,11 @@ endfunction
 
 function LoadDefaultsFromPath(String path)
   int defaultsFile = JValue.readFromFile(path)
-  String mod = JMap.nextKey(defaultsFile)
-  while mod 
+  int n = JMap.count(defaultsFile)
+  while n > 0
+    n -= 1
+    String mod = JMap.getNthKey(defaultsFile, n) 
     LoadDefaultsForMod(mod, defaultsFile)
-    mod = JMap.nextKey(defaultsFile, mod)
   endwhile
 endfunction
 
