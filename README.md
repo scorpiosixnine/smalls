@@ -27,7 +27,7 @@ Exactly which items Smalls adds is determined randomly, using a list that you ca
 
 ## Configuration
 
-Smalls keeps a list of items, which it uses to assign pick random underwear to NPCs as you encounter them.
+Smalls keeps a list of items, which it uses to assign random underwear to NPCs as you encounter them.
 
 Each item that Smalls knows about can be set to one of the following categories:
 
