@@ -301,14 +301,21 @@ endfunction
 function LoadDefaultsFromPath(String path)
   int defaultsFile = JValue.readFromFile(path)
   int n = JMap.count(defaultsFile)
-  while n > 0
-    n -= 1
-    String mod = JMap.getNthKey(defaultsFile, n) 
+  Trace("found " + n + " defaults entries in " + path)
+  String mod = JMap.nextKey(defaultsFile, previousKey="", endKey="") 
+  while mod != ""
     LoadDefaultsForMod(mod, defaultsFile)
+    mod = JMap.nextKey(defaultsFile, mod, endKey="")
   endwhile
 endfunction
 
 function LoadDefaultsForMod(String mod, int file)
+  int index = Game.GetModByName(mod)
+  if index == 255
+    Debug(mod + " is not installed.")
+    return
+  endif
+
   int values = JMap.getObj(file, mod)
   int added = 0
   added += LoadDefaultsWithKey(values, "female", kModeFemale, mod)
@@ -317,11 +324,17 @@ function LoadDefaultsForMod(String mod, int file)
   added += LoadDefaultsWithKey(values, "male", kModeMale, mod)
   added += LoadDefaultsWithKey(values, "unisex", kModeUnisex, mod)
   if added > 0
-    Log("Added " + added + " defaults from " + mod + ".")
+    Log("Added " + added + " items from " + mod + ".")
+  else 
+    Debug("Added nothing from " + mod + ".")
   endif
 endfunction
 
 int function LoadDefaultsWithKey(int values, String k, int mode, String mod)
+  if !JMap.hasKey(values, k)
+    return 0
+  endif
+
   int added = 0
   int list = JMap.getObj(values, k)
   int i = JValue.count(list)
@@ -343,6 +356,8 @@ int function LoadDefaultsWithKey(int values, String k, int mode, String mod)
         SetModeForSmall(item, mode)
         Trace("added " + item.GetName() + " (" + mod + ") slots: " + SlotsDescription(item))
         added += 1
+      else
+        Trace("couldn't find " + data)
       endif
     endif
   endwhile
@@ -351,7 +366,6 @@ endfunction
 
 function AddSmall(Armor item)
   if !rDefaults.HasForm(item)
-    Trace("added " + item.GetName())
     rDefaults.AddForm(item)
   endif
 endFunction
