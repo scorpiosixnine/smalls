@@ -29,11 +29,17 @@
         ]
     },
     "CBBE Standalone Underwear.esp": {
-        "female": [
-            "0xC804"
+        "femaleBottom": [
+            {
+                "id": "0x00000804",
+                "name": "CBBE_Underwear_Bottom"
+            }
         ],
         "femaleTop": [
-            "0xC805"
+            {
+                "id": "0x00000805",
+                "name": "CBBE_Underwear_Top"
+            }
         ]
     },
     "Celes Tarot Outfit Cloth UNP.esp": {
