@@ -94,6 +94,8 @@ function SetupGeneralPage()
   SetupToggle("Enabled", "Enabled", pQuest.pEnabled)
   SetupToggle("ReplaceMales", "Use for males.", pQuest.pReplaceMales)
   SetupToggle("ReplaceFemales", "Use for females.", pQuest.pReplaceFemales)
+  SetupToggle("RunWithoutUI", "Don't check for inventory UI.", pQuest.pRunWithoutUI)
+  SetupToggle("EquipEarly", "Try to equip early.", pQuest.pEquipEarly)
   AddEmptyOption()
   SetupButton("Reset items list to defaults.", "Reset", "Revert to the default item list. Any custom items that you have added will be removed.", kButtonReset)
 
@@ -149,6 +151,10 @@ function ConfigToggleChanged(String identifier, bool value, int tag)
     pQuest.pReplaceMales = value
   elseif identifier == "ReplaceFemales"
     pQuest.pReplaceFemales = value
+  elseif identifier == "RunWithoutUI"
+    pQuest.pRunWithoutUI = value
+  elseif identifier == "EquipEarly"
+    pQuest.pEquipEarly = value
   elseif identifier == "Enabled"
     pQuest.pEnabled = value
     pQuest.UpdatedEnabled()
