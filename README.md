@@ -87,9 +87,13 @@ Note that the dictionary for an item can also optionally include the name of the
 
 To help with the creation of this file, Smalls also installs an SSEdit script: `Smalls Export Underwear JSON.pas`. You use this by opening an underwear mod in SSEdit, selecting the armour records that you want to add to Smalls, and then running the script. This will export the ids to a JSON file in a suitable format. The files that the script exports are not directly usable by Smalls, but you can copy & paste their contents into your custom config file (I recommend also keeping the exported files somewhere for refeference).
 
+If you've edited this file mid-game, you can force Smalls to parse it again by choosing `Reset Defaults` from the MCM. Note that doing this will also reset any changes that you've made using the MCM configuration interface (see below).
+
+For that reason you are better off either using this configuration file, or the MCM, but not both. Using this file is probably the best option as it can be shared between games, backed up, etc.
+
 ### Custom Items - Using the MCM
 
-You can also edit the underwear list via an MCM configuration panel.
+If editing JSON files sounds a bit scary, you can also edit the underwear list via an MCM configuration panel.
 
 #### How To Add Armour
 
@@ -97,15 +101,16 @@ Make sure that the armour you want to add is in your inventory.
 
 Open up the Smalls / Add Item panel in MCM.
 
-Tick the items you want to add, then switch back to the Current Items panel. The item you've added should now be in the list. By default it will
+Tick the items you want to add, then switch back to the Current Items panel. The item you've added should now be in the list.
 
-Smalls has to guess which lists to add the item to, based on the slot positions it's marked for, and whether it has meshes set for male, female or both. This information isn't always reliable, so sometimes underwear will be added to the wrong lists. You can fix this yourself by removing the armour from some lists.
+Smalls has to guess which lists to add the item to, based on the slot positions it's marked for, and whether it has meshes set for male, female or both. This information isn't always reliable, so sometimes underwear will be added to the wrong lists. You can fix this yourself using the popup next to the item.
 
 #### How To Remove Armour
 
 Open up the Smalls / Current Items panel in MCM.
 
 Set the items you want to remove to "remove", then dismiss MCM (or switch away from the Smalls panel).
+
 
 
 ## How It Works - The Complicated Version
