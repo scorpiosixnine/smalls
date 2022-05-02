@@ -106,26 +106,71 @@ That is all beyond the scope of Smalls, but I'm up for discussing solutions!
 
 ## Configuration
 
-By default, Smalls uses underwear from a few mods that it knows about, if they are installed.
+Smalls keeps a list of items, which it uses to assign pick random underwear to NPCs as you encounter them.
 
-However, you can edit the underwear list to add your own items, via an MCM configuration panel.
-
-Each item that Smalls knows about can be set to one of the following modes:
+Each item that Smalls knows about can be set to one of the following categories:
 
 - unisex; used for males and females
 - male; used for males only
-- female; used for females only
-- female top; used for females only, where the first item added appears to be bottom-only
+- female; used for females only; entries with this category should be one-pieces or sets that include both tops & bottoms in a single clothing item
+- female top; used for females tops only; if an item from this list is picked, then it is paired with a random item from female bottom
+- female bottom; used for female bottoms only
 - ignore; smalls knows that this is underwear, but doesn't use it
 - remove; when you close Smalls, this item will be removed from the list of known underwear
 
-If you have more than one item in a category, a random choice is made. If the female item appears to cover the whole body, it is used on its own. If not, a female top item is added too.
-
 This is not very sophisticated, and does not yet try to match tops & bottoms, or pick appropriate underwear for specific profession, races, tribes, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
 
-Smalls tries to detect the type of an item automatically, but the detection is based on the slot flags set by the armor author. These flags are often inconsistent, and underwear armor is often not designed to be worn along with other items, which means that sometimes the slot flags are just set as "body".
+### Default Items
 
-### How To Add Armour
+The Smalls mod itself doesn't contain any underwear, so you need to install one or more other mods that do, and then tell Smalls to use them.
+
+By default, Smalls uses underwear from a few mods that it knows about, if they are installed.
+
+The list of these mods and items is defined in the file `SmallsDefaults.json`, which should be installed in the `Data` folder along with the `Smalls.esp` file.
+
+
+### Custom Items - JSON
+
+Smalls will also look for another file called `SmallsCustom.json`, and add any entries that it finds there. 
+
+If you want to teach smalls about new items, it is better to make `SmallsCustom.json` and add them there, since changes to this file will not be affected by the mod being updated.
+
+Both of the json files use the same format, which is as follows:
+
+The top level is a dictionary, with each key being the name of the `.esp` file containing some underwear items.
+
+The value of each record should be another dictionary, containing one or more of the following keys: `female, femaleTop, femaleBottom, male, unisex`.
+
+The entry for one of these keys should be a list of dictionaries, each of which specifies the id of the item to use.
+
+Here's a simple example:
+
+```json
+    "CBBE Standalone Underwear.esp": {
+        "femaleBottom": [
+            {
+                "id": "0x00000804",
+                "name": "CBBE_Underwear_Bottom"
+            }
+        ],
+        "femaleTop": [
+            {
+                "id": "0x00000805",
+                "name": "CBBE_Underwear_Top"
+            }
+        ]
+    },
+```
+ 
+Note that the dictionary for an item can also optionally include the name of the item, although for now this is only for reference and not used by Smalls.
+
+To help with the creation of this file, Smalls also installs an SSEdit script: `Smalls Export Underwear JSON.pas`. You use this by opening an underwear mod in SSEdit, selecting the armour records that you want to add to Smalls, and then running the script. This will export the ids to a JSON file in a suitable format. The files that the script exports are not directly usable by Smalls, but you can copy & paste their contents into your custom config file (I recommend also keeping the exported files somewhere for refeference).
+
+### Custom Items - Using the MCM
+
+You can also edit the underwear list via an MCM configuration panel.
+
+#### How To Add Armour
 
 Make sure that the armour you want to add is in your inventory.
 
@@ -135,7 +180,7 @@ Tick the items you want to add, then switch back to the Current Items panel. The
 
 Smalls has to guess which lists to add the item to, based on the slot positions it's marked for, and whether it has meshes set for male, female or both. This information isn't always reliable, so sometimes underwear will be added to the wrong lists. You can fix this yourself by removing the armour from some lists.
 
-### How To Remove Armour
+#### How To Remove Armour
 
 Open up the Smalls / Current Items panel in MCM.
 
@@ -144,11 +189,9 @@ Set the items you want to remove to "remove", then dismiss MCM (or switch away f
 
 ## Dependencies
 
-The only dependency is SkyUI, which is used for the configuration menu.
+Smalls requires SkyUI, Spell Item Distributor (SPID), and JContainers.
 
-Smalls is compatible with UNP, CBBE, etc. Just use whatever underwear you want.
-
-Smalls knows about certain mods that add underwear, and it pre-populates its list if it detects that they are present. If you have a favourite mod you'd like Smalls to know about, please let me know and I will add it.
+Smalls is compatible with UNP, CBBE, 3BA, etc. Just use whichever body and underwear mods you want.
 
 ## Known Issues
 
