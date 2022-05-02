@@ -294,7 +294,12 @@ function ResetDefaultSmalls()
 EndFunction
 
 function LoadDefaults()
-  int defaultsFile = JValue.readFromFile("Data/SmallsDefaults.json")
+  LoadDefaultsFromPath("Data/SmallsDefaults.json")
+  LoadDefaultsFromPath("Data/SmallsCustom.json")
+endfunction
+
+function LoadDefaultsFromPath(String path)
+  int defaultsFile = JValue.readFromFile(path)
   String mod = JMap.nextKey(defaultsFile)
   while mod 
     LoadDefaultsForMod(mod, defaultsFile)
