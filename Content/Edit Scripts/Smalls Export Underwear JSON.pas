@@ -1,5 +1,5 @@
 {
-  Export underwear items as JSON for use as Smalls Defaults
+  Export spells, perks, items, shouts and leveled items-spells for Spell Perk Item Distributor
 }
 unit ExportSPI;
 
@@ -8,13 +8,42 @@ var
   modname: string;
   typename: string;
   buffer: string;
-
   
 function Initialize: integer;
+  var
+    options: TStringList;
+    frm: TForm;
+    i: Integer;
+    clb: TCheckListBox;
+
   begin
+
     slExport := TStringList.Create;
     modname := '';
-    InputQuery('Item Type', 'Type', typename);
+
+    options := TStringList.Create;
+    frm := frmFileSelect;
+    try
+      options.Add('female');
+      options.Add('femaleTop');
+      options.Add('femaleBottom');
+      options.Add('male');
+      options.Add('unisex');
+
+      frm.Caption := 'Underwear Type';
+      clb := TCheckListBox(frm.FindComponent('CheckListBox1'));
+      clb.items.Assign(options);
+      if frm.ShowModal <> mrOk then
+        exit;
+      for i := 0 to Pred(clb.items.Count) do
+        if clb.Checked[i] then
+          typename := options[i];
+
+    finally
+      options.Free;
+      frm.Free;
+    end;
+
     slExport.Add('{');
   end;
 
@@ -54,7 +83,7 @@ begin
           slExport.Add(buffer + ',');
         end;
 
-      buffer := '{ "id": "' + IntToHex(FormID(e) and $FFFFFF, 8) + '", "name": "' + EditorID(e) + '" }';    
+      buffer := '{ "id": "0x' + IntToHex(FormID(e) and $FFFFFF, 8) + '", "name": "' + EditorID(e) + '" }';    
 end;
 
 function Finalize: integer;
@@ -73,7 +102,7 @@ begin
       dlgSave.Options := dlgSave.Options + [ofOverwritePrompt];
       dlgSave.Filter := 'JSON (*.json)|*.json';
       dlgSave.InitialDir := 'C:\Users\sam\Documents\Projects\smalls';
-      dlgSave.FileName := modname + '_Underwear.json';
+      dlgSave.FileName := modname + '_' + typename + '_Underwear.json';
   if dlgSave.Execute then 
     begin
       ExportFileName := dlgSave.FileName;
