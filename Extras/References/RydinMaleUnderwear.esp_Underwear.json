@@ -1,0 +1,18 @@
+{
+"RydinMaleUnderwear.esp": {
+"male": [
+{ "id": "0x00000D62", "name": "rump_male_clothwaistbandtiebriefs" },
+{ "id": "0x00000D68", "name": "rump_male_bearfurbriefs" },
+{ "id": "0x0000182E", "name": "rump_male_clothwaistbandbriefs" },
+{ "id": "0x00001830", "name": "rump_male_leatherbriefs" },
+{ "id": "0x00001D94", "name": "rump_male_wolffurbriefs" },
+{ "id": "0x00003323", "name": "rump_male_blackleatherbriefs" },
+{ "id": "0x00003DEA", "name": "rump_male_large_bearfurbriefs" },
+{ "id": "0x00003DEC", "name": "rump_male_large_blackleatherbriefs" },
+{ "id": "0x00003DEE", "name": "rump_male_large_clothwaistbandbriefs" },
+{ "id": "0x00003DF0", "name": "rump_male_large_clothwaistbandtiebriefs" },
+{ "id": "0x00003DF3", "name": "rump_male_large_leatherbriefs" },
+{ "id": "0x00003DF5", "name": "rump_male_large_wolffurbriefs" }
+]
+}
+}

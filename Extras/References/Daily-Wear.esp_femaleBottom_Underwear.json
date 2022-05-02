@@ -1,0 +1,35 @@
+{
+"Daily-Wear.esp": {
+"femaleBottom": [
+{ "id": "0x0000E355", "name": "DWPantyClothB" },
+{ "id": "0x0000E356", "name": "DWPantyClothD" },
+{ "id": "0x0000E357", "name": "DWPantyClothGN" },
+{ "id": "0x0000E358", "name": "DWPantyClothI" },
+{ "id": "0x0000E359", "name": "DWPantyClothL1B" },
+{ "id": "0x0000E35A", "name": "DWPantyClothL1R" },
+{ "id": "0x0000E35B", "name": "DWPantyClothL2black" },
+{ "id": "0x0000E35C", "name": "DWPantyClothL2pink" },
+{ "id": "0x0000E35D", "name": "DWPantyClothL2red" },
+{ "id": "0x0000E35E", "name": "DWPantyClothM" },
+{ "id": "0x0000E35F", "name": "DWPantyClothR1" },
+{ "id": "0x0000E360", "name": "DWPantyLight" },
+{ "id": "0x0000E361", "name": "DWPantyLightB" },
+{ "id": "0x0000E363", "name": "DWPantyLightD" },
+{ "id": "0x0000E364", "name": "DWPantyLightGN" },
+{ "id": "0x0000E365", "name": "DWPantyLightI" },
+{ "id": "0x0000E366", "name": "DWPantyLightL1B" },
+{ "id": "0x0000E367", "name": "DWPantyLightL1R" },
+{ "id": "0x0000E369", "name": "DWPantyLightL2black" },
+{ "id": "0x0000E36A", "name": "DWPantyLightL2pink" },
+{ "id": "0x0000E36B", "name": "DWPantyLightL2red" },
+{ "id": "0x0000E36C", "name": "DWPantyLightM" },
+{ "id": "0x0000E36D", "name": "DWPantyLightR" },
+{ "id": "0x0000FEAD", "name": "DWPantyClothTan" },
+{ "id": "0x0000FEAE", "name": "DWPantyClothFur" },
+{ "id": "0x0000FEB0", "name": "DWPantyLightFur" },
+{ "id": "0x00010426", "name": "DWPantyLightTan" },
+{ "id": "0x00011469", "name": "DWPantyClothL1G" },
+{ "id": "0x0001146A", "name": "DWPantyLightL1G" }
+]
+}
+}
