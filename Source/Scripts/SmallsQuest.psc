@@ -303,7 +303,11 @@ endfunction
 
 function LoadDefaultsFromPath(String path)
   int defaultsFile = JValue.readFromFile(path)
+  JValue.retain(defaultsFile)
+
   int mods = JMap.allKeys(defaultsFile)
+  JValue.retain(mods)
+
   int n = JValue.count(mods)
   Trace("found " + n + " defaults entries in " + path)
   while n > 0
@@ -311,6 +315,9 @@ function LoadDefaultsFromPath(String path)
     String mod = JArray.getStr(mods, n)
     LoadDefaultsForMod(mod, defaultsFile)
   endwhile
+
+  JValue.release(mods)
+  JValue.release(defaultsFile)
 endfunction
 
 function LoadDefaultsForMod(String mod, int file)
