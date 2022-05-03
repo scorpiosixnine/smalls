@@ -41,6 +41,25 @@ Each item that Smalls knows about can be set to one of the following categories:
 
 This is not very sophisticated, and does not yet try to match tops & bottoms, or pick appropriate underwear for specific profession, races, tribes, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
 
+### MCM Options
+
+Smalls has an MCM panel which lets you adjust its behaviour with the following options:
+
+
+- Enabled
+- Use for males
+- Use for females
+
+These options are fairly self evident. You can use them to disable Smalls for females, males, or all NPCs.
+
+- Skip UI Checks
+
+Normally Smalls will only equip underwear on an NPC if the Inventory dialogue is open and targetted on that NPC. This is a safety feature to prevent Smalls from interfering with other scripts that remove items from NPCs. However, this check means that Smalls doesn't work with mods that _allow_ you to loot without using the normal UI. Turning the Skip UI Checks option on should fix this problem, but might cause others. Use at your own risk!
+
+- Try to equip early
+
+Unfortunately, many underwear items are not designed to be worn with other clothing, so can't be equipped until the main armour has been removed. This can cause a moment where the NPC appears to be naked. If you enable this option, Smalls will attempt to equip the underwear on the NPC as soon as it is added, which will be long before you are looting it. This may work for a small number of underwear items, but more likely it will result in lots of NPCs wandering around in _only_ their underwear! Use at your own risk!
+
 ### Default Items
 
 The Smalls mod itself doesn't contain any underwear, so you need to install one or more other mods that do, and then tell Smalls to use them.
@@ -115,7 +134,7 @@ Set the items you want to remove to "remove", then dismiss MCM (or switch away f
 
 ## How It Works - The Complicated Version
 
-For those who are interested, here's a bit more information on how Smalls works.
+For those who are interested, here's a bit more information on how Smalls works, and the problems that it is trying to fix.
 ### Armour, Clothing, Underwear and Slots
 
 Any piece of armour/clothing in Skyrim is tagged as occupying one or more body slots. 
