@@ -98,6 +98,7 @@ function SetupGeneralPage()
   SetupToggle("EquipEarly", "Try to equip early (Experimental).", pQuest.pEquipEarly)
   AddEmptyOption()
   SetupButton("Reset items list to defaults.", "Reset", "Revert to the default item list. Any custom items that you have added will be removed.", kButtonReset)
+  AddEmptyOption()
 
   AddHeaderOption("Debug Options")
   SetupToggle("Debugging", "Enable Logging", pQuest.pDebugMode)
