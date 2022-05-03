@@ -115,6 +115,7 @@ Set the items you want to remove to "remove", then dismiss MCM (or switch away f
 
 ## How It Works - The Complicated Version
 
+For those who are interested, here's a bit more information on how Smalls works.
 ### Armour, Clothing, Underwear and Slots
 
 Any piece of armour/clothing in Skyrim is tagged as occupying one or more body slots. 
