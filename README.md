@@ -25,25 +25,11 @@ If not, Smalls will monitor what you remove. If you remove the main clothing ite
 Exactly which items Smalls adds is determined randomly, using a list that you can configure. By default Smalls knows about a few popular underwear mods, but you can add in items from other mods, and remove any that you don't want to use. See the **Configuration** section below for more details.
 
 
-## Configuration
 
-Smalls keeps a list of items, which it uses to assign random underwear to NPCs as you encounter them.
 
-Each item that Smalls knows about can be set to one of the following categories:
+## General Settings
 
-- unisex; used for males and females
-- male; used for males only
-- female; used for females only; entries with this category should be one-pieces or sets that include both tops & bottoms in a single clothing item
-- female top; used for females tops only; if an item from this list is picked, then it is paired with a random item from female bottom
-- female bottom; used for female bottoms only
-- ignore; smalls knows that this is underwear, but doesn't use it
-- remove; when you close Smalls, this item will be removed from the list of known underwear
-
-This is not very sophisticated, and does not yet try to match tops & bottoms, or pick appropriate underwear for specific profession, races, tribes, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
-
-### MCM Options
-
-Smalls has an MCM panel which lets you adjust its behaviour with the following options:
+Smalls has an MCM panel which lets you adjust its behaviour.
 
 
 - Enabled
@@ -60,6 +46,29 @@ Normally Smalls will only equip underwear on an NPC if the Inventory dialogue is
 
 Unfortunately, many underwear items are not designed to be worn with other clothing, so can't be equipped until the main armour has been removed. This can cause a moment where the NPC appears to be naked. If you enable this option, Smalls will attempt to equip the underwear on the NPC as soon as it is added, which will be long before you are looting it. This may work for a small number of underwear items, but more likely it will result in lots of NPCs wandering around in _only_ their underwear! Use at your own risk!
 
+- Reset items list to defaults
+
+Clicking on this option causes Smalls to reset its list of underwear, and to re-read it from the configuration files. This will happen once you've closed the MCM. See below for more details on how to configure the item list.
+
+- Enable Logging
+
+In general, you don't need the logging and should keep it disabled. If you are having problems, you might want to turn it on, and take a look in `{HOME}\Documents\My Games\Skyrim Special Edition\Logs\Script\User\Smalls.0.log`. This should contain a running commentary of what Smalls is doing.
+
+## Item Configuration
+
+Smalls keeps a list of items, which it uses to assign random underwear to NPCs as you encounter them.
+
+Each item that Smalls knows about can be set to one of the following categories:
+
+- unisex; used for males and females
+- male; used for males only
+- female; used for females only; entries with this category should be one-pieces or sets that include both tops & bottoms in a single clothing item
+- female top; used for females tops only; if an item from this list is picked, then it is paired with a random item from female bottom
+- female bottom; used for female bottoms only
+- ignore; smalls knows that this is underwear, but doesn't use it
+- remove; when you close Smalls, this item will be removed from the list of known underwear
+
+This is not very sophisticated, and does not yet try to match tops & bottoms, or pick appropriate underwear for specific profession, races, tribes, etc. All of these considerations are things I'd like to improve, but... you've got to start somewhere.
 ### Default Items
 
 The Smalls mod itself doesn't contain any underwear, so you need to install one or more other mods that do, and then tell Smalls to use them.
@@ -246,10 +255,26 @@ The source for this mod can be found on [github](https://github.com/scorpiosixni
 
 
 
+
+## FAQ
+
+**Does this work with CBBE/UNP/SomeOtherBody?**
+
+Yes, it should work with all of them
+
+**Does this work with my favourite underwear?**
+
+Yes, it should work with all underwear
+
+**I've installed it, why is nothing happening?**
+
+The mod itself doesn't contain any underwear, so you also need to install some mods that add them. Then you need to configure Smalls to use the underwear from the other mod. If this is all too complicated, you might want to try [Equippable Underwear for NPCs](https://www.nexusmods.com/skyrimspecialedition/mods/45277), which works in a similar way, but comes with some underwear included.
 ## Credits
 
-I came up with approach after getting into a mess with [Equipable Underwear For Everyone](https://www.nexusmods.com/skyrimspecialedition/mods/17183).
+I came up with this mod (and the "Just-In-Time Underwear" approach, after getting into a mess with [Equipable Underwear For Everyone](https://www.nexusmods.com/skyrimspecialedition/mods/17183).
 
 I later discovered [Underpants](https://www.loverslab.com/files/file/1878-underpants/), which works the same way. I wasn't sure whether it was ported to SE yet, and in any case I wanted to learn how to mod, so I decided to make my own. Whilst I didn't copy any of the Underpants code, taking a look at how it worked was invaluable. So props to [periselene](https://www.loverslab.com/profile/786664-periselene/) for making the source available.
+
+Some of the changes in Version 2 were inspired by [Equippable Underwear for NPCs](https://www.nexusmods.com/skyrimspecialedition/mods/45277). The approach of using SPID is better than the way I was doing things before. Again, thanks to [wSkeever](https://www.nexusmods.com/skyrimspecialedition/users/7064860) for including the script source in that mod.
 
 Thanks also to [CBBE](https://www.nexusmods.com/skyrimspecialedition/mods/198), [Tempered Skins For Males](https://www.nexusmods.com/skyrimspecialedition/mods/7902), SOS, etc, for making this mod necessary in the first place.
